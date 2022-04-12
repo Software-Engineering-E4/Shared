@@ -2,4 +2,4 @@
 
 Echipa: Ciobotariu Andrei, Iliana Iulia, Munteanu Raluca, Sofron Radu, Tiprigan Tiberiu
 
-Link Diagrame + usefulStuff :  https://we.tl/t-5qpH1XlI43
+Diagramele modului din laboratorul 5 : https://docs.google.com/document/d/1vAqIcJlCZ7fBNErAHNB_wYE4A2FzOZEiGO7SIJoczXY/edit?usp=sharing
