@@ -32,11 +32,21 @@
                     <a class="list" href="about.html">About us</a>
                 </li>
             </ul>
+            <img src="./btn1.png" alt="" class="menu-btn">
+            
         </nav>
         <!-- <div class="news">
             <p>Check out our latest post here!</p>
         </div>-->
     </header>
+    <script>
+        const menuBtn = document.querySelector('.menu-btn')
+        const navlinks = document.querySelector('.container')
+        menuBtn.addEventListener('click',()=>{
+            navlinks.classList.toggle('mobile-menu')
+        })
+    </script>
+    
 
     <hr>
 
