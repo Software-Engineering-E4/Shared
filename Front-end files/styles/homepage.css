@@ -66,6 +66,8 @@ ul.container:hover{
     background-color: #00468B;
     border: 0.1rem solid white;
     border-radius: 1.5rem;
+
+    transition: 200ms;
 }
 li.latest{
     font-size: 1.5rem;
@@ -78,6 +80,8 @@ li.latest:hover{
     background-color: #128FC8;
     color: white;
     border-radius: 1.5rem;
+
+    transition: 500ms;
 }
 li.categories{
     font-size: 1.5rem;
@@ -90,6 +94,8 @@ li.categories:hover{
     background-color: #128FC8;
     color: white;
     border-radius: 1.5rem;
+
+    transition: 500ms;
 }
 li.about{
     font-size: 1.5rem;
@@ -102,6 +108,8 @@ li.about:hover{
     background-color: #128FC8;
     color: white;
     border-radius: 1.5rem;
+
+    transition: 500ms;
 }
 
 /*
