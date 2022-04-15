@@ -112,6 +112,17 @@ li.about:hover{
     transition: 500ms;
 }
 
+a.faculty{
+    background-color: white;
+
+    display: flex;
+}
+img.faculty_logo{
+    align-self: center;
+    height: 2rem;
+    width: 2rem;
+}
+
 /*
 div.news{
     background-color: white;
@@ -192,7 +203,7 @@ h2{
 
 @media (max-width: 850px){
     nav {
-        padding: 0;
+        padding: 0rem;
     }
     .menu-btn{
         display: block;
