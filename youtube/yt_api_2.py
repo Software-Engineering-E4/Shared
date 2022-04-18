@@ -3,8 +3,7 @@ from googleapiclient.discovery import build
 
 from DBManager import DBManager
 
-# api_key= 'AIzaSyAvn6yIJd0ovZRR0SSK_OUW6yRG0N4wFg4'
-api_key = "AIzaSyCeNssf_A9u7bjKNu9DZRL3BzSq2AvMZyA"
+api_key= 'AIzaSyAvn6yIJd0ovZRR0SSK_OUW6yRG0N4wFg4'
 youtube = build("youtube", "v3", developerKey=api_key)
 request = youtube.search().list(
     part="snippet",
