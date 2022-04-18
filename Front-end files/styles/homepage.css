@@ -1,236 +1,155 @@
-body{
-    margin: 0rem;
+:root{
+    --darkblue: #00468B;
+    --lightblue: #008BD0;
+    --lightred: #FF715B;
+    --white: #FFFFFF;
+    --lightgray: #DFDFDF;
+    --twitter: #00acee;
+    --twitter-outline: rgb(122, 203, 235);
+    --reddit: #FF5700;
+    --reddit-outline: #fe9e6d;
+    --youtube: #c4302b;
+    --youtube-outline: #c46c69;
 }
 
-nav{
-    background-color: #00468B;
-    line-height: 2.5rem;
+/* elements */
+h2.titles{
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    font-size: 1.875rem;
+    color: var(--darkblue);
+}
+h3{
+    margin: 2.5vh;
+    color: black;
+}
+p.description{
+    margin: 2.5vh;
+}
+h2.twitter{
+    margin-top: 0vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    color: var(--twitter)
 
-    border-bottom-width: 0.77rem;
-    border-bottom-color: #128FC8;
-    border-bottom-style: solid;
-    
-    /*flex display*/
-    display:flex;
+}
+h2.reddit{
+    margin-top: 7.5vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    color: var(--reddit);
+
+}
+h2.youtube{
+    margin-top: 7.5vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    color: var(--youtube);
+}
+
+/* homepage */
+/* popular works */
+section.most_reviewed{
+    padding-top: 2.5vh;
+    padding-bottom: 5vh;
+    padding-left: 0vh;
+    padding-right: 0vh;
+    background-color: var(--white);
+
+    display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content:space-between;
-    align-items: center;
-}
-
-div.site_name{
-    font-size: 2.25rem;
-    text-align: center;
-    flex-grow: 1;
-}
-
-/* search bar */
-form{
-    /* flex item from nav flex */
-    flex-grow: 1;
-}
-div.search_bar{
-    padding: 1rem;
-    /*flex display*/
-    display: flex;
-    justify-content: center;
-}
-div.search_bar input[type=search]{
-    /* bar itself */
-    width: 14rem;
-    padding: 0.2rem;
-    outline: 0.1rem ridge;
-    outline:darkgrey;
-    border-radius: 1.5rem;
-
-    /* its content */
-    background-color:azure;
-}
-
-/* list container & items */
-ul.container{
-    list-style: none;
-    padding: 0rem;
-    border: 0.1rem solid #00468B;
-    border-radius: 1.5rem;
-
-    flex-grow: 4;
-    /* new flex for future items*/
-    display: flex;
-    flex-direction:row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
 }
-ul.container:hover{
-    background-color: #00468B;
-    border: 0.1rem solid white;
-    border-radius: 1.5rem;
-
-    transition: 200ms;
-}
-li.latest{
-    font-size: 1.5rem;
-    text-align: center;
-
+div.most_reviewed{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--darkblue);
+    background-color: var(--white);
     flex-grow: 1;
-    flex-basis: 0;
 }
-li.latest:hover{
-    background-color: #128FC8;
-    color: white;
-    border-radius: 1.5rem;
-
-    transition: 500ms;
+div.most_reviewed:hover{
+    outline: 0.2rem outset var(--lightblue);
+    transition: 100ms;
 }
-li.categories{
-    font-size: 1.5rem;
-    text-align: center;
-
-    flex-grow: 1;
-    flex-basis: 0;
-}
-li.categories:hover{
-    background-color: #128FC8;
-    color: white;
-    border-radius: 1.5rem;
-
-    transition: 500ms;
-}
-li.about{
-    font-size: 1.5rem;
-    text-align: center;
-
-    flex-grow: 1;
-    flex-basis: 0;
-}
-li.about:hover{
-    background-color: #128FC8;
-    color: white;
-    border-radius: 1.5rem;
-
-    transition: 500ms;
-}
-
-a.faculty{
-    background-color: white;
-
-    display: flex;
-}
-img.faculty_logo{
-    align-self: center;
-    height: 2rem;
-    width: 2rem;
-}
-
-/*
-div.news{
-    background-color: white;
-    color: #006666;
-    line-height: 0.5rem;
-
-    border-top-width: 0.5;
-    border-top-color: black;
-    border-top-style: solid;
-    border-bottom-width: 0.5;
-    border-bottom-color: black;
-    border-bottom-style: solid;
-    border-left: none;
-    border-right: none;
-}
-*/
-
-/*for main page*/
-main{
-    border-top: none;
-
-}
-section.main_posts{
-    background-color: white;
-    
-}
-
-section.infos{
-    background-color: white;
-}
-
+/* categorized works */
 section.categories{
-    background-color: white;
+    padding-top: 2.5vh;
+    padding-bottom: 5vh;
+    padding-left: 0vh;
+    padding-right: 0vh;
+    background-color: var(--white);
+}
+div.twitter{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
+}
+div.twitter_post{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--twitter);
+    background-color: var(--white);
+    flex-grow: 1;
+}
+div.twitter_post:hover{
+    outline: 0.2rem outset var(--twitter-outline);
+    transition: 100ms;
 }
 
+div.reddit{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
+}
+div.reddit_post{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--reddit);
+    background-color: var(--white);
+    flex-grow: 1;
+}
+div.reddit_post:hover{
+    outline: 0.2rem outset var(--reddit-outline);
+    transition: 100ms;
+}
+
+div.youtube{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
+}
+div.youtube_post{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--youtube);
+    background-color: var(--white);
+    flex-grow: 1;
+}
+div.youtube_post:hover{
+    outline: 0.2rem outset var(--youtube-outline);
+    transition: 100ms;
+}
+
+
+/* footer */
 footer{
-    background-color: #00468B;
+    background-color: var(--darkblue);
     color: #fefee4;
     margin: 0rem;
 }
 
-/* other things */
-a{
-    color:lightgray;
-    text-decoration: none;
-}
-a.site_name:hover{
-    color:white;
-}
-a.list:hover{
-    color:white;
-}
 
-input{
-    background-color: white;
-    color: black;
-}
-
+/* to be removed in the future */
 hr{
-    
     background-color: black;
     margin: 0rem;
-}
-
-h2{
-    background-color: #008bd0;
-    color: ghostwhite;
-}
-.menu-btn{
-    position:absolute;
-    top:30px;
-    right: 30px;
-    width: 40px;
-    cursor: pointer;
-    display: none;
-}
-
-
-@media (max-width: 850px){
-    nav {
-        padding: 0rem;
-    }
-    .menu-btn{
-        display: block;
-    }
-    .container{
-        
-        flex-direction: column;
-       
-        width: 100%;
-        
-        justify-content: center;
-        background-color: #008bd0;
-        margin-top: -1000px;
-        transition:all 0.5s ease;
-    }
-    .mobile-menu{
-        margin-top: 0px;
-        border-bottom-right-radius: 30%;
-    }
-    div.search_bar{
-        display:none;
-    }
-    
-    
-    .container li {
-        margin:30px auto;
-
-    }
-    
 }

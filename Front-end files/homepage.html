@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/general.css" rel="stylesheet">
     <link href="styles/homepage.css" rel="stylesheet">
     <title>Site name</title>
 </head>
@@ -13,23 +14,25 @@
 
     <header class="site_header">
         <nav class="navig_line">
-            <div class="site_name">
-                <a class="site_name" href="/homepage.html">Site name</a>
-            </div>
-            <form action="/homepage.html" method="get">
-                <div class="search_bar">
-                    <input type="search" id="search" name="search" placeholder=" Search...">
+            <div class="left_container">
+                <div class="site_name">
+                    <a class="site_name" href="/homepage.html">Site name</a>
                 </div>
-            </form>
-            <ul class="container">
+                <form action="/homepage.html" method="get">
+                    <div class="search_bar">
+                        <input type="search" id="search" name="search" placeholder=" Search...">
+                    </div>
+                </form>
+            </div>
+            <ul class="right_container">
                 <li class="latest">
-                    <a class="list" href="homepage.html"> Latest </a>
+                    <a class="menu_option" href="homepage.html"> Latest </a>
                 </li>
                 <li class="categories">
-                    <a class="list" href="#Categories">Categories</a>
+                    <a class="menu_option" href="#Categories">Categories</a>
                 </li>
                 <li class="about">
-                    <a class="list" href="about.html">About us</a>
+                    <a class="menu_option" href="about.html">About us</a>
                 </li>
             </ul>
             <a href="https://www.info.uaic.ro" class="faculty"> <img src="images/logo-fii.png" alt="University logo"
@@ -44,6 +47,8 @@
             <p>Check out our latest post here!</p>
         </div>-->
     </header>
+
+    <!-- script for responsive website -->
     <script>
         const menuBtn = document.querySelector('.menu-btn')
         const navlinks = document.querySelector('.container')
@@ -52,37 +57,256 @@
         })
     </script>
 
-
-    <hr>
-
     <main>
-        <section class="main_posts">
-            Main posts here <br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit blanditiis atque perferendis ab earum sed.
-            Nostrum cum voluptatibus numquam consequatur similique dicta facilis doloribus, ipsam provident fugit
-            expedita, sunt ratione!
-            Esse est ad adipisicing culpa aute dolore mollit esse id incididunt nisi et sunt. Reprehenderit amet
-            incididunt sit adipisicing nulla deserunt enim. Incididunt in ipsum ex minim adipisicing ad aute nulla.
-            Culpa culpa consequat cillum elit cillum non velit exercitation pariatur fugiat proident excepteur irure.
-            Lorem cupidatat sit ullamco laborum magna ex aliqua minim.
-
-            In quis ut sunt fugiat labore deserunt nisi esse esse ad labore. Officia nulla consequat in tempor
-            consectetur eu exercitation laborum duis labore dolore. Lorem nulla irure minim nulla minim.
-            <hr>
+        <h2 class="titles">Popular works</h2>
+        <section class="most_reviewed">
+            <div class="most_reviewed">
+                <h3>Title</h3>
+                <p class="description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
+                    maxime animi eveniet! Ipsam distinctio perferendis iste a fugit consectetur asperiores omnis
+                    nesciunt
+                    architecto earum pariatur, tenetur placeat cupiditate doloribus.
+                </p>
+            </div>
+            <div class="most_reviewed">
+                <h3>Title</h3>
+                <p class="description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
+                    maxime animi eveniet! Ipsam distinctio perferendis iste a fugit consectetur asperiores omnis
+                    nesciunt
+                    architecto earum pariatur, tenetur placeat cupiditate doloribus.
+                </p>
+            </div>
+            <div class="most_reviewed">
+                <h3>Title</h3>
+                <p class="description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
+                    maxime animi eveniet! Ipsam distinctio perferendis iste a fugit consectetur asperiores omnis
+                    nesciunt
+                    architecto earum pariatur, tenetur placeat cupiditate doloribus.
+                </p>
+            </div>
+            <div class="most_reviewed">
+                <h3>Title</h3>
+                <p class="description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
+                    maxime animi eveniet! Ipsam distinctio perferendis iste a fugit consectetur asperiores omnis
+                    nesciunt
+                    architecto earum pariatur, tenetur placeat cupiditate doloribus.
+                </p>
+            </div>
+            <div class="most_reviewed">
+                <h3>Title</h3>
+                <p class="description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
+                    maxime animi eveniet! Ipsam distinctio perferendis iste a fugit consectetur asperiores omnis
+                    nesciunt
+                    architecto earum pariatur, tenetur placeat cupiditate doloribus.
+                </p>
+            </div>
+            <div class="most_reviewed">
+                <h3>Title</h3>
+                <p class="description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
+                    maxime animi eveniet! Ipsam distinctio perferendis iste a fugit consectetur asperiores omnis
+                    nesciunt
+                    architecto earum pariatur, tenetur placeat cupiditate doloribus.
+                </p>
+            </div>
         </section>
 
-        <section class="categories" id="Categories">
-            <h2>Categories</h2>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, soluta. Placeat veniam cumque incidunt,
-            voluptas fugit cum molestias nulla tempora non laborum commodi soluta corporis tenetur eius ratione minus
-            harum.
+
+        <h2 class="titles" id="Categories">Categories</h2>
+        <section class="categories">
+
+            <h2 class="twitter">Twitter</h2>
+            <div class="twitter">
+                <div class="twitter_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="twitter_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="twitter_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="twitter_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="twitter_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="twitter_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+            </div>
+
+
+            <h2 class="reddit">Reddit</h2>
+            <div class="reddit">
+                <div class="reddit_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="reddit_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="reddit_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="reddit_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="reddit_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="reddit_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+            </div>
+
+
+            <h2 class="youtube">YouTube</h2>
+            <div class="youtube">
+                <div class="youtube_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="youtube_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="youtube_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="youtube_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="youtube_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+                <div class="youtube_post">
+                    <h3>Title</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
+                        ex
+                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
+                        officiis illo doloribus, ea labore quo soluta modi.
+                    </p>
+                </div>
+            </div>
+
         </section>
+
     </main>
 
     <hr>
 
     <footer>
-        Footer infos
+        Footer infos <br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
+        sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
+        minus est.
     </footer>
 
 </body>
