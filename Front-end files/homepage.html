@@ -41,6 +41,23 @@
 
             <!-- responsive website -->
             <img src="./btn1.png" alt="" class="menu-btn">
+            <img src="./search.png" alt="" class="search-btn">
+            <!-- script for responsive website -->
+            <script>
+                const menuBtn = document.querySelector('.menu-btn')
+                const navlinks = document.querySelector('ul.right_container')
+                menuBtn.addEventListener('click', () => {
+                    navlinks.classList.toggle('mobile-menu')
+                })
+            </script>
+            <script>
+                const searchBtn = document.querySelector('.search-btn')
+                const searchlink = document.querySelector('div.search_bar')
+                searchBtn.addEventListener('click', () => {
+                    searchlink.classList.toggle('search_menu')
+                })
+            </script>
+
 
         </nav>
         <!-- <div class="news">
@@ -49,13 +66,7 @@
     </header>
 
     <!-- script for responsive website -->
-    <script>
-        const menuBtn = document.querySelector('.menu-btn')
-        const navlinks = document.querySelector('.container')
-        menuBtn.addEventListener('click', () => {
-            navlinks.classList.toggle('mobile-menu')
-        })
-    </script>
+    
 
     <main>
         <h2 class="titles">Popular works</h2>
