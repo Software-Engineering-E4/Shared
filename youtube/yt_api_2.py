@@ -3,14 +3,17 @@ from googleapiclient.discovery import build
 
 from DBManager import DBManager
 
-api_key= 'AIzaSyAvn6yIJd0ovZRR0SSK_OUW6yRG0N4wFg4'
+api_key= 'AIzaSyCeNssf_A9u7bjKNu9DZRL3BzSq2AvMZyA'
 youtube = build("youtube", "v3", developerKey=api_key)
+
 request = youtube.search().list(
     part="snippet",
     order="relevance",
     q="cancer colorectal",
     maxResults="50",
-    regionCode="US",
+    type="video",
+    location=(38.11295, -102.30703),
+    locationRadius=(1000 km)   #README1
 )
 all_data = []
 response = request.execute()
