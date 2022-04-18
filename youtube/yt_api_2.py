@@ -6,7 +6,6 @@ from DBManager import DBManager
 # api_key= 'AIzaSyAvn6yIJd0ovZRR0SSK_OUW6yRG0N4wFg4'
 api_key = "AIzaSyCeNssf_A9u7bjKNu9DZRL3BzSq2AvMZyA"
 youtube = build("youtube", "v3", developerKey=api_key)
-# START 1README
 request = youtube.search().list(
     part="snippet",
     order="relevance",
@@ -16,8 +15,7 @@ request = youtube.search().list(
 )
 all_data = []
 response = request.execute()
-# FINAL 1README
-# START 2README
+
 for item in response["items"]:
     data = {
         "id":item["id"]["videoId"],
@@ -28,7 +26,6 @@ for item in response["items"]:
         "channel_id": item["snippet"]["channelId"],
     }
     all_data.append(data)
-# FINAL 2README
 
 db = DBManager(
     host="ip-database.ccrihfbatmnt.eu-central-1.rds.amazonaws.com",
