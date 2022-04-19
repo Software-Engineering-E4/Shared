@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/general.css" rel="stylesheet">
     <link href="styles/homepage.css" rel="stylesheet">
+    <script src="scripts/general.js" defer></script>
     <title>Site name</title>
 </head>
 
 <body>
-
     <header class="site_header">
         <nav class="navig_line">
             <div class="left_container">
@@ -35,29 +35,16 @@
                     <a class="menu_option" href="about.html">About us</a>
                 </li>
             </ul>
+            <div class="change_theme">
+                <input type="checkbox" class="change_theme" id="change_theme">
+            </div>
             <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
                     alt="University logo" class="faculty_logo">
             </a>
 
             <!-- responsive website -->
-            <img src="./btn1.png" alt="" class="menu-btn">
-            <img src="./search.png" alt="" class="search-btn">
-            <!-- script for responsive website -->
-            <script>
-                const menuBtn = document.querySelector('.menu-btn')
-                const navlinks = document.querySelector('ul.right_container')
-                menuBtn.addEventListener('click', () => {
-                    navlinks.classList.toggle('mobile-menu')
-                })
-            </script>
-            <script>
-                const searchBtn = document.querySelector('.search-btn')
-                const searchlink = document.querySelector('div.search_bar')
-                searchBtn.addEventListener('click', () => {
-                    searchlink.classList.toggle('search_menu')
-                })
-            </script>
-
+            <img src="images/btn1.png" alt="" class="menu-btn">
+            <img src="images/search.png" alt="" class="search-btn">
 
         </nav>
         <!-- <div class="news">
@@ -65,13 +52,10 @@
         </div>-->
     </header>
 
-    <!-- script for responsive website -->
-
-
     <main>
-        <h2 class="titles">Popular works</h2>
+        <h2 class="titles" id="titles">Popular works</h2>
         <section class="most_reviewed">
-            <div class="most_reviewed">
+            <div class="most_reviewed_post">
                 <h3>Title</h3>
                 <p class="description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
@@ -80,7 +64,7 @@
                     architecto earum pariatur, tenetur placeat cupiditate doloribus.
                 </p>
             </div>
-            <div class="most_reviewed">
+            <div class="most_reviewed_post">
                 <h3>Title</h3>
                 <p class="description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
@@ -89,7 +73,7 @@
                     architecto earum pariatur, tenetur placeat cupiditate doloribus.
                 </p>
             </div>
-            <div class="most_reviewed">
+            <div class="most_reviewed_post">
                 <h3>Title</h3>
                 <p class="description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
@@ -98,7 +82,7 @@
                     architecto earum pariatur, tenetur placeat cupiditate doloribus.
                 </p>
             </div>
-            <div class="most_reviewed">
+            <div class="most_reviewed_post">
                 <h3>Title</h3>
                 <p class="description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
@@ -107,7 +91,7 @@
                     architecto earum pariatur, tenetur placeat cupiditate doloribus.
                 </p>
             </div>
-            <div class="most_reviewed">
+            <div class="most_reviewed_post">
                 <h3>Title</h3>
                 <p class="description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo
@@ -116,7 +100,7 @@
                     architecto earum pariatur, tenetur placeat cupiditate doloribus.
                 </p>
             </div>
-            <div class="most_reviewed">
+            <div class="most_reviewed_post">
                 <h3>Title</h3>
                 <p class="description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum explicabo

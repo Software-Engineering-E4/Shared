@@ -10,6 +10,8 @@
     --reddit-outline: #fe9e6d;
     --youtube: #c4302b;
     --youtube-outline: #c46c69;
+    --opo_white: #292C35;
+    --opo_post: #acafb7;
 }
 
 /* elements */
@@ -64,13 +66,14 @@ section.most_reviewed{
     column-gap: 2.5vh;
     row-gap: 2.5vh;
 }
-div.most_reviewed{  
+div.most_reviewed_post{  
     max-width: 31.6%;
     border: 0.1rem solid var(--darkblue);
     background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
     flex-grow: 1;
 }
-div.most_reviewed:hover{
+div.most_reviewed_post:hover{
     outline: 0.2rem outset var(--lightblue);
     transition: 100ms;
 }
@@ -99,6 +102,7 @@ div.twitter_post{
     max-width: 31.6%;
     border: 0.1rem solid var(--twitter);
     background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
     flex-grow: 1;
 }
 div.twitter_post:hover{
@@ -118,6 +122,7 @@ div.reddit_post{
     max-width: 31.6%;
     border: 0.1rem solid var(--reddit);
     background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
     flex-grow: 1;
 }
 div.reddit_post:hover{
@@ -137,6 +142,7 @@ div.youtube_post{
     max-width: 31.6%;
     border: 0.1rem solid var(--youtube);
     background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
     flex-grow: 1;
 }
 div.youtube_post:hover{
@@ -153,11 +159,12 @@ footer{
 }
 
 
-/* to be removed in the future */
+/* !!!!!!!!!!!!!!!! to be removed in the future */
 hr{
     background-color: black;
     margin: 0rem;
 }
+
 
 /* responsive */
 @media (max-width:800px){
@@ -203,3 +210,21 @@ hr{
         max-width: 80%;
     }
 }
+
+
+/* change theme */
+h2.dark-gray{
+    background-color: var(--opo_white);
+}
+section.dark-gray{
+    background-color: var(--opo_white);
+}
+div.dark-gray{
+    background-color: var(--opo_white);
+}
+
+div.light-gray{
+    background-color: var(--opo_post);
+    box-shadow: none;
+}
+

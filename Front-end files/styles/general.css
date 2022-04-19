@@ -4,6 +4,7 @@
     --lightred: #FF715B;
     --white: #FFFFFF;
     --lightgray: #DFDFDF;
+    --opo_white: #292C35;
 }
 
 body{
@@ -13,8 +14,8 @@ body{
 
 /* top bar */
 header.site_header{
-    background-color: black;
     border-bottom: 0.05rem solid black;
+    background-color: black;
 }
 
 nav.navig_line{
@@ -36,7 +37,6 @@ nav.navig_line{
     align-items: center;
     column-gap: 2.5vh;
 }
-
 
 /*left container */
 div.left_container{
@@ -82,12 +82,11 @@ input:hover{
     outline: 0.1rem solid var(--white);
     transition: 200ms;
 }
-
 /* menu - options */
 ul.right_container{
     list-style: none;
     padding: 0rem;
-    border: 0.1rem solid var(--darkblue);
+    border: 0.1rem solid var(--lightgray);
     border-radius: 1.5rem;
 
     flex-grow: 4;
@@ -100,7 +99,7 @@ ul.right_container{
 }
 ul.right_container:hover{
     background-color: var(--darkblue);
-    border: 0.1rem solid white;
+    border: 0.1rem solid var(--white);
     border-radius: 1.5rem;
 
     transition: 200ms;
@@ -154,7 +153,12 @@ a.menu_option{
 a.menu_option:hover{
     color: var(--white);
 }
-
+/* theme button */
+div.change_theme input.change_theme{
+    border-radius: 1.5rem;
+    /* to be styled soon */
+    background-color: #FF715B;
+}
 /* faculty logo */
 a.faculty{
     background-color: var(--white);
@@ -238,4 +242,10 @@ main{
         margin:30px auto;
     }
     
+}
+
+
+/* change theme */
+body.dark{
+    background-color: var(--opo_white);
 }
