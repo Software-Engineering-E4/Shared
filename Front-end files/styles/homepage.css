@@ -64,9 +64,7 @@ section.most_reviewed{
     column-gap: 2.5vh;
     row-gap: 2.5vh;
 }
-div.most_reviewed{
-    
-    
+div.most_reviewed{  
     max-width: 31.6%;
     border: 0.1rem solid var(--darkblue);
     background-color: var(--white);
@@ -83,6 +81,11 @@ section.categories{
     padding-left: 0vh;
     padding-right: 0vh;
     background-color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: no wrap;
+    
 }
 div.twitter{
     display: flex;
@@ -156,6 +159,7 @@ hr{
     margin: 0rem;
 }
 
+/* responsive */
 @media (max-width:800px){
     section.most_reviewed{
         padding-top: 2.5vh;
