@@ -16,6 +16,10 @@ $settings = [
 function InsertJsonIntoDB(object $object) {
     global $link;
 
+    if (!($object == null)) {
+        return;
+    }
+
     //Original object has two attributes but we're not interested in 'metadata'.
     $object = $object->data;
 
@@ -43,7 +47,7 @@ function InsertJsonIntoDB(object $object) {
 
 function getData(string $searchPhrase) {
     global $settings;
-    
+
     $client = new Client($settings);
     
     $result = $client->tweetSearch()
@@ -58,7 +62,7 @@ function getData(string $searchPhrase) {
     //        'colorectal cancer'
               $searchPhrase
         ], \Noweh\TwitterApi\Enum\Operators::or)
-        ->addFilterOnLocales(['en'])
+    //    ->addFilterOnLocales(['en'])
         ->addMaxResults(100)
     //    ->addStartTime('2022-04-01')
     //	  ->addEndTime('2022-04-02')

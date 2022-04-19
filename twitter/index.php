@@ -7,6 +7,10 @@ require "helper.php";
 
     foreach ($phrases as $phrase) {
         $data = getData($phrase);
+        if ($data == null) {
+            echo "No response for query:" . $phrase . "\n";
+            continue;
+        }
         InsertJsonIntoDB($data);
     }
 ?>
