@@ -93,7 +93,7 @@ ul.right_container{
     flex-grow: 4;
     /* new flex for future items*/
     display: flex;
-    flex-direction:row;
+    
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
@@ -186,37 +186,56 @@ main{
     cursor: pointer;
     display: none;
 }
+.search-btn{
+    position:absolute;
+    top:30px;
+    right: 80px;
+    width: 35px;
+    cursor: pointer;
+    display: none;
+}
 
 @media (max-width: 850px){
     nav {
         padding: 0rem;
     }
+    a.faculty{
+        display: none;
+    }
     .menu-btn{
         display: block;
     }
-    .container{
-        
+    .search-btn{
+        display: block;
+    }
+    .right_container{
         flex-direction: column;
-       
         width: 100%;
-        
         justify-content: center;
-        background-color: #008bd0;
+        background-color: var(--darkblue);
         margin-top: -1000px;
         transition:all 0.5s ease;
     }
     .mobile-menu{
         margin-top: 0px;
         border-bottom-right-radius: 30%;
-    }
-    div.search_bar{
-        display:none;
-    }
     
-    
+    }
+    .search_bar{
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        background-color: var(--darkblue);
+        margin-top: -1000px;
+        transition:all 0.5s ease;
+    }
+    .search_menu{
+        margin-top: 0px;
+        border-bottom-right-radius: 30%;
+
+    }
     .container li {
         margin:30px auto;
-
     }
     
 }

@@ -88,53 +88,54 @@
 
         <!-- De aici iau datele din twitter_posts -->
         <h2 class="twitter">Twitter</h2>
-        <?php
-            $stmt = $mysql->prepare('SELECT * FROM `twitter_posts` LIMIT 6');
-            $stmt->execute();
-            $result = $stmt->get_result();
-            while ($row = $result->fetch_assoc()):
-        ?>
-
         <div class="twitter">
+            <?php
+                $stmt = $mysql->prepare('SELECT * FROM `twitter_posts` LIMIT 6');
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()):
+            ?>
+
             <div class="twitter_post">
                 <h3>Title</h3>
                 <p class="description"> <?php echo $row['text'] ?> </p>
             </div>
+            <?php endwhile; ?>
         </div>
-        <?php endwhile; ?>
         
         <!-- De aici iau datele din reddit_posts -->
         <h2 class="reddit">Reddit</h2>
-        <?php
-            $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts` LIMIT 6');
-            $stmt->execute();
-            $result = $stmt->get_result();
-            while ($row = $result->fetch_assoc()):
-        ?>
-
         <div class="reddit">
+            <?php
+                $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts` LIMIT 6');
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()):
+            ?>
+        
             <div class="reddit_post">
                 <h3> <?php echo $row['title'] ?> </h3>
                 <p class="description"> <?php echo $row['selftext'] ?> </p>
             </div>
+            <?php endwhile; ?>
         </div>
-        <?php endwhile; ?>
         
         <!-- De aici iau datele din youtube_videos -->
         <h2 class="youtube">YouTube</h2>
-        <?php
-            $stmt = $mysql->prepare('SELECT * FROM `youtube_videos` LIMIT 6');
-            $stmt->execute();
-            $result = $stmt->get_result();
-            while ($row = $result->fetch_assoc()):
-        ?>
         <div class="youtube">
+            <?php
+                $stmt = $mysql->prepare('SELECT * FROM `youtube_videos` LIMIT 6');
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()):
+            ?>
+
             <div class="youtube_post">
                 <h3> <?php echo $row['title'] ?> </h3>
                 <p class="description"> <?php echo $row['description'] ?> </p>
             </div>
+            <?php endwhile; ?>
         </div>
-        <?php endwhile; ?>
 
         </section>
     </main>

@@ -58,13 +58,13 @@ section.most_reviewed{
     background-color: var(--white);
 
     display: flex;
-    flex-direction: row;
+    
     flex-wrap: wrap;
     justify-content: space-around;
     column-gap: 2.5vh;
     row-gap: 2.5vh;
 }
-div.most_reviewed{
+div.most_reviewed{  
     max-width: 31.6%;
     border: 0.1rem solid var(--darkblue);
     background-color: var(--white);
@@ -81,6 +81,11 @@ section.categories{
     padding-left: 0vh;
     padding-right: 0vh;
     background-color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: no wrap;
+    
 }
 div.twitter{
     display: flex;
@@ -152,4 +157,49 @@ footer{
 hr{
     background-color: black;
     margin: 0rem;
+}
+
+/* responsive */
+@media (max-width:800px){
+    section.most_reviewed{
+        padding-top: 2.5vh;
+        padding-bottom: 5vh;
+        padding-left: 0vh;
+        padding-right: 0vh;
+        background-color: var(--white);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;     
+    }
+    div.most_reviewed{       
+        max-width: 80%;
+    }
+    div.twitter{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;       
+    }
+    div.twitter_post{
+        max-width: 80%;        
+    }
+    div.reddit{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    div.reddit_post{
+        max-width: 80%;
+    }
+    div.youtube{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    div.youtube_post{
+        max-width: 80%;
+    }
 }
