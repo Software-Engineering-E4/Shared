@@ -69,7 +69,7 @@
         
         <!-- De aici iau datele din reddit_posts -->
         <?php
-            $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts`');
+            $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts` LIMIT 6');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
@@ -82,188 +82,61 @@
         <?php endwhile; ?>
 
         </section>
-
+        
         <h2 class="titles" id="Categories">Categories</h2>
         <section class="categories">
 
-            <h2 class="twitter">Twitter</h2>
-            <div class="twitter">
-                <div class="twitter_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="twitter_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="twitter_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="twitter_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="twitter_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="twitter_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
+        <!-- De aici iau datele din twitter_posts -->
+        <h2 class="twitter">Twitter</h2>
+        <?php
+            $stmt = $mysql->prepare('SELECT * FROM `twitter_posts` LIMIT 6');
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()):
+        ?>
+
+        <div class="twitter">
+            <div class="twitter_post">
+                <h3>Title</h3>
+                <p class="description"> <?php echo $row['text'] ?> </p>
             </div>
+        </div>
+        <?php endwhile; ?>
+        
+        <!-- De aici iau datele din reddit_posts -->
+        <h2 class="reddit">Reddit</h2>
+        <?php
+            $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts` LIMIT 6');
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()):
+        ?>
 
-
-            <h2 class="reddit">Reddit</h2>
-            <div class="reddit">
-                <div class="reddit_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="reddit_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="reddit_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="reddit_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="reddit_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="reddit_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
+        <div class="reddit">
+            <div class="reddit_post">
+                <h3> <?php echo $row['title'] ?> </h3>
+                <p class="description"> <?php echo $row['selftext'] ?> </p>
             </div>
-
-
-            <h2 class="youtube">YouTube</h2>
-            <div class="youtube">
-                <div class="youtube_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="youtube_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="youtube_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="youtube_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="youtube_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
-                <div class="youtube_post">
-                    <h3>Title</h3>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eaque asperiores laudantium
-                        ex
-                        quaerat adipisci quibusdam similique, consectetur blanditiis praesentium repellendus accusamus,
-                        officiis illo doloribus, ea labore quo soluta modi.
-                    </p>
-                </div>
+        </div>
+        <?php endwhile; ?>
+        
+        <!-- De aici iau datele din youtube_videos -->
+        <h2 class="youtube">YouTube</h2>
+        <?php
+            $stmt = $mysql->prepare('SELECT * FROM `youtube_videos` LIMIT 6');
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()):
+        ?>
+        <div class="youtube">
+            <div class="youtube_post">
+                <h3> <?php echo $row['title'] ?> </h3>
+                <p class="description"> <?php echo $row['description'] ?> </p>
             </div>
+        </div>
+        <?php endwhile; ?>
 
         </section>
-
     </main>
 
     <hr>
