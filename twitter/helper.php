@@ -1,5 +1,18 @@
 <?php
 
+use Noweh\TwitterApi\Client;
+
+use Abraham\TwitterOAuth\TwitterOAuth;
+
+$settings = [
+    'account_id' => 2244994945,
+    'consumer_key' => 'cCYOTLx09q198b9ucpoeub9LT',
+    'consumer_secret' => 'HSk5dpgzAx5tBNH27ybCga4xJrFEv1BKvVLMNrV02TciIiluc4',
+    'bearer_token' => 'AAAAAAAAAAAAAAAAAAAAABs6bgEAAAAABdp3e1xIUmO95Wau0WH3YlpLzwQ%3D6GkZgDUgv2CIvujqyhhMhVLTqQ1UbkngHitOYOMGIWImUgPwjs',
+    'access_token' => '1515303940048441346-RoWMP3SbVwsJMDvaWjMghj7d86brdX',
+    'access_token_secret' => 'Jgt2QW698TRNXh4fgDkQxIungg9v0hcdakYSQju6sMqTZ'
+];
+
 function InsertJsonIntoDB(object $object) {
     global $link;
 
@@ -12,20 +25,47 @@ function InsertJsonIntoDB(object $object) {
 
                 $tweet_id = $tweet->id;
                 $retweet_count = $tweet->public_metrics->retweet_count;
-                $reply_count = $tweet->public_metrics->reply_count;
                 $like_count = $tweet->public_metrics->like_count;
-                $quote_count = $tweet->public_metrics->quote_count;
                 $text = $tweet->text;
     
                     // preparing statement for insert query
-                    $st = mysqli_prepare($link, 'INSERT INTO tweets(tweet_id, retweet_count, reply_count, like_count, quote_count, text) VALUES (?, ?, ?, ?, ?, ?)');
+                    $st = mysqli_prepare($link, 'INSERT IGNORE INTO twitter_posts(id, likes, retweets, text) VALUES (?, ?, ?, ?)');
                 
                     // bind variables to insert query params
-                    mysqli_stmt_bind_param($st, 'ddddds', $tweet_id, $retweet_count, $reply_count, $like_count, $quote_count, $text);
+                    mysqli_stmt_bind_param($st, 'ddds', $tweet_id, $like_count, $retweet_count, $text);
                 
                     // executing insert query
                     mysqli_stmt_execute($st);
         }
 //    }
+}
+
+
+function getData(string $searchPhrase) {
+    global $settings;
+    
+    $client = new Client($settings);
+    
+    $result = $client->tweetSearch()
+        ->showMetrics()
+    //    ->onlyWithMedias()
+    /*    ->addFilterOnUsernamesFrom([
+            'twitterdev',
+            'Noweh95'
+        ], \Noweh\TwitterApi\Enum\Operators::or)*/
+        ->addFilterOnKeywordOrPhrase([
+    //        'prostate cancer'
+    //        'colorectal cancer'
+              $searchPhrase
+        ], \Noweh\TwitterApi\Enum\Operators::or)
+        ->addFilterOnLocales(['en'])
+        ->addMaxResults(100)
+    //    ->addStartTime('2022-04-01')
+    //	  ->addEndTime('2022-04-02')
+    //    ->showUserDetails()
+        ->performRequest()
+    ;
+
+    return $result;
 }
 ?>
