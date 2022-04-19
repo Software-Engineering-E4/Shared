@@ -4,13 +4,10 @@ require "dbconnect.php";
 require "helper.php";
 
     $phrases = array("prostate cancer", "colorectal cancer", "prostate cancer treatment", "prostate cancer survival rate", "prostate cancer diagnosis", "prostate cancer screening", "prostate cancer staging", "prostate cancer metastasis");
+    $helper = new Helper();
 
     foreach ($phrases as $phrase) {
-        $data = getData($phrase);
-        if ($data == null) {
-            echo "No response for query:" . $phrase . "\n";
-            continue;
-        }
-        InsertJsonIntoDB($data);
+        $data = $helper->getData($phrase);
+        $helper->InsertJsonIntoDB($data);
     }
 ?>
