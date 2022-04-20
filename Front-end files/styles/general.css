@@ -5,6 +5,9 @@
     --white: #FFFFFF;
     --lightgray: #DFDFDF;
     --opo_white: #292C35;
+    --opo_post: #595b64;
+    --opo_shadow: #3b3d46;
+    --pink: #E75480;
 }
 
 body{
@@ -15,9 +18,7 @@ body{
 /* top bar */
 header.site_header{
     border-bottom: 0.05rem solid black;
-    background-color: black;
 }
-
 nav.navig_line{
     padding-left: 5vh;
     padding-right: 5vh;
@@ -82,6 +83,7 @@ input:hover{
     outline: 0.1rem solid var(--white);
     transition: 200ms;
 }
+
 /* menu - options */
 ul.right_container{
     list-style: none;
@@ -181,6 +183,17 @@ main{
 }
 
 
+/* footer */
+footer.footer{
+    border-top-width: 0.38rem;
+    border-top-style: solid;
+    border-top-color: var(--lightblue);
+    background-color: var(--darkblue);
+    color: var(--lightgray);
+    margin: 0rem;
+}
+
+
 /* responsive design */
 .menu-btn{
     position:absolute;
@@ -246,6 +259,36 @@ main{
 
 
 /* change theme */
-body.dark{
+body.dark-theme{
     background-color: var(--opo_white);
 }
+nav.dark-theme{
+    border-bottom-color: var(--pink);
+    background-color: var(--opo_white);
+}
+div.dark-theme input[type=search]{
+    background-color: var(--opo_post);
+    color: var(--white);
+}
+ul.dark-theme{
+    border: 0.1rem solid var(--opo_white);
+    background-color: var(--opo_white);
+}
+ul.dark-theme:hover{
+    border: 0.1rem solid var(--opo_white);
+    background-color: var(--opo_white);
+}
+li.dark-theme:hover{
+    background-color: var(--opo_shadow);
+}
+a.dark-theme{
+    color: var(--pink);
+}
+a.dark-theme:hover{
+    color: var(--pink);
+}
+footer.dark-theme{
+    border-top-color: var(--pink);
+    background-color: var(--opo_white);
+}
+

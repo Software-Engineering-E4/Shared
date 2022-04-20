@@ -11,7 +11,9 @@
     --youtube: #c4302b;
     --youtube-outline: #c46c69;
     --opo_white: #292C35;
-    --opo_post: #acafb7;
+    --opo_post: #595b64;
+    --opo_shadow: #3b3d46;
+    --pink: #E75480;
 }
 
 /* elements */
@@ -22,7 +24,7 @@ h2.titles{
     font-size: 1.875rem;
     color: var(--darkblue);
 }
-h3{
+h3.title{
     margin: 2.5vh;
     color: black;
 }
@@ -78,7 +80,7 @@ div.most_reviewed_post:hover{
     transition: 100ms;
 }
 /* categorized works */
-section.categories{
+section.Categories{
     padding-top: 2.5vh;
     padding-bottom: 5vh;
     padding-left: 0vh;
@@ -151,21 +153,6 @@ div.youtube_post:hover{
 }
 
 
-/* footer */
-footer{
-    background-color: var(--darkblue);
-    color: #fefee4;
-    margin: 0rem;
-}
-
-
-/* !!!!!!!!!!!!!!!! to be removed in the future */
-hr{
-    background-color: black;
-    margin: 0rem;
-}
-
-
 /* responsive */
 @media (max-width:800px){
     section.most_reviewed{
@@ -213,18 +200,23 @@ hr{
 
 
 /* change theme */
-h2.dark-gray{
+h2.dark-theme-dark-grey{
+    background-color: var(--opo_white);
+    color: var(--lightgray);
+}
+h2.dark-theme-dark-grey-overlap{
     background-color: var(--opo_white);
 }
-section.dark-gray{
+section.dark-theme-dark-grey{
     background-color: var(--opo_white);
 }
-div.dark-gray{
-    background-color: var(--opo_white);
-}
-
-div.light-gray{
+div.dark-theme-grey{
     background-color: var(--opo_post);
-    box-shadow: none;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--opo_shadow);
 }
-
+h3.dark-theme-light-grey{
+    color: var(--lightgray);
+}
+p.dark-theme-light-grey{
+    color: var(--lightgray);
+}
