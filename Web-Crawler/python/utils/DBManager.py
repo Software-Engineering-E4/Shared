@@ -5,7 +5,7 @@ import mysql.connector
 
 
 class DBManager:
-    def __init__(self, path: str) -> None:
+    def __init__(self, path: str, auto_connect: bool = True) -> None:
         with open(path) as file:
             data = json.load(file)
             self.host = data["host"]
@@ -15,14 +15,23 @@ class DBManager:
             self.port = data["port"]
             self.table_name = ""
 
-        self.connector = mysql.connector.connect(
-            database=self.database,
-            user=self.user,
-            password=self.password,
-            host=self.host,
-            port=self.port,
+        if auto_connect:
+            self.connector = self.make_connection(
+                self.database, self.user, self.password, self.host, self.port
+            )
+
+    def make_connection(
+        self, database: str, user: str, password: str, host: str, port: str
+    ) -> mysql.connector.connection_cext.CMySQLConnection:
+        sql_connection = mysql.connector.connect(
+            database=database,
+            user=user,
+            password=password,
+            host=host,
+            port=port,
         )
-        self.cursor = self.connector.cursor()
+        self.cursor = sql_connection.cursor()
+        return sql_connection
 
     def __enter__(self) -> DBManager:
         return self

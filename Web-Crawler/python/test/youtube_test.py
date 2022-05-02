@@ -1,13 +1,15 @@
 import unittest
 from utils.DBManager import DBManager
+from src.youtube import Youtube
 
 
 class YoutubeTest(unittest.TestCase):
-    def setUp(self) -> None:
+    def __init__(self, super_method: str = "") -> None:
+        super().__init__(super_method)
         self.db = DBManager("Web-Crawler/python/config/database.json")
 
-    def tearDown(self) -> None:
-        self.db.__exit__()
+    def setUp(self) -> None:
+        self.youtube = Youtube(self.db)
 
-    def test_db_connection(self) -> None:
+    def tearDown(self) -> None:
         pass
