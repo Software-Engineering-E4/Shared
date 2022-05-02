@@ -28,6 +28,12 @@ class DBManager:
     def insert(self, items: str) -> None:
         try:
             self.cursor.execute(f"insert into {self.table_name} values({items})")
+        except mysql.connector.errors.IntegrityError as err:
+            print(err)
+
+    def execute(self, statement: str) -> None:
+        try:
+            self.cursor.execute(statement)
         except Exception as ex:
             print(ex)
 
@@ -36,11 +42,9 @@ class DBManager:
         out = ""
 
         for key in response.keys():
-            if isinstance(key, str):
+            if isinstance(response[key], str):
                 formatted = str(response[key]).replace("'", "").replace('"', "")
                 out += f"'{formatted}', "
-            elif isinstance(response[key], datetime):
-                pass
             else:
                 out += f"{response[key]}, "
 

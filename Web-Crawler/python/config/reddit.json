@@ -1,0 +1,21 @@
+{
+    "authentication": {
+        "username": "SoftwareE4",
+        "password": "Cnr1XNy%gtc#6F4HS$9e",
+        "client_id": "fTCKpqKyRapTPX73ePjJNg",
+        "secret_key": "yJgOOuHl-3Yigm9dOextVza3Ybb7RQ"
+    },
+    "db_columns": [
+        "id",
+        "subreddit",
+        "title",
+        "selftext",
+        "score",
+        "award_score",
+        "views",
+        "created_utc",
+        "positive",
+        "negative",
+        "neutral"
+    ]
+}

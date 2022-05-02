@@ -1,5 +1,6 @@
 import json
 from youtube import Youtube
+from reddit import Reddit
 from utils.DBManager import DBManager
 
 
@@ -12,13 +13,24 @@ def main() -> None:
             database=data["database"],
             user=data["user"],
             password=data["password"],
-            port=data["port"]
+            port=data["port"],
         )
-    yt = Youtube(db)
-    queries = ["colorectal cancer", "cancer", "colorectal", "cancer colorectal"]
-    for query in queries:
-        output = yt.request(query)
-        yt.send_to_db(output)
+    # yt = Youtube(db)
+    # queries = ["colorectal cancer", "cancer", "colorectal", "cancer colorectal"]
+    # for query in queries:
+    #     output = yt.request(query)
+    #     yt.send_to_db(output)
+
+    reddit = Reddit(db)
+    subreddits = [
+        "cancerbiology",
+        "cancerfamilysupport",
+        "cancercaregivers",
+        "colorectalcancer",
+    ]
+    for subreddit in subreddits:
+        output = reddit.request(subreddit)
+        reddit.send_to_db(output)
     db.close()
 
 
