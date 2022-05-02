@@ -2,17 +2,17 @@ from datetime import datetime
 import json
 import requests
 from utils.DBManager import DBManager
+from requester import Requester
 
 
-class Reddit:
+class Reddit(Requester):
     def __init__(self, db: DBManager) -> None:
-        self.db = db
+        super(Reddit, self).__init__(db)
         self.db.set_table_name("reddit_posts")
         self.username = ""
         self.password = ""
         self.client_id = ""
         self.secret_key = ""
-        self.db_columns: list[str] = []
 
         with open("Web-Crawler/python/config/reddit.json") as file:
             data = json.load(file)
@@ -49,21 +49,24 @@ class Reddit:
             params={"limit": "100"},
         )
 
+        keys_not_found: set[str] = {""}
         out: list[dict[str, str | int | datetime]] = []
         for post in res.json()["data"]["children"]:
             data: dict[str, str | int | datetime] = {}
 
             for column in self.db_columns:
                 if column == "created_utc":
-                    data[column] = datetime.fromtimestamp(post["data"][column])
+                    data[column] = str(datetime.fromtimestamp(post["data"][column]))[:10]
                 else:
                     try:
                         data[column] = post["data"][column]
                     except KeyError:
-                        print(f"Key '{column}' not found")
+                        keys_not_found.add(column)
                         data[column] = "NULL"
             out.append(data)
 
+        if len(keys_not_found):
+            print("Keys not found in the response:", " ".join(key for key in keys_not_found))
         return out
 
     def send_to_db(self, data: list[dict[str, str | int | datetime]]) -> None:

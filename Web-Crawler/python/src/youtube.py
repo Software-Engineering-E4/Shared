@@ -2,14 +2,14 @@ import json
 from datetime import datetime
 from googleapiclient.discovery import build
 from utils.DBManager import DBManager
+from requester import Requester
 
 
-class Youtube:
+class Youtube(Requester):
     def __init__(self, db: DBManager) -> None:
-        self.db = db
+        super(Youtube, self).__init__(db)
         self.db.set_table_name("youtube_videos")
         self.api_key = ""
-        self.db_columns: list[str] = []
 
         with open("Web-Crawler/python/config/youtube.json") as file:
             data = json.load(file)
@@ -33,9 +33,11 @@ class Youtube:
             .execute()
         )
 
+        keys_not_found: set[str] = {""}
         out: list[dict[str, str | int | datetime]] = []
         for item in request["items"]:
             data: dict[str, str | int | datetime] = {}
+
             for column in self.db_columns:
                 if column == "id":
                     data[column] = item["id"]["videoId"]
@@ -43,13 +45,10 @@ class Youtube:
                     try:
                         data[column] = item["snippet"][column]
                     except KeyError:
-                        print(f"Key '{column}' not found")
+                        keys_not_found.add(column)
                         data[column] = "NULL"
             out.append(data)
 
+        if len(keys_not_found):
+            print("Keys not found in the response:", " ".join(key for key in keys_not_found))
         return out
-
-    def send_to_db(self, data: list[dict[str, str | int | datetime]]) -> None:
-        for item in data:
-            formatted = DBManager.format_data(item)
-            self.db.insert(formatted)

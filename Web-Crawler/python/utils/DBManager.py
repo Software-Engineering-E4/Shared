@@ -1,17 +1,19 @@
+from __future__ import annotations
 from datetime import datetime
+import json
 import mysql.connector
 
 
 class DBManager:
-    def __init__(
-        self, *, host: str, database: str, user: str, password: str, port: str
-    ) -> None:
-        self.host = host
-        self.database = database
-        self.user = user
-        self.password = password
-        self.port = port
-        self.table_name = ""
+    def __init__(self, path: str) -> None:
+        with open(path) as file:
+            data = json.load(file)
+            self.host = data["host"]
+            self.database = data["database"]
+            self.user = data["user"]
+            self.password = data["password"]
+            self.port = data["port"]
+            self.table_name = ""
 
         self.connector = mysql.connector.connect(
             database=self.database,
@@ -21,6 +23,13 @@ class DBManager:
             port=self.port,
         )
         self.cursor = self.connector.cursor()
+
+    def __enter__(self) -> DBManager:
+        return self
+
+    def __exit__(self, *args, **kwargs) -> None:
+        self.connector.commit()
+        self.connector.close()
 
     def set_table_name(self, table_name: str) -> None:
         self.table_name = table_name
@@ -49,7 +58,3 @@ class DBManager:
                 out += f"{response[key]}, "
 
         return out[:-2:]
-
-    def close(self) -> None:
-        self.connector.commit()
-        self.connector.close()
