@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 import requests
 from utils.DBManager import DBManager
-from requester import Requester
+from src.requester import Requester
 
 
 class Reddit(Requester):

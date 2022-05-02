@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from googleapiclient.discovery import build
 from utils.DBManager import DBManager
-from requester import Requester
+from src.requester import Requester
 
 
 class Youtube(Requester):
