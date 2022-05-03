@@ -17,32 +17,29 @@ Class Helper {
     function InsertJsonIntoDB(object $object) {
         global $link;
     
-        if (!($object == null)) {
+        if (($object == null || $object->data == null)) {
             return;
         }
     
         //Original object has two attributes but we're not interested in 'metadata'.
         $object = $object->data;
+  
+        foreach ($object as $tweet) {
     
-        // processing the array of objects
-    //    foreach ($object as $tweets) {
-            foreach ($object as $tweet) {
-    
-                    $tweet_id = $tweet->id;
-                    $retweet_count = $tweet->public_metrics->retweet_count;
-                    $like_count = $tweet->public_metrics->like_count;
-                    $text = $tweet->text;
+                $tweet_id = $tweet->id;
+                $retweet_count = $tweet->public_metrics->retweet_count;
+                $like_count = $tweet->public_metrics->like_count;
+                $text = $tweet->text;
         
-                        // preparing statement for insert query
-                        $st = mysqli_prepare($link, 'INSERT IGNORE INTO twitter_posts(id, likes, retweets, text) VALUES (?, ?, ?, ?)');
-                    
-                        // bind variables to insert query params
-                        mysqli_stmt_bind_param($st, 'ddds', $tweet_id, $like_count, $retweet_count, $text);
-                    
-                        // executing insert query
-                        mysqli_stmt_execute($st);
-            }
-    //    }
+                    // preparing statement for insert query
+                    $st = mysqli_prepare($link, 'INSERT IGNORE INTO twitter_posts(id, likes, retweets, text) VALUES (?, ?, ?, ?)');
+                
+                    // bind variables to insert query params
+                    mysqli_stmt_bind_param($st, 'ddds', $tweet_id, $like_count, $retweet_count, $text);
+                
+                    // executing insert query
+                    mysqli_stmt_execute($st);
+        }
     }
     
     
