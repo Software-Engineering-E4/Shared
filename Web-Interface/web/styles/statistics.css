@@ -1,0 +1,31 @@
+:root{
+    --darkblue: #00468B;
+    --lightblue: #008BD0;
+    --lightred: #FF715B;
+    --white: #FFFFFF;
+    --lightgray: #DFDFDF;
+    --twitter: #00acee;
+    --twitter-outline: rgb(122, 203, 235);
+    --reddit: #FF5700;
+    --reddit-outline: #fe9e6d;
+    --youtube: #c4302b;
+    --youtube-outline: #c46c69;
+    --opo_white: #292C35;
+    --opo_post: #595b64;
+    --opo_shadow: #3b3d46;
+    --pink: #E75480;
+}
+
+div.statistics {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+p.first_statistics {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    font-size: 1.25rem;
+}

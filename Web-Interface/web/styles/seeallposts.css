@@ -17,23 +17,6 @@
 }
 
 /* elements */
-h2.titles{
-    margin-top: 2.5vh;
-    margin-bottom: 2.5vh;
-    background-color: var(--white);
-    font-size: 1.875rem;
-    color: var(--darkblue);
-}
-h3.title{
-    margin: 0vh;
-    padding: 2.5vh;
-    color: black;
-}
-p.description{
-    margin: 0vh;
-    padding: 2.5vh;
-    padding-top: 0vh;
-}
 h2.twitter{
     margin-top: 2.5vh;
     margin-bottom: 2.5vh;
@@ -42,64 +25,31 @@ h2.twitter{
 
 }
 h2.reddit{
-    margin-top: 7.5vh;
+    margin-top: 2.5vh;
     margin-bottom: 2.5vh;
     background-color: var(--white);
     color: var(--reddit);
 
 }
 h2.youtube{
-    margin-top: 7.5vh;
+    margin-top: 2.5vh;
     margin-bottom: 2.5vh;
     background-color: var(--white);
     color: var(--youtube);
+}
+h3.title{
+    margin: 2.5vh;
+    color: black;
+}
+p.description{
+    margin: 2.5vh;
 }
 a.post{
     text-decoration: none;
     color: black;
 }
 
-/* homepage */
-/* popular works */
-section.most_reviewed{
-    padding-top: 2.5vh;
-    padding-bottom: 5vh;
-    padding-left: 0vh;
-    padding-right: 0vh;
-    background-color: var(--white);
-
-    display: flex;
-    
-    flex-wrap: wrap;
-    justify-content: space-around;
-    column-gap: 2.5vh;
-    row-gap: 2.5vh;
-}
-div.most_reviewed_post{  
-    max-width: 31.6%;
-    border: 0.1rem solid var(--darkblue);
-    background-color: var(--white);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
-    flex-grow: 1;
-}
-div.most_reviewed_post:hover{
-    outline: 0.2rem outset var(--lightblue);
-    transition: 100ms;
-}
-/* categorized works */
-section.Categories{
-    padding-top: 0vh;
-    padding-bottom: 2.5vh;
-    padding-left: 0vh;
-    padding-right: 0vh;
-    background-color: var(--white);
-
-    display: flex;
-    flex-direction: column;
-    flex-wrap: no wrap;
-    
-}
-
+/* see all categories */
 div.twitter{
     display: flex;
     flex-direction: row;
@@ -119,7 +69,6 @@ div.twitter_post:hover{
     outline: 0.2rem outset var(--twitter-outline);
     transition: 100ms;
 }
-
 div.reddit{
     display: flex;
     flex-direction: row;
@@ -139,7 +88,6 @@ div.reddit_post:hover{
     outline: 0.2rem outset var(--reddit-outline);
     transition: 100ms;
 }
-
 div.youtube{
     display: flex;
     flex-direction: row;
@@ -160,57 +108,11 @@ div.youtube_post:hover{
     transition: 100ms;
 }
 
-div.see_all{
-    padding: 0vh;
-    padding-top: 2.5vh;
-    padding-bottom: 2.5vh;
-    width: 100%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-div.see_all:hover{
-    background: var(--lightgray);
-    border-radius: 1.5rem;
-    transition: 750ms;
-}
-a.twitter_see_all{
-    text-decoration: none;
-    text-align: center;
-    color: var(--twitter);
-    font-size: 1.25rem;
-}
-a.reddit_see_all{
-    text-decoration: none;
-    text-align: center;
-    color: var(--reddit);
-    font-size: 1.25rem;
-}
-a.youtube_see_all{
-    text-decoration: none;
-    text-align: center;
-    color: var(--youtube);
-    font-size: 1.25rem;
-}
-
 
 /* responsive */
 @media (max-width:900px){
-    div.most_reviewed_post{       
+    div.platform_post{       
         max-width: 80%;
-    }
-    div.twitter_post{
-        max-width: 80%;        
-    }
-    div.reddit_post{
-        max-width: 80%;
-    }
-    div.youtube_post{
-        max-width: 80%;
-    }
-    div.see_all{
-        width: 100%;
     }
 }
 
@@ -218,14 +120,9 @@ a.youtube_see_all{
 /* change theme */
 h2.dark-theme-dark-grey{
     background-color: var(--opo_white);
-    color: var(--lightgray);
     transition: all 250ms;
 }
-h2.dark-theme-dark-grey-overlap{
-    background-color: var(--opo_white);
-    transition: all 250ms;
-}
-section.dark-theme-dark-grey{
+div.dark-theme-dark-grey{
     background-color: var(--opo_white);
     transition: all 250ms;
 }
@@ -233,12 +130,6 @@ div.dark-theme-grey{
     background-color: var(--opo_post);
     box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--opo_shadow);
     transition: all 250ms;
-}
-div.dark-theme-grey-overlap{
-    background-color: var(--opo_white);
-}
-div.dark-theme-grey-overlap:hover{
-    background-color: var(--opo_post);
 }
 h3.dark-theme-light-grey{
     color: var(--lightgray);
