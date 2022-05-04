@@ -1,4 +1,7 @@
 {
     "api_key": "AIzaSyCeNssf_A9u7bjKNu9DZRL3BzSq2AvMZyA",
-    "db_columns": ["id", "likes", "title", "description", "subtitles", "views", "utc_date", "sentiment"]
+    "tables": {
+        "youtube_videos": ["id", "likes", "title", "description", "subtitles", "views", "created_utc"],
+        "youtube_comments": ["id", "id_video", "likes", "text", "created_utc"]
+    }
 }

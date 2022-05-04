@@ -46,9 +46,10 @@ class DBManager:
     def insert(self, columns: list[str], items: str) -> None:
         try:
             pretty_columns = ", ".join(col for col in columns)
-            self.cursor.execute(
-                f"insert into {self.table_name} ({pretty_columns}) values({items})"
+            statement = (
+                f"insert into {self.table_name} ({pretty_columns}) values ({items})"
             )
+            self.cursor.execute(statement)
         except mysql.connector.errors.IntegrityError as err:
             print(err)
 
@@ -65,7 +66,10 @@ class DBManager:
         for key in response.keys():
             if isinstance(response[key], str):
                 formatted = str(response[key]).replace("'", "").replace('"', "")
-                out += f"'{formatted}', "
+                if formatted != "NULL":
+                    out += f"'{formatted}', "
+                else:
+                    out += "NULL, "
             else:
                 out += f"{response[key]}, "
 

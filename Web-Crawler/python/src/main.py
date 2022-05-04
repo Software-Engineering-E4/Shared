@@ -1,4 +1,4 @@
-from youtube import Youtube
+from youtube.youtube_videos import Youtube
 from reddit.reddit_comments import RedditComments
 from reddit.reddit_posts import RedditPosts
 from utils.DBManager import DBManager
