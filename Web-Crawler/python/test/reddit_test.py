@@ -1,8 +1,7 @@
-from socket import socket
 import unittest
 import jsonschema
 import requests
-from src.reddit import Reddit
+from src.reddit.reddit_posts import RedditPosts
 from utils.DBManager import DBManager
 
 
@@ -12,7 +11,7 @@ class RedditTest(unittest.TestCase):
         super(RedditTest, self).__init__(super_method)
 
     def setUp(self) -> None:
-        self.reddit = Reddit(self.db)
+        self.reddit = RedditPosts(self.db)
 
     def tearDown(self) -> None:
         pass

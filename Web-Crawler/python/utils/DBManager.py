@@ -43,9 +43,12 @@ class DBManager:
     def set_table_name(self, table_name: str) -> None:
         self.table_name = table_name
 
-    def insert(self, items: str) -> None:
+    def insert(self, columns: list[str], items: str) -> None:
         try:
-            self.cursor.execute(f"insert into {self.table_name} values({items})")
+            pretty_columns = ", ".join(col for col in columns)
+            self.cursor.execute(
+                f"insert into {self.table_name} ({pretty_columns}) values({items})"
+            )
         except mysql.connector.errors.IntegrityError as err:
             print(err)
 

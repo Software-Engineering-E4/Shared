@@ -15,6 +15,10 @@ class Requester(ABC):
     def request(self, query: Any) -> list[dict[str, str | int | datetime]]:
         pass
 
+    @abstractmethod
+    def authenticate(self, *args) -> None:
+        pass
+
     def set_table_name(self, table_name: str) -> None:
         self.db.set_table_name(table_name)
         self.columns = self.json_data["tables"][self.db.table_name]
@@ -25,4 +29,4 @@ class Requester(ABC):
     def send_to_db(self, data: list[dict[str, str | int | datetime]]) -> None:
         for item in data:
             formatted = DBManager.format_data(item)
-            self.db.insert(formatted)
+            self.db.insert(self.columns, formatted)

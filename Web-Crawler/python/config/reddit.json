@@ -14,11 +14,8 @@
             "score",
             "award_score",
             "views",
-            "created_utc",
-            "positive",
-            "negative",
-            "neutral"
+            "created_utc"
         ],
-        "reddit_comments": ["id", "id_post", "selftext", "score", "awards", "sentiment", "utc_date"]
+        "reddit_comments": ["id", "id_post", "selftext", "score", "award_score", "utc_date"]
     }
 }

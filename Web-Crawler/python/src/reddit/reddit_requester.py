@@ -1,5 +1,4 @@
 import json
-from typing import Any
 import requests
 from requester import Requester
 from utils.DBManager import DBManager
