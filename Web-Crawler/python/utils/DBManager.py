@@ -1,12 +1,24 @@
 from __future__ import annotations
+from dataclasses import dataclass, field
 from datetime import datetime
 import json
 import mysql.connector
 
 
+@dataclass
 class DBManager:
-    def __init__(self, path: str, auto_connect: bool = True) -> None:
-        with open(path) as file:
+    path: str
+    auto_connect: bool = field(default=True)
+    host: str = field(init=False)
+    database: str = field(init=False)
+    user: str = field(init=False)
+    password: str = field(init=False)
+    port: str = field(init=False)
+    table_name: str = field(init=False)
+    connector: mysql.connector.connection_cext.CMySQLConnection = field(init=False)
+
+    def __post_init__(self) -> None:
+        with open(self.path) as file:
             data = json.load(file)
             self.host = data["host"]
             self.database = data["database"]
@@ -15,7 +27,7 @@ class DBManager:
             self.port = data["port"]
             self.table_name = ""
 
-        if auto_connect:
+        if self.auto_connect:
             self.connector = self.make_connection(
                 self.database, self.user, self.password, self.host, self.port
             )

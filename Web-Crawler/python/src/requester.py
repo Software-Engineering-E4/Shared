@@ -1,15 +1,17 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 from utils.DBManager import DBManager
 
 
+@dataclass
 class Requester(ABC):
-    def __init__(self, db: DBManager) -> None:
-        self.db = db
-        self.table_name: str = ""
-        self.columns: list[str] = []
-        self.json_data: Any = None
+    db: DBManager
+    table_name: str = field(init=False)
+    json_data: Any = field(init=False)
+    columns: list[str] = field(init=False)
+    config_file: str = field(init=False)
 
     @abstractmethod
     def request(self, query: Any) -> list[dict[str, str | int | datetime]]:

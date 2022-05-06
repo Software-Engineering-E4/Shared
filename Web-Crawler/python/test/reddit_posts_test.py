@@ -5,10 +5,10 @@ from src.reddit.reddit_posts import RedditPosts
 from utils.DBManager import DBManager
 
 
-class RedditTest(unittest.TestCase):
+class RedditPostsTest(unittest.TestCase):
     def __init__(self, super_method: str = "") -> None:
         self.db = DBManager("Web-Crawler/python/config/database.json")
-        super(RedditTest, self).__init__(super_method)
+        super(RedditPostsTest, self).__init__(super_method)
 
     def setUp(self) -> None:
         self.reddit = RedditPosts(self.db)
@@ -17,20 +17,20 @@ class RedditTest(unittest.TestCase):
         pass
 
     def test_json_file(self) -> None:
+        NULLABLE_NUMBER = {"type": ["number", "string"], "pattern": r"^(\d+)|(null|NULL)$"}
+        NULLABLE_STRING = {"type": ["string", "null"]}
+
         schema = {
             "type": "object",
             "properties": {
                 "id": {"type": "string"},
                 "subreddit": {"type": "string"},
                 "title": {"type": "string"},
-                "selftext": {"type": "string"},
-                "score": {"type": "number"},
-                "award_score": {"type": "number"},
-                "views": {"type": "number"},
+                "selftext": NULLABLE_STRING,
+                "score": NULLABLE_NUMBER,
+                "award_score": NULLABLE_NUMBER,
+                "views": NULLABLE_NUMBER,
                 "created_utc": {"type": "string", "format": "date-time"},
-                "positive": {},
-                "negative": {},
-                "neutral": {},
             },
         }
         mock_subreddits = [
@@ -42,15 +42,13 @@ class RedditTest(unittest.TestCase):
 
         errors = []
         for subreddit in mock_subreddits:
-            try:
-                for f in self.reddit.request(subreddit):
+            for f in self.reddit.request(subreddit):
+                try:
                     jsonschema.validate(f, schema)
-            except jsonschema.exceptions.ValidationError as err:  # type: ignore
-                errors.append(err)
+                except jsonschema.exceptions.ValidationError as err:  # type: ignore
+                    errors.append(err)
 
-        self.assertTrue(
-            len(errors) == 0, f"{len(errors)} fields are invalid (wrong types)"
-        )
+        self.assertEqual(errors, [], f"{errors} fields are invalid (wrong types)")
 
     def test_initial_response(self) -> None:
         res = requests.get(

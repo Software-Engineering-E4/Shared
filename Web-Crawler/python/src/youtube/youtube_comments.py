@@ -1,12 +1,15 @@
-import datetime
+from dataclasses import dataclass
+from datetime import datetime
 from typing import Any
 from utils.DBManager import DBManager
-from requester import Requester
+from youtube.youtube_requester import YoutubeRequester
 
 
-class YoutubeComments(Requester):
-    def __init__(self, db: DBManager) -> None:
-        super(YoutubeComments, self).__init__(db)
+@dataclass
+class YoutubeComments(YoutubeRequester):
+    db: DBManager
+
+    def __post_init__(self) -> None:
         self.db.set_table_name("youtube_comments")
 
     def request(self, query: Any) -> list[dict[str, str | int | datetime]]:

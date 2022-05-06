@@ -1,12 +1,19 @@
+from dataclasses import dataclass, field
 import json
 import requests
 from requester import Requester
-from utils.DBManager import DBManager
 
 
+@dataclass
 class RedditRequester(Requester):
-    def __init__(self, db: DBManager) -> None:
-        super().__init__(db)
+    username: str = field(init=False)
+    password: str = field(init=False)
+    client_id: str = field(init=False)
+    secret_key: str = field(init=False)
+    headers: dict[str, str] = field(init=False)
+
+    def __post_init__(self) -> None:
+        super().__init__(self.db)
         self.set_config_file("Web-Crawler/python/config/reddit.json")
 
         with open(self.config_file) as file:

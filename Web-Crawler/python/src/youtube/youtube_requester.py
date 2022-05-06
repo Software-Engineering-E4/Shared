@@ -1,12 +1,16 @@
+from dataclasses import dataclass, field
 import json
 from requester import Requester
-from utils.DBManager import DBManager
-from googleapiclient.discovery import build
+import googleapiclient.discovery
 
 
+@dataclass
 class YoutubeRequester(Requester):
-    def __init__(self, db: DBManager) -> None:
-        super().__init__(db)
+    api_key: str = field(init=False)
+    resource: googleapiclient.discovery.Resource = field(init=False)
+
+    def __post_init__(self) -> None:
+        super().__init__(self.db)
         self.set_config_file("Web-Crawler/python/config/youtube.json")
 
         with open(self.config_file) as file:
@@ -16,4 +20,6 @@ class YoutubeRequester(Requester):
         self.authenticate(self.api_key)
 
     def authenticate(self, api_key: str) -> None:
-        self.resource = build("youtube", "v3", developerKey=api_key)
+        self.resource = googleapiclient.discovery.build(
+            "youtube", "v3", developerKey=api_key
+        )

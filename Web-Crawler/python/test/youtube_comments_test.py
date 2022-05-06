@@ -1,5 +1,5 @@
 import unittest
-from src.youtube_comments import YoutubeComments
+from youtube.youtube_comments import YoutubeComments
 from utils.DBManager import DBManager
 
 

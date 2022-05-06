@@ -1,13 +1,13 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 from reddit.reddit_requester import RedditRequester
-from utils.DBManager import DBManager
 import requests
 
 
+@dataclass
 class RedditComments(RedditRequester):
-    def __init__(self, db: DBManager) -> None:
-        super(RedditComments, self).__init__(db)
+    def __post_init__(self) -> None:
         self.db.set_table_name("reddit_comments")
 
     def request(self, query: Any) -> list[dict[str, str | int | datetime]]:

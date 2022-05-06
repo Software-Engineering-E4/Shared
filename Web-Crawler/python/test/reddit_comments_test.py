@@ -1,5 +1,5 @@
 import unittest
-from src.reddit_comments import RedditComments
+from reddit.reddit_comments import RedditComments
 from utils.DBManager import DBManager
 
 

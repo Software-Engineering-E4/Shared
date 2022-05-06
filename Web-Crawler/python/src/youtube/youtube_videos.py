@@ -1,17 +1,17 @@
-import json
+from dataclasses import dataclass
 from datetime import datetime
-from utils.DBManager import DBManager
 from youtube.youtube_requester import YoutubeRequester
 
 
-class Youtube(YoutubeRequester):
-    def __init__(self, db: DBManager) -> None:
-        super(Youtube, self).__init__(db)
+@dataclass
+class YoutubeVideos(YoutubeRequester):
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.set_table_name("youtube_videos")
 
     def request(self, query: str) -> list[dict[str, str | int | datetime]]:
         request = (
-            self.resource.search()
+            self.resource.search()  # type: ignore
             .list(
                 part="snippet",
                 order="relevance",
@@ -24,7 +24,6 @@ class Youtube(YoutubeRequester):
             .execute()
         )
 
-        keys_not_found: set[str] = {""}
         out: list[dict[str, str | int | datetime]] = []
         for item in request["items"]:
             data: dict[str, str | int | datetime] = {}
@@ -36,13 +35,8 @@ class Youtube(YoutubeRequester):
                     try:
                         data[column] = item["snippet"][column]
                     except KeyError:
-                        keys_not_found.add(column)
                         data[column] = "NULL"
+
             out.append(data)
 
-        if len(keys_not_found):
-            print(
-                "Keys not found in the response:",
-                " ".join(key for key in keys_not_found),
-            )
         return out

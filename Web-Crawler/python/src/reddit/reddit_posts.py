@@ -1,12 +1,16 @@
+from dataclasses import dataclass
 from datetime import datetime
 import requests
 from reddit.reddit_requester import RedditRequester
 from utils.DBManager import DBManager
 
 
+@dataclass
 class RedditPosts(RedditRequester):
-    def __init__(self, db: DBManager) -> None:
-        super(RedditPosts, self).__init__(db)
+    db: DBManager
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.set_table_name("reddit_posts")
 
     def request(self, subreddit: str) -> list[dict[str, str | int | datetime]]:
@@ -23,7 +27,9 @@ class RedditPosts(RedditRequester):
 
             for column in self.columns:
                 if column == "created_utc":
-                    data[column] = str(datetime.fromtimestamp(post["data"][column]))[:10]
+                    data[column] = str(datetime.fromtimestamp(post["data"][column]))[
+                        :10
+                    ]
                 else:
                     try:
                         data[column] = post["data"][column]
@@ -32,6 +38,4 @@ class RedditPosts(RedditRequester):
                         data[column] = "NULL"
             out.append(data)
 
-        if len(keys_not_found):
-            print("Keys not found in the response:", " ".join(key for key in keys_not_found))
         return out
