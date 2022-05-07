@@ -1,0 +1,141 @@
+:root{
+    --darkblue: #00468B;
+    --lightblue: #008BD0;
+    --lightred: #FF715B;
+    --white: #FFFFFF;
+    --lightgray: #DFDFDF;
+    --twitter: #00acee;
+    --twitter-outline: rgb(122, 203, 235);
+    --reddit: #FF5700;
+    --reddit-outline: #fe9e6d;
+    --youtube: #c4302b;
+    --youtube-outline: #c46c69;
+    --opo_white: #292C35;
+    --opo_post: #595b64;
+    --opo_shadow: #3b3d46;
+    --pink: #E75480;
+}
+
+/* elements */
+h2.twitter{
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    color: var(--twitter)
+
+}
+h2.reddit{
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    color: var(--reddit);
+
+}
+h2.youtube{
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    background-color: var(--white);
+    color: var(--youtube);
+}
+h3.title{
+    margin: 2.5vh;
+    color: black;
+}
+p.description{
+    margin: 2.5vh;
+}
+a.post{
+    text-decoration: none;
+    color: black;
+}
+
+/* see all categories */
+div.twitter{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
+}
+div.twitter_post{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--twitter);
+    background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
+    flex-grow: 1;
+}
+div.twitter_post:hover{
+    outline: 0.2rem outset var(--twitter-outline);
+    transition: 100ms;
+}
+div.reddit{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
+}
+div.reddit_post{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--reddit);
+    background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
+    flex-grow: 1;
+}
+div.reddit_post:hover{
+    outline: 0.2rem outset var(--reddit-outline);
+    transition: 100ms;
+}
+div.youtube{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 2.5vh;
+    row-gap: 2.5vh;
+}
+div.youtube_post{
+    max-width: 31.6%;
+    border: 0.1rem solid var(--youtube);
+    background-color: var(--white);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
+    flex-grow: 1;
+}
+div.youtube_post:hover{
+    outline: 0.2rem outset var(--youtube-outline);
+    transition: 100ms;
+}
+
+
+/* responsive */
+@media (max-width:900px){
+    div.platform_post{       
+        max-width: 80%;
+    }
+}
+
+
+/* change theme */
+h2.dark-theme-dark-grey{
+    background-color: var(--opo_white);
+    transition: all 250ms;
+}
+div.dark-theme-dark-grey{
+    background-color: var(--opo_white);
+    transition: all 250ms;
+}
+div.dark-theme-grey{
+    background-color: var(--opo_post);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--opo_shadow);
+    transition: all 250ms;
+}
+h3.dark-theme-light-grey{
+    color: var(--lightgray);
+    transition: all 250ms;
+}
+p.dark-theme-light-grey{
+    color: var(--lightgray);
+    transition: all 250ms;
+}
