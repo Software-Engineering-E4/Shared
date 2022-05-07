@@ -1,0 +1,73 @@
+:root{
+    --darkblue: #00468B;
+    --lightblue: #008BD0;
+    --lightred: #FF715B;
+    --white: #FFFFFF;
+    --lightgray: #DFDFDF;
+    --twitter: #00acee;
+    --twitter-outline: rgb(122, 203, 235);
+    --reddit: #FF5700;
+    --reddit-outline: #fe9e6d;
+    --youtube: #c4302b;
+    --youtube-outline: #c46c69;
+    --opo_white: #292C35;
+    --opo_post: #595b64;
+    --opo_shadow: #3b3d46;
+    --pink: #E75480;
+}
+
+main{
+    padding: 0vh;
+}
+
+/* elements */
+h2.platform_title{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    font-size: 1.875rem;
+    
+    background-color: var(--twitter-outline);
+    text-align: center;
+    color: var(--white);
+    border-bottom: 0.2rem solid var(--lightgray);
+}
+h3.title{
+    margin: 0vh;
+    padding: 2.5vh;
+}
+p.description{
+    margin: 0vh;
+    padding: 2.5vh;
+    padding-top: 0vh;
+}
+h3.stats_title{
+    margin: 0vh;
+    padding: 2.5vh;
+}
+
+div.content{ 
+    border-left: 0.2rem solid var(--lightgray);
+    border-bottom: 0.2rem solid var(--lightgray);
+    border-right: 0.2rem solid var(--lightgray);
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+section.title_and_description{
+    padding: 2.5vh;
+    padding-top: 0vh;
+    width: 50%;
+    border-right: 0.1rem solid var(--lightgray);
+
+}
+section.stats_and_review{
+    padding: 2.5vh;
+    padding-top: 0vh;
+    width: 50%;
+    border-left: 0.1rem solid var(--lightgray);
+}

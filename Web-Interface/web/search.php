@@ -74,16 +74,19 @@
 
         </nav>
     </header>
-    
-    <script>
-        function postData(path, name){
-            document.getElementById("formField").name = name;
-            document.getElementById("form").action = path;
-            document.getElementById("form").submit();
-        }
-    </script>
-    
+
     <main>
+        <?php
+            if($_POST["search"]=="") {
+                echo "<h2>No results found...</h2>";
+            } else {
+                $search=trim($_POST["search"]);
+                
+                $stmt = $mysql->prepare("SELECT title, selftext FROM reddit_posts WHERE title like '%$search%' OR selftext like '%$search%'");
+                
+            }
+        ?>
+        
         <h2 class="titles" id="titles">Popular works</h2>
         <section class="most_reviewed">
         
@@ -133,81 +136,6 @@
             </a>
         </div>
         <?php endwhile; ?>
-
-        </section>
-        
-        <h2 class="titles" id="Categories">Categories</h2>
-        <section class="categories">
-
-        <!-- De aici iau datele din twitter_posts -->
-        <h2 class="twitter">Twitter</h2>
-        <div class="twitter">
-            <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets FROM `twitter_posts` ORDER BY retweets DESC LIMIT 6');
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_assoc()):
-            ?>
-
-            <div class="twitter_post">
-                <a class="post" href="post.php">
-                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
-                </a>
-            </div>
-            <?php endwhile; ?>
-
-            <div class="see_all">
-                <form action="postData" name="twitter">
-                    <a class="twitter_see_all" href="/seeallposts.php" id="twitter_see_all">See all</a>
-                </form>
-            </div>
-        </div>
-        
-        <!-- De aici iau datele din reddit_posts -->
-        <h2 class="reddit">Reddit</h2>
-        <div class="reddit">
-            <?php
-                $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score FROM `reddit_posts` ORDER BY score DESC LIMIT 6');
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_assoc()):
-            ?>
-        
-            <div class="reddit_post">
-                <a class="post" href="post.php">
-                    <h3> <?php echo $row['title'] ?> </h3>
-                    <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
-                </a>
-            </div>
-            <?php endwhile; ?>
-
-            <div class="see_all">
-                <a class="reddit_see_all" href="/seeallposts.php" id="reddit_see_all">See all</a>
-            </div>
-        </div>
-        
-        <!-- De aici iau datele din youtube_videos -->
-        <h2 class="youtube">YouTube</h2>
-        <div class="youtube">
-            <?php
-                $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), likes FROM `youtube_videos` ORDER BY likes LIMIT 6');
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_assoc()):
-            ?>
-
-            <div class="youtube_post">
-                <a class="post" href="post.php">
-                    <h3> <?php echo $row['title'] ?> </h3>
-                    <p class="description"> <?php echo $row['SUBSTRING(description, 1, 250)'] ?> </p>
-                </a>
-            </div>
-            <?php endwhile; ?>
-        </div>
-
-        <div class="see_all">
-            <a class="youtube_see_all" href="/seeallposts.php" id="youtube_see_all">See all</a>
-        </div>
 
         </section>
     </main>
