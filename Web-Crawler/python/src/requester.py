@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 from utils.DBManager import DBManager
+import logging
 
 
 @dataclass
@@ -13,6 +14,8 @@ class Requester(ABC):
     json_data: Any = field(init=False)
     columns: dict[str, dict[str, str]] = field(init=False)
     config_file: str = field(init=False)
+    logger: logging.Logger = logging.getLogger()
+    logging.basicConfig(level=logging.INFO)
 
     @abstractmethod
     def request(self, query: Any) -> list[dict[str, str | int | datetime]]:
@@ -32,6 +35,7 @@ class Requester(ABC):
             formatted = self.db.clean_translation(formatted)
             # self.db.insert(formatted)
             self.db.update(formatted)
+            self.logger.info(f"Sent row with id={item['id']}")
 
     @abstractmethod
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:

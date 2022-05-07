@@ -17,3 +17,6 @@ class YoutubeComments(YoutubeRequester):
 
     def send_to_db(self, data: list[dict[str, str | int | datetime]]) -> None:
         return
+
+    def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
+        return ""

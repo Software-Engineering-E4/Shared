@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import json
+import logging
 import requests
 from requester import Requester
 
@@ -13,7 +14,7 @@ class RedditRequester(Requester):
     headers: dict[str, str] = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db)
+        super().__init__(self.db, logger=logging.getLogger(__name__))
         self.config_file = "Web-Crawler/python/config/reddit.json"
 
         with open(self.config_file) as file:
@@ -46,3 +47,4 @@ class RedditRequester(Requester):
         )
         token = res.json()["access_token"]
         self.headers["Authorization"] = f"bearer {token}"
+        self.logger.info("Finished authentication")

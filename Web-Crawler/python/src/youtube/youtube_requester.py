@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import json
+import logging
 from requester import Requester
 import googleapiclient.discovery
 
@@ -10,7 +11,7 @@ class YoutubeRequester(Requester):
     resource: googleapiclient.discovery.Resource = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db)
+        super().__init__(self.db, logger=logging.getLogger(__name__))
         self.config_file = "Web-Crawler/python/config/youtube.json"
 
         with open(self.config_file) as file:
@@ -23,3 +24,4 @@ class YoutubeRequester(Requester):
         self.resource = googleapiclient.discovery.build(
             "youtube", "v3", developerKey=api_key
         )
+        self.logger.info("Finished authentication")
