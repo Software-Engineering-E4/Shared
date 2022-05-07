@@ -8,6 +8,7 @@ from utils.DBManager import DBManager
 @dataclass
 class Requester(ABC):
     db: DBManager
+    translate: bool = field(default=False)
     table_name: str = field(init=False)
     json_data: Any = field(init=False)
     columns: list[str] = field(init=False)
@@ -25,10 +26,8 @@ class Requester(ABC):
         self.db.set_table_name(table_name)
         self.columns = self.json_data["tables"][self.db.table_name]
 
-    def set_config_file(self, path: str) -> None:
-        self.config_file = path
-
-    def send_to_db(self, data: list[dict[str, str | int | datetime]]) -> None:
+    def send_to_db(self, data: list[dict[str, str | int | datetime]], format) -> None:
         for item in data:
-            formatted = DBManager.format_data(item)
-            self.db.insert(self.columns, formatted)
+            formatted = self.db.format_data(item, format)
+            formatted = self.db.clean_translation(formatted)
+            self.db.insert(formatted)

@@ -11,7 +11,7 @@ class YoutubeRequester(Requester):
 
     def __post_init__(self) -> None:
         super().__init__(self.db)
-        self.set_config_file("Web-Crawler/python/config/youtube.json")
+        self.config_file = "Web-Crawler/python/config/youtube.json"
 
         with open(self.config_file) as file:
             self.json_data = json.load(file)

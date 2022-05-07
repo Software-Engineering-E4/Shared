@@ -1,7 +1,57 @@
 {
     "api_key": "AIzaSyCeNssf_A9u7bjKNu9DZRL3BzSq2AvMZyA",
     "tables": {
-        "youtube_videos": ["id", "likes", "title", "description", "subtitles", "views", "created_utc"],
-        "youtube_comments": ["id", "id_video", "likes", "text", "created_utc"]
+        "youtube_videos": {
+            "id": {
+                "type": "string",
+                "translate": false
+            },
+            "likes": {
+                "type": "number",
+                "translate": false
+            },
+            "title": {
+                "type": "string",
+                "translate": true
+            },
+            "description": {
+                "type": "string",
+                "translate": true
+            },
+            "subtitles": {
+                "type": "string",
+                "translate": true
+            },
+            "views": {
+                "type": "number",
+                "translate": false
+            },
+            "created_utc": {
+                "type": "date",
+                "translate": false
+            }
+        },
+        "youtube_comments": {
+            "id": {
+                "type": "string",
+                "translate": false
+            },
+            "id_video": {
+                "type": "string",
+                "translate": false
+            },
+            "likes": {
+                "type": "number",
+                "translate": false
+            },
+            "text": {
+                "type": "string",
+                "translate": true
+            },
+            "created_utc": {
+                "type": "date",
+                "translate": false
+            }
+        }
     }
 }
