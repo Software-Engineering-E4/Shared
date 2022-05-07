@@ -11,7 +11,7 @@ class Requester(ABC):
     translate: bool = field(default=False)
     table_name: str = field(init=False)
     json_data: Any = field(init=False)
-    columns: list[str] = field(init=False)
+    columns: dict[str, dict[str, str]] = field(init=False)
     config_file: str = field(init=False)
 
     @abstractmethod
@@ -30,4 +30,9 @@ class Requester(ABC):
         for item in data:
             formatted = self.db.format_data(item, format)
             formatted = self.db.clean_translation(formatted)
-            self.db.insert(formatted)
+            # self.db.insert(formatted)
+            self.db.update(formatted)
+
+    @abstractmethod
+    def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
+        pass

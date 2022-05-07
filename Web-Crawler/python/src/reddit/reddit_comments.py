@@ -17,3 +17,6 @@ class RedditComments(RedditRequester):
             params={"limit": "100"},
         )
         return []
+
+    def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
+        return ""

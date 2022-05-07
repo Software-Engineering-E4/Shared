@@ -28,6 +28,11 @@
             },
             "created_utc": {
                 "type": "date",
+                "translate": false,
+                "actualName": "publishedAt"
+            },
+            "thumbnail": {
+                "type": "string",
                 "translate": false
             }
         },

@@ -6,7 +6,7 @@ from random import random
 from turtle import st
 import mysql.connector
 import translators as ts
-from utils.utils import hamming_distance
+from Levenshtein import distance as lv
 
 
 @dataclass
@@ -59,14 +59,26 @@ class DBManager:
     def set_table_name(self, table_name: str) -> None:
         self.table_name = table_name
 
-    def insert(self, columns: list[dict[str, str]]) -> None:
+    def insert(self, columns: list[dict[str, str | int]]) -> None:
         pretty_columns = ", ".join([val for val in col.keys()][0] for col in columns)
-        pretty_items = self.unpack_data(columns)
+        pretty_items = self.unpack_for_insert(columns)
+        statement = (
+            f"insert into {self.table_name} ({pretty_columns}) values ({pretty_items})"
+        )
         try:
-            statement = f"insert into {self.table_name} ({pretty_columns}) values ({pretty_items})"
             self.cursor.execute(statement)
         except mysql.connector.errors.IntegrityError as err:
             print(err)
+        self.connector.commit()
+
+    def update(self, columns: list[dict[str, str | int]]) -> None:
+        result = self.unpack_for_update(columns)
+        for col in columns[0].values():
+            statement = f"update {self.table_name} set {result} where id='{col}'"
+            try:
+                self.cursor.execute(statement)
+            except mysql.connector.errors.IntegrityError as err:
+                print(err)
         self.connector.commit()
 
     def execute(self, statement: str) -> None:
@@ -77,33 +89,48 @@ class DBManager:
 
     def format_data(
         self, response: dict[str, str | int | datetime], format
-    ) -> list[dict[str, str]]:
-        out: list[dict[str, str]] = []
-        translations: list[dict[str, str]] = []
+    ) -> list[dict[str, str | int]]:
+        out: list[dict[str, str | int]] = []
+        translations: list[dict[str, str | int]] = []
 
         for key in response.keys():
             if format[key]["type"] == "string":
-                clean_str = str(response[key]).replace("'", "").replace('"', "")
+                clean_str = (
+                    str(response[key])
+                    .replace("'", "")
+                    .replace('"', "")
+                    .replace("\n", "")
+                    .strip()
+                )
 
                 if clean_str != "NULL":
                     if format[key]["translate"] and clean_str:
-                        translated = str(ts.google(
-                            clean_str,
-                            sleep_seconds=0.125,
-                            if_ignore_limit_of_length=True,
-                        ))
-                        if hamming_distance(clean_str, translated)> len(clean_str)*.2:
+                        translated = str(
+                            ts.google(
+                                clean_str,
+                                sleep_seconds=0.125,
+                                if_ignore_limit_of_length=True,
+                            )
+                        )
+                        if (
+                            lv(clean_str, translated) > len(clean_str) * 0.2
+                            and clean_str.find(translated) != 0
+                        ):
                             translations.append({f"{key}_translated": str(translated)})
                     out.append({key: clean_str})
                 else:
                     out.append({key: "NULL"})
-
+            elif format[key]["type"] == "date":
+                out.append({key: str(response[key])[:10]})
             else:
-                out.append({key: str(response[key])})
+                if response[key] != "NULL":
+                    out.append({key: int(response[key])})  # type: ignore
+                else:
+                    out.append({key: "NULL"})
 
         return out + translations
 
-    def unpack_data(self, data: list[dict[str, str]]) -> str:
+    def unpack_for_insert(self, data: list[dict[str, str | int]]) -> str:
         out = ""
 
         for row in data:
@@ -118,12 +145,38 @@ class DBManager:
 
         return out[:-2]
 
-    def clean_translation(self, item: list[dict[str, str]]) -> list[dict[str, str]]:
-        clean: list[dict[str, str]] = []
+    def unpack_for_update(self, data: list[dict[str, str | int]]) -> str:
+        out = ""
+
+        for row in data:
+            for val in row.keys():
+                if row[val] != "NULL":
+                    if isinstance(row[val], int):
+                        out += f"{val}={row[val]}, "
+                    else:
+                        out += f"{val}='{row[val]}', "
+                else:
+                    out += f"{val}=NULL, "
+
+        return out[:-2]
+
+    def clean_translation(
+        self, item: list[dict[str, str | int]]
+    ) -> list[dict[str, str | int]]:
+        clean: list[dict[str, str | int]] = []
 
         for row in item:
-            tmp: dict[str, str] = {}
+            tmp: dict[str, str | int] = {}
             for val in row:
-                tmp[val] = row[val].replace("'", "").replace('"', "")
+                if isinstance(row[val], str):
+                    tmp[val] = (
+                        str(row[val])
+                        .replace("'", "")
+                        .replace('"', "")
+                        .replace("\n", "")
+                        .strip()
+                    )
+                else:
+                    tmp[val] = row[val]
             clean.append(tmp)
         return clean

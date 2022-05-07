@@ -37,3 +37,9 @@ Libraries:
     ```bash
     pip install google-api-python-client
     ```
+
+- levenshtein `0.18.1`
+
+    ```bash
+    pip install Levenshtein
+    ```

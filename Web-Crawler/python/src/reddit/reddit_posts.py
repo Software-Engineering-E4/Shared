@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 import requests
 from reddit.reddit_requester import RedditRequester
 from utils.DBManager import DBManager
@@ -20,22 +21,25 @@ class RedditPosts(RedditRequester):
             params={"limit": "100"},
         )
 
-        keys_not_found: set[str] = {""}
         out: list[dict[str, str | int | datetime]] = []
         for post in res.json()["data"]["children"]:
             data: dict[str, str | int | datetime] = {}
 
             for column in self.columns:
-                if column == "created_utc":
-                    data[column] = str(datetime.fromtimestamp(post["data"][column]))[
-                        :10
-                    ]
-                else:
-                    try:
-                        data[column] = post["data"][column]
-                    except KeyError:
-                        keys_not_found.add(column)
-                        data[column] = "NULL"
+                data[column] = self.treat_special_case(column, post)
+                if data[column]:
+                    continue
+                try:
+                    data[column] = post["data"][column]
+                except KeyError:
+                    data[column] = "NULL"
             out.append(data)
 
         return out
+
+    def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
+        match column:
+            case "created_utc":
+                return str(datetime.fromtimestamp(item["data"][column]))[:10]
+            case _:
+                return ""

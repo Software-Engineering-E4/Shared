@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 from youtube.youtube_requester import YoutubeRequester
 
 
@@ -29,14 +30,28 @@ class YoutubeVideos(YoutubeRequester):
             data: dict[str, str | int | datetime] = {}
 
             for column in self.columns:
-                if column == "id":
-                    data[column] = item["id"]["videoId"]
-                else:
+                data[column] = self.treat_special_case(column, item)
+                if data[column]:
+                    continue
+                try:
+                    data[column] = item["snippet"][column]
+                except KeyError:
                     try:
-                        data[column] = item["snippet"][column]
+                        data[column] = item["snippet"][
+                            self.columns[column]["actualName"]
+                        ]
                     except KeyError:
                         data[column] = "NULL"
 
             out.append(data)
 
         return out
+
+    def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
+        match column:
+            case "id":
+                return item["id"]["videoId"]
+            case "thumbnail":
+                return item["snippet"]["thumbnails"]["high"]["url"]
+            case _:
+                return ""
