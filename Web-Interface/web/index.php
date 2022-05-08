@@ -151,7 +151,7 @@
             <?php endwhile; ?>
 
             <div class="see_all">
-                <a class="twitter_see_all" href="/seeallposts.php?platformName=Twitter" id="twitter_see_all">>See all</a>
+                <a class="twitter_see_all" href="/seeallposts.php?platformName=Twitter" id="twitter_see_all">See all</a>
             </div>
 
         </div>
