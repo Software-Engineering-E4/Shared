@@ -12,7 +12,10 @@ def main() -> None:
         for query in queries:
             output = youtube_videos.request(query)
             youtube_videos.send_to_db(output, youtube_videos.columns)
+
         youtube_comments = YoutubeComments(db)
+        response = youtube_comments.request()
+        youtube_comments.send_to_db(response, youtube_comments.columns)
 
         reddit_posts = RedditPosts(db)
         subreddits = [
@@ -26,6 +29,8 @@ def main() -> None:
             reddit_posts.send_to_db(output, reddit_posts.columns)
 
         reddit_comments = RedditComments(db)
+        response = reddit_comments.request()
+        reddit_comments.send_to_db(response, reddit_comments.columns)
 
 
 if __name__ == "__main__":

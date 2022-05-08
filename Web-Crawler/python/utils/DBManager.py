@@ -1,11 +1,7 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
-from datetime import datetime
 import json
-from logging import Logger
 import logging
-from random import random
-from turtle import st
+from dataclasses import dataclass, field
 import mysql.connector
 import translators as ts
 from Levenshtein import distance as lv
@@ -15,6 +11,7 @@ from Levenshtein import distance as lv
 class DBManager:
     config_file: str
     auto_connect: bool = field(default=True)
+    translate: bool = field(default=False)
     host: str = field(init=False)
     database: str = field(init=False)
     user: str = field(init=False)
@@ -22,8 +19,12 @@ class DBManager:
     port: str = field(init=False)
     table_name: str = field(init=False)
     connector: mysql.connector.connection_cext.CMySQLConnection = field(init=False)
-    logger:logging.Logger = logging.getLogger(__name__)
-    logging.basicConfig(level=logging.INFO)
+    logger: logging.Logger = field(default=logging.getLogger(__name__), init=False)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="[%(asctime)s] %(name)s line %(lineno)s: %(message)s",
+        filename="latest.log",
+    )
 
     def __post_init__(self) -> None:
         with open(self.config_file) as file:
@@ -51,6 +52,7 @@ class DBManager:
             port=port,
         )
         self.cursor = sql_connection.cursor()
+        self.logger.info("Connected to the database")
         return sql_connection
 
     def __enter__(self) -> DBManager:
@@ -72,7 +74,7 @@ class DBManager:
         try:
             self.cursor.execute(statement)
         except mysql.connector.errors.IntegrityError as err:
-            self.logger.info(err)
+            self.logger.exception(err)
         self.connector.commit()
 
     def update(self, columns: dict[str, str | int]) -> None:
@@ -85,14 +87,23 @@ class DBManager:
                 self.logger.info(err)
         self.connector.commit()
 
+    def query(self, table_name: str, items: list[str]) -> list[tuple[str, ...]]:
+        pretty_items = ", ".join(item for item in items)
+        self.cursor.execute(f"select {pretty_items} from {table_name}")
+        return self.cursor.fetchall()
+
+    def query_one(self, table_name: str, item: str) -> set[str]:
+        self.cursor.execute(f"select {item} from {table_name}")
+        return set(ele[0] for ele in self.cursor.fetchall())
+
     def execute(self, statement: str) -> None:
         try:
             self.cursor.execute(statement)
         except Exception as ex:
-            self.logger.info(ex)
+            self.logger.exception(ex)
 
     def format_data(
-        self, response: dict[str, str | int | datetime], format
+        self, response: dict[str, str | int], format
     ) -> dict[str, str | int]:
         out: dict[str, str | int] = {}
         translations: dict[str, str | int] = {}
@@ -106,16 +117,21 @@ class DBManager:
                     .replace("\n", "")
                     .strip()
                 )
-
+                if clean_str == "":
+                    clean_str = "NULL"
                 if clean_str != "NULL":
-                    if format[key]["translate"] and clean_str:
-                        translated = str(
-                            ts.google(
-                                clean_str,
-                                sleep_seconds=0.125,
-                                if_ignore_limit_of_length=True,
+                    if format[key]["translate"] and clean_str != "" and self.translate:
+                        try:
+                            translated = str(
+                                ts.google(
+                                    clean_str,
+                                    sleep_seconds=0.125,
+                                    if_ignore_limit_of_length=True,
+                                )
                             )
-                        )
+                        except Exception as ex:
+                            self.logger.exception(ex)
+                            continue
                         if (
                             lv(clean_str, translated) > len(clean_str) * 0.2
                             and clean_str.find(translated) != 0
@@ -128,7 +144,7 @@ class DBManager:
                 out[key] = str(response[key])[:10]
             else:
                 if response[key] != "NULL":
-                    out[key]= int(str(response[key]))
+                    out[key] = int(str(response[key]))
                 else:
                     out[key] = "NULL"
 
@@ -139,7 +155,7 @@ class DBManager:
     def unpack_for_insert(self, data: dict[str, str | int]) -> str:
         out = ""
 
-        for row in data:
+        for row in data.values():
             if row != "NULL":
                 if isinstance(row, int):
                     out += f"{row}, "

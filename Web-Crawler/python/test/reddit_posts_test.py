@@ -17,7 +17,10 @@ class RedditPostsTest(unittest.TestCase):
         pass
 
     def test_json_file(self) -> None:
-        NULLABLE_NUMBER = {"type": ["number", "string"], "pattern": r"^(\d+)|(null|NULL)$"}
+        NULLABLE_NUMBER = {
+            "type": ["number", "string"],
+            "pattern": r"^(\d+)|(null|NULL)$",
+        }
         NULLABLE_STRING = {"type": ["string", "null"]}
 
         schema = {

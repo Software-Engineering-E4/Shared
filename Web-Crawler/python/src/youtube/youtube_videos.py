@@ -10,7 +10,7 @@ class YoutubeVideos(YoutubeRequester):
         super().__post_init__()
         self.set_table_name("youtube_videos")
 
-    def request(self, query: str) -> list[dict[str, str | int | datetime]]:
+    def request(self, query: str) -> list[dict[str, str | int]]:
         request = (
             self.resource.search()  # type: ignore
             .list(
@@ -25,9 +25,9 @@ class YoutubeVideos(YoutubeRequester):
             .execute()
         )
 
-        out: list[dict[str, str | int | datetime]] = []
+        out: list[dict[str, str | int]] = []
         for item in request["items"]:
-            data: dict[str, str | int | datetime] = {}
+            data: dict[str, str | int] = {}
 
             for column in self.columns:
                 data[column] = self.treat_special_case(column, item)
@@ -53,5 +53,7 @@ class YoutubeVideos(YoutubeRequester):
                 return item["id"]["videoId"]
             case "thumbnail":
                 return item["snippet"]["thumbnails"]["high"]["url"]
+            case "link":
+                return f"https://www.youtube.com/watch?v={item['id']['videoId']}"
             case _:
                 return ""

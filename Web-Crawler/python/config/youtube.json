@@ -34,6 +34,10 @@
             "thumbnail": {
                 "type": "string",
                 "translate": false
+            },
+            "link": {
+                "type": "string",
+                "translate": false
             }
         },
         "youtube_comments": {
