@@ -21,7 +21,9 @@ div.statistics {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    
+    color:black;
+
+
 }
 p.first_statistics {
     text-decoration: none;
@@ -29,3 +31,107 @@ p.first_statistics {
     color: black;
     font-size: 1.25rem;
 }
+h2.reddit{
+    color: var(--reddit);
+    justify-content: center;
+}
+h2.youtube{
+    color: var(--youtube);
+    justify-content: center;
+}
+h2.twitter{
+    color: var(--twitter);
+    justify-content: center;
+}
+div.twitter{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.chart{
+    width: 600px;
+    height: 300px;
+    display: block;
+}
+
+.values{
+    color: var(--twitter);
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 100%;
+    display: inline-block;
+
+}
+
+.values li{
+    list-style: none;
+    height: 150px;
+    position: relative;
+    bottom: 145px;
+}
+
+.values span{
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.bars{
+    color: var(--twitter);
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--twitter);
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+
+}
+
+.bars li{
+    display: table-cell;
+    width: 150px;
+    height: 300px;
+    position: relative;
+    left: 20px;
+}
+
+.bars span{
+    width: 100%;
+    position: absolute;
+    bottom: -30px;
+    text-align: center;
+    left: 0px;
+}
+
+.bars .bar{
+    display: block;
+    background: #fff;
+    width: 70px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 40px;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
+    transition: 0.5s;
+    transition-property: background, box-shadow;
+}
+
+.bars .bar:hover{
+    background: var(--darkblue);
+    box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+    cursor: pointer;
+}
+
+.bars .bar:before{
+    color: #fff;
+    content: attr(data-percentage) '%';
+    position: relative;
+    bottom: 20px;
+}
+
