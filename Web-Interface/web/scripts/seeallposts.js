@@ -2,8 +2,7 @@
 var optionFromLocalStorage = localStorage.getItem("vLocalStorage");
 var option = optionFromLocalStorage;
 
-var twitter = 'twitter';
-if(option === twitter) {
+if(option === 'twitter') {
     document.getElementById("platform_name").innerHTML = 'Twitter';
     var elem;
     elem = document.querySelector(".platform_name");
@@ -17,8 +16,8 @@ if(option === twitter) {
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('twitter_post');
 }
-var reddit = 'reddit';
-if(option === reddit) {
+
+if(option === 'reddit') {
     document.getElementById("platform_name").innerHTML = 'Reddit';
     var elem;
     elem = document.querySelector(".platform_name");
@@ -32,8 +31,8 @@ if(option === reddit) {
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('reddit_post');
 }
-var youtube = 'youtube';
-if(option === youtube) {
+
+if(option === 'youtube') {
     document.getElementById("platform_name").innerHTML = 'YouTube';
     var elem;
     elem = document.querySelector(".platform_name");

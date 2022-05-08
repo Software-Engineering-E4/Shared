@@ -11,9 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/general.css" rel="stylesheet">
     <link href="styles/homepage.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/homepage.js" defer></script>
+    <script src="scripts/ajaxBackend.js" defer></script>
     <title>Site name</title>
 </head>
 
@@ -48,11 +50,11 @@
                 <li class="categories">
                     <a class="menu_option" href="#Categories">Categories</a>
                 </li>
-                <li class="about">
-                    <a class="menu_option" href="about.php">About us</a>
-                </li>
                 <li class="statistics">
                     <a class="menu_option" href="statistics.php">Statistics</a>
+                </li>
+                <li class="about">
+                    <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
 
@@ -149,8 +151,9 @@
             <?php endwhile; ?>
 
             <div class="see_all">
-                <a class="twitter_see_all" href="/seeallposts.php" id="twitter_see_all">See all</a>
+                <a class="twitter_see_all" href="/seeallposts.php?platformName=Twitter" id="twitter_see_all">See all</a>
             </div>
+
         </div>
         
         <!-- De aici iau datele din reddit_posts -->
@@ -172,7 +175,7 @@
             <?php endwhile; ?>
 
             <div class="see_all">
-                <a class="reddit_see_all" href="/seeallposts.php" id="reddit_see_all">See all</a>
+                <a class="reddit_see_all" href="/seeallposts.php?platformName=Reddit" id="reddit_see_all">See all</a>
             </div>
         </div>
         
@@ -196,7 +199,7 @@
         </div>
 
         <div class="see_all">
-            <a class="youtube_see_all" href="/seeallposts.php" id="youtube_see_all">See all</a>
+            <a class="youtube_see_all" href="/seeallposts.php?platformName=Youtube" id="youtube_see_all">See all</a>
         </div>
 
         </section>

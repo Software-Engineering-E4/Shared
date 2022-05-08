@@ -48,11 +48,11 @@
                 <li class="categories">
                     <a class="menu_option" href="#Categories">Categories</a>
                 </li>
-                <li class="about">
-                    <a class="menu_option" href="about.php">About us</a>
-                </li>
                 <li class="statistics">
                     <a class="menu_option" href="statistics.php">Statistics</a>
+                </li>
+                <li class="about">
+                    <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
 

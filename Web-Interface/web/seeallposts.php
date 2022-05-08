@@ -14,6 +14,7 @@
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/seeallposts.js" defer></script>
+    <script src="scripts/homepage.js" defer></script>
     <title>All posts</title>
 </head>
 
@@ -22,9 +23,9 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/homepage.html">Site name</a>
+                    <a class="site_name" href="/index.php">Site name</a>
                 </div>
-                <form action="/homepage.html" method="get">
+                <form action="/index.php" method="get">
                     <div class="search_bar">
                         <input type="search" id="search" name="search" placeholder=" Search...">
                     </div>
@@ -32,16 +33,16 @@
             </div>
             <ul class="right_container">
                 <li class="latest">
-                    <a class="menu_option" href="homepage.html"> Latest </a>
+                    <a class="menu_option" href="latest.php"> Latest </a>
                 </li>
                 <li class="categories">
-                    <a class="menu_option" href="homepage.html#Categories">Categories</a>
+                    <a class="menu_option" href="index.php#Categories">Categories</a>
                 </li>
                 <li class="statistics">
-                    <a class="menu_option" href="statistics.html">Statistics</a>
+                    <a class="menu_option" href="statistics.php">Statistics</a>
                 </li>
                 <li class="about">
-                    <a class="menu_option" href="about.html">About us</a>
+                    <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
             <div class="change_theme">
@@ -64,30 +65,38 @@
 
     <main>
         <h2 class="platform_name" id="platform_name"></h2>
+        <?php
+        $queries = array();
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $platformName =  $queries['platformName'];
 
-        <?php if ("platform_name" == 'Reddit'): ?>
-            <div class="reddit">
+        if ($platformName == 'Reddit'): ?>
+            <div class="reddit" id="reddit_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts`');
+                    $stmt = $mysql->prepare('SELECT title, SUBSTRING_INDEX(selftext, ".", 2), score FROM `reddit_posts` ORDER BY score DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
                 ?>
-
                 <div class="reddit_post">
                     <a class="post" href="post.php">
                         <h3> <?php echo $row['title'] ?> </h3>
-                        <p class="description"> <?php echo $row['selftext'] ?> </p>
+                        <p class="description"> <?php echo $row['SUBSTRING_INDEX(selftext, ".", 2)'] ?> </p>
                     </a>
                 </div>
                 <?php endwhile; ?>     
             </div>
         <?php endif; ?>
         
-        <?php if ("platform_name" == 'Youtube'): ?>
-            <div class="youtube">
+        <?php
+        $queries = array();
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $platformName =  $queries['platformName'];
+
+        if ($platformName == 'Youtube'): ?>
+            <div class="youtube" id="youtube_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title, description FROM `youtube_videos`');
+                    $stmt = $mysql->prepare('SELECT title,SUBSTRING_INDEX(description, ".", 2), likes FROM `youtube_videos` ORDER BY likes DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
@@ -96,28 +105,32 @@
                 <div class="youtube_post">
                     <a class="post" href="post.php">
                         <h3> <?php echo $row['title'] ?> </h3>
-                        <p class="description"> <?php echo $row['description'] ?> </p>
+                        <p class="description"> <?php echo $row['SUBSTRING_INDEX(description, ".", 2)'] ?> </p>
                     </a>
                 </div>
-                <?php endwhile; ?>   
+                <?php endwhile; ?>
             </div>
         <?php endif; ?>
         
-        <?php if ("platform_name" == 'Twitter'): ?>
-        <div class="twitter">
+        <?php
+        $queries = array();
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $platformName =  $queries['platformName'];
+
+        if ($platformName == 'Twitter'): ?>
+        <div class="twitter" id="twitter_see_all">
             <?php
-                $stmt = $mysql->prepare('SELECT text FROM `twitter_posts`');
+                $stmt = $mysql->prepare('SELECT SUBSTRING_INDEX(text, ".", 2), retweets FROM `twitter_posts` ORDER BY retweets DESC');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
             ?>
-
-            <div class="twitter_post">
-                <a class="post" href="post.php">
-                    <p class="description"> <?php echo $row['text'] ?> </p>
-                </a>
+                <div class="twitter_post">
+                    <a class="post" href="post.php">
+                        <p class="description"> <?php echo $row['SUBSTRING_INDEX(text, ".", 2)'] ?> </p>
+                    </a>
             </div>
-            <?php endwhile; ?>   
+            <?php endwhile; ?>
         </div>
         <?php endif; ?>
 

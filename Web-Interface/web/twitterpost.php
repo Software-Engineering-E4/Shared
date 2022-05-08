@@ -1,3 +1,7 @@
+<?php
+    require "dbconnection.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +10,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/general.css" rel="stylesheet">
+    <link href="styles/post.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
-    <title>About</title>
+    <title>Twitter post</title>
 </head>
 
 <body>
@@ -29,7 +34,7 @@
                     <a class="menu_option" href="latest.php"> Latest </a>
                 </li>
                 <li class="categories">
-                    <a class="menu_option" href="index.php#Categories">Categories</a>
+                    <a class="menu_option" href="/index.php#Categories">Categories</a>
                 </li>
                 <li class="statistics">
                     <a class="menu_option" href="statistics.php">Statistics</a>
@@ -55,13 +60,41 @@
 
         </nav>
     </header>
-    <main>
-
-    </main>
-
-    <footer>
-
-    </footer>
 </body>
+
+<main>
+    <h2 class="platform_title">Twitter post</h2>
+    <div class="content">
+        <section class="title_and_description">
+            <h3 class="title">
+                Title of post
+            </h3>
+            <p class="description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio similique explicabo doloremque iure
+                eveniet
+                incidunt adipisci, doloribus sit vel eligendi at architecto quod necessitatibus voluptatem magni sint
+                non
+                aut voluptate.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tempore assumenda praesentium. Officiis
+                nemo ut possimus debitis numquam corporis delectus dolores quam illum, necessitatibus repellendus,
+                fugiat, ipsum eum ad error?
+            </p>
+        </section>
+        <section class="stats_and_review">
+            <div class="date">
+                <h3 class="stats_title">Date:</h3>
+                <p class="description">posted date</p>
+            </div>
+            <div class="feelings">
+                <h3 class="stats_title">Overall feeling:</h3>
+                <p class="description">Lorem ipsum dolor sit amet</p>
+            </div>
+            <div class=" review">
+                <h3 class="stats_title">Leave a review here:</h3>
+                <p class="description">To be done...</p>
+            </div>
+        </section>
+    </div>
+</main>
 
 </html>

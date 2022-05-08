@@ -1,7 +1,6 @@
 <?php
     require "dbconnection.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,9 +20,9 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/homepage.html">Site name</a>
+                    <a class="site_name" href="/index.php">Site name</a>
                 </div>
-                <form action="/homepage.html" method="get">
+                <form action="/index.php" method="get">
                     <div class="search_bar">
                         <input type="search" id="search" name="search" placeholder=" Search...">
                     </div>
@@ -31,16 +30,16 @@
             </div>
             <ul class="right_container">
                 <li class="latest">
-                    <a class="menu_option" href="homepage.html"> Latest </a>
+                    <a class="menu_option" href="latest.php"> Latest </a>
                 </li>
                 <li class="categories">
-                    <a class="menu_option" href="#Categories">Categories</a>
+                    <a class="menu_option" href="index.php#Categories">Categories</a>
                 </li>
                 <li class="statistics">
-                    <a class="menu_option" href="statistics.html">Statistics</a>
+                    <a class="menu_option" href="statistics.php">Statistics</a>
                 </li>
                 <li class="about">
-                    <a class="menu_option" href="about.html">About us</a>
+                    <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
             <div class="change_theme">
