@@ -43,3 +43,9 @@ Libraries:
     ```bash
     pip install Levenshtein
     ```
+
+- translator `5.1.1`
+
+    ```bash
+    pip install translators
+    ```

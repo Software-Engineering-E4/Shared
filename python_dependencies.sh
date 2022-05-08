@@ -5,3 +5,4 @@ sudo apt install python3-pip
 pip install mysql-connector-python
 pip install google-api-python-client
 pip install Levenshtein
+pip install translators

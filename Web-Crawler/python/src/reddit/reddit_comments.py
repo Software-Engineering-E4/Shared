@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from hashlib import sha1
 import random
 import string
 from typing import Any
@@ -17,7 +18,6 @@ class RedditComments(RedditRequester):
         out = []
         for values in self.db.query("reddit_posts", ["id", "subreddit"])[:100]:
             id, subreddit = values
-            data: dict[str, str | int] = {}
             try:
                 res = requests.get(
                     f"https://oauth.reddit.com/r/{subreddit}/comments/{id}",
@@ -30,6 +30,7 @@ class RedditComments(RedditRequester):
 
             for child in res.json():
                 for inner_child in child["data"]["children"]:
+                    data: dict[str, str | int] = {}
                     for column in self.columns:
                         data[column] = self.treat_special_case(column, inner_child)
                         if data[column]:
@@ -43,7 +44,8 @@ class RedditComments(RedditRequester):
                                 ]
                             except KeyError:
                                 data[column] = "NULL"
-                    out.append(data)
+                    if data["id"] != data["id_post"]:
+                        out.append(data)
 
             self.logger.info(f"Comments with post_id={id} done")
 
@@ -52,10 +54,10 @@ class RedditComments(RedditRequester):
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
         match column:
             case "id":
-                return "".join(
-                    random.choice(string.ascii_lowercase + string.digits)
-                    for _ in range(10)
-                )
+                try:
+                    return sha1(bytes(item["data"]["body"], "utf-8")).hexdigest()
+                except KeyError:
+                    return ""
             case "id_post":
                 return item["data"]["id"]
             case "created_utc":

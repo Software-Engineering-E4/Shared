@@ -7,10 +7,9 @@ from youtube.youtube_requester import YoutubeRequester
 
 @dataclass
 class YoutubeComments(YoutubeRequester):
-    db: DBManager
-
     def __post_init__(self) -> None:
-        self.db.set_table_name("youtube_comments")
+        super().__post_init__()
+        self.set_table_name("youtube_comments")
 
     def request(self, query: Any = None) -> list[dict[str, str | int]]:
         return super().request(query)
