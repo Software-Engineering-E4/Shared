@@ -14,6 +14,7 @@
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/seeallposts.js" defer></script>
+    <script src="scripts/homepage.js" defer></script>
     <title>All posts</title>
 </head>
 
@@ -64,16 +65,19 @@
 
     <main>
         <h2 class="platform_name" id="platform_name"></h2>
+        <?php
+        $queries = array();
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $platformName =  $queries['platformName'];
 
-        <?php if ("platform_name" == 'Reddit'): ?>
-            <div class="reddit">
+        if ($platformName == 'Reddit'): ?>
+            <div class="reddit" id="reddit_see_all">
                 <?php
                     $stmt = $mysql->prepare('SELECT title, selftext FROM `reddit_posts`');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
                 ?>
-
                 <div class="reddit_post">
                     <a class="post" href="post.php">
                         <h3> <?php echo $row['title'] ?> </h3>
@@ -84,8 +88,13 @@
             </div>
         <?php endif; ?>
         
-        <?php if ("platform_name" == 'Youtube'): ?>
-            <div class="youtube">
+        <?php
+        $queries = array();
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $platformName =  $queries['platformName'];
+
+        if ($platformName == 'Youtube'): ?>
+            <div class="youtube" id="youtube_see_all">
                 <?php
                     $stmt = $mysql->prepare('SELECT title, description FROM `youtube_videos`');
                     $stmt->execute();
@@ -99,25 +108,29 @@
                         <p class="description"> <?php echo $row['description'] ?> </p>
                     </a>
                 </div>
-                <?php endwhile; ?>   
+                <?php endwhile; ?>
             </div>
         <?php endif; ?>
         
-        <?php if ("platform_name" == 'Twitter'): ?>
-        <div class="twitter">
+        <?php
+        $queries = array();
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $platformName =  $queries['platformName'];
+
+        if ($platformName == 'Twitter'): ?>
+        <div class="twitter" id="twitter_see_all">
             <?php
                 $stmt = $mysql->prepare('SELECT text FROM `twitter_posts`');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
             ?>
-
-            <div class="twitter_post">
-                <a class="post" href="post.php">
-                    <p class="description"> <?php echo $row['text'] ?> </p>
-                </a>
+                <div class="twitter_post">
+                    <a class="post" href="post.php">
+                        <p class="description"> <?php echo $row['text'] ?> </p>
+                    </a>
             </div>
-            <?php endwhile; ?>   
+            <?php endwhile; ?>
         </div>
         <?php endif; ?>
 
