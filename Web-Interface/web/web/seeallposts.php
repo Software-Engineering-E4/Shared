@@ -73,7 +73,7 @@
         if ($platformName == 'Reddit'): ?>
             <div class="reddit" id="reddit_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title, SUBSTRING_INDEX(selftext, ".", 2), score FROM `reddit_posts` ORDER BY score DESC');
+                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(selftext, 1, 250), score FROM `reddit_posts` ORDER BY score DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
@@ -81,7 +81,7 @@
                 <div class="reddit_post">
                     <a class="post" href="post.php">
                         <h3> <?php echo $row['title'] ?> </h3>
-                        <p class="description"> <?php echo $row['SUBSTRING_INDEX(selftext, ".", 2)'] ?> </p>
+                        <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
                     </a>
                 </div>
                 <?php endwhile; ?>     
@@ -96,7 +96,7 @@
         if ($platformName == 'Youtube'): ?>
             <div class="youtube" id="youtube_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title,SUBSTRING_INDEX(description, ".", 2), likes FROM `youtube_videos` ORDER BY likes DESC');
+                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(description, 1, 250), likes FROM `youtube_videos` ORDER BY likes DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
@@ -105,7 +105,7 @@
                 <div class="youtube_post">
                     <a class="post" href="post.php">
                         <h3> <?php echo $row['title'] ?> </h3>
-                        <p class="description"> <?php echo $row['SUBSTRING_INDEX(description, ".", 2)'] ?> </p>
+                        <p class="description"> <?php echo $row['SUBSTRING(description, 1, 250)'] ?> </p>
                     </a>
                 </div>
                 <?php endwhile; ?>
@@ -120,14 +120,14 @@
         if ($platformName == 'Twitter'): ?>
         <div class="twitter" id="twitter_see_all">
             <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING_INDEX(text, ".", 2), retweets FROM `twitter_posts` ORDER BY retweets DESC');
+                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets FROM `twitter_posts` ORDER BY retweets DESC');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
             ?>
                 <div class="twitter_post">
                     <a class="post" href="post.php">
-                        <p class="description"> <?php echo $row['SUBSTRING_INDEX(text, ".", 2)'] ?> </p>
+                        <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
                     </a>
             </div>
             <?php endwhile; ?>
