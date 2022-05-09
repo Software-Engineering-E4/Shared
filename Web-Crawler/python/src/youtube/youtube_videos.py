@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import datetime
+import logging
 from typing import Any
 from youtube.youtube_requester import YoutubeRequester
 
@@ -8,6 +8,7 @@ from youtube.youtube_requester import YoutubeRequester
 class YoutubeVideos(YoutubeRequester):
     def __post_init__(self) -> None:
         super().__post_init__()
+        self.logger = logging.getLogger(__name__)
         self.set_table_name("youtube_videos")
 
     def request(self, query: str) -> list[dict[str, str | int]]:
@@ -42,8 +43,10 @@ class YoutubeVideos(YoutubeRequester):
                         ]
                     except KeyError:
                         data[column] = "NULL"
-
-            out.append(data)
+            if self.real_time:
+                self.send_to_db([data], self.columns)
+            else:
+                out.append(data)
 
         return out
 

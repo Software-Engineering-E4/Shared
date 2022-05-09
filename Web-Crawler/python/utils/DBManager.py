@@ -22,7 +22,7 @@ class DBManager:
     logger: logging.Logger = field(default=logging.getLogger(__name__), init=False)
     logging.basicConfig(
         level=logging.INFO,
-        format="[%(asctime)s] %(name)s line %(lineno)s: %(message)s",
+        format="[%(asctime)s] %(levelname)s %(name)s line %(lineno)s: %(message)s",
         filename="latest.log",
     )
 
@@ -52,7 +52,7 @@ class DBManager:
             port=port,
         )
         self.cursor = sql_connection.cursor()
-        self.logger.info("Connected to the database")
+        self.logger.info(f"Connected to the database, auto_connect={self.auto_connect}, translate={self.translate}")
         return sql_connection
 
     def __enter__(self) -> DBManager:
@@ -79,12 +79,11 @@ class DBManager:
 
     def update(self, columns: dict[str, str | int]) -> None:
         result = self.unpack_for_update(columns)
-        for col in columns.values():
-            statement = f"update {self.table_name} set {result} where id='{col}'"
-            try:
-                self.cursor.execute(statement)
-            except mysql.connector.errors.IntegrityError as err:
-                self.logger.info(err)
+        statement = f"update {self.table_name} set {result} where id='{columns['id']}'"
+        try:
+            self.cursor.execute(statement)
+        except mysql.connector.errors.IntegrityError as err:
+            self.logger.exception(err)
         self.connector.commit()
 
     def query(self, table_name: str, items: list[str]) -> list[tuple[str, ...]]:

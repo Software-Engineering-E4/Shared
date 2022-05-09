@@ -11,7 +11,7 @@ class YoutubeRequester(Requester):
     resource: googleapiclient.discovery.Resource = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db, logger=logging.getLogger(__name__))
+        super().__init__(self.db)
         self.config_file = "Web-Crawler/python/config/youtube.json"
 
         with open(self.config_file) as file:

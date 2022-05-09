@@ -10,7 +10,6 @@ class DBManagerTest(unittest.TestCase):
         super().__init__(methodName)
 
     def internet_connection(self) -> None:
-        sock = socket.create_connection(("1.1.1.1", 53))
         sock = None
         try:
             sock = socket.create_connection(("1.1.1.1", 53))

@@ -14,7 +14,7 @@ class RedditRequester(Requester):
     headers: dict[str, str] = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db, logger=logging.getLogger(__name__))
+        super().__init__(self.db)
         self.config_file = "Web-Crawler/python/config/reddit.json"
 
         with open(self.config_file) as file:

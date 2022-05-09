@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+import logging
 from typing import Any
 import requests
 from reddit.reddit_requester import RedditRequester
@@ -9,6 +10,7 @@ from reddit.reddit_requester import RedditRequester
 class RedditPosts(RedditRequester):
     def __post_init__(self) -> None:
         super().__post_init__()
+        self.logger = logging.getLogger(__name__)
         self.set_table_name("reddit_posts")
 
     def request(self, subreddit: str) -> list[dict[str, str | int]]:
@@ -24,13 +26,16 @@ class RedditPosts(RedditRequester):
 
             for column in self.columns:
                 data[column] = self.treat_special_case(column, post)
-                if data[column]:
+                if data[column] != "":
                     continue
                 try:
                     data[column] = post["data"][column]
                 except KeyError:
                     data[column] = "NULL"
-            out.append(data)
+            if self.real_time:
+                self.send_to_db([data], self.columns)
+            else:
+                out.append(data)
 
         return out
 
