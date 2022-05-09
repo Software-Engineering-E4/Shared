@@ -11,11 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/general.css" rel="stylesheet">
     <link href="styles/homepage.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/homepage.js" defer></script>
-    <script src="scripts/ajaxBackend.js" defer></script>
     <title>Site name</title>
 </head>
 
@@ -26,26 +24,16 @@
                 <div class="site_name">
                     <a class="site_name" href="/index.php">Site name</a>
                 </div>
-                <form action="/index.php" method="get">
+                <form action="/search.php" method="POST">
                     <div class="search_bar">
                         <input type="search" id="search" name="search" placeholder=" Search...">
                     </div>
                 </form>
-
-                <!-- Aici este functia pentru search (trebuie vazut de ce nu functioneaza) -->
-                <?php
-				    if (isset($_GET['search'])) {
-                        $search = $_GET['search'];
-                        $stmt = $pdo->query("SELECT * FROM `reddit_posts` WHERE title LIKE '%$search%' OR selftext LIKE '%$search%'");
-                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    }
-				?>
-
             </div>
 
             <ul class="right_container">
                 <li class="latest">
-                    <a class="menu_option" href="latest.php"> Latest </a>
+                    <a class="menu_option" href="index.php"> Latest </a>
                 </li>
                 <li class="categories">
                     <a class="menu_option" href="#Categories">Categories</a>
@@ -66,8 +54,8 @@
                 </label>
             </div>
 
-            <a href="https://www.info.uaic.ro" class="faculty"> <img src="images/logo-fii.png" alt="University logo"
-                    class="faculty_logo">
+            <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
+                    alt="University logo" class="faculty_logo">
             </a>
 
             <!-- responsive website -->
@@ -76,21 +64,21 @@
 
         </nav>
     </header>
-
+    
     <main>
         <h2 class="titles" id="titles">Popular works</h2>
         <section class="most_reviewed">
         
         <!-- De aici iau datele din reddit_posts -->
         <?php
-            $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score FROM `reddit_posts` ORDER BY score DESC LIMIT 2');
+            $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score, id FROM reddit_posts ORDER BY score DESC LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
         ?>
 
         <div class="most_reviewed_post">
-            <a class="post" href="post.php">
+            <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
                 <h3> <?php echo $row['title'] ?> </h3>
                 <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
             </a>
@@ -99,14 +87,14 @@
         
         <!-- De aici iau datele din twitter_posts -->
         <?php
-            $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets FROM `twitter_posts` ORDER BY retweets DESC LIMIT 2');
+            $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id FROM twitter_posts ORDER BY retweets DESC LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
         ?>
 
         <div class="most_reviewed_post">
-            <a class="post" href="post.php">
+            <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
                 <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
             </a>
         </div>
@@ -114,7 +102,7 @@
         
         <!-- De aici iau datele din youtube_videos -->
         <?php
-            $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), likes FROM `youtube_videos` ORDER BY likes LIMIT 2');
+            $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), likes FROM youtube_videos ORDER BY likes LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
@@ -131,20 +119,20 @@
         </section>
         
         <h2 class="titles" id="Categories">Categories</h2>
-        <section class="categories">
+        <section class="Categories">
 
         <!-- De aici iau datele din twitter_posts -->
         <h2 class="twitter">Twitter</h2>
         <div class="twitter">
             <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets FROM `twitter_posts` ORDER BY retweets DESC LIMIT 6');
+                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id FROM twitter_posts ORDER BY retweets DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
             ?>
 
             <div class="twitter_post">
-                <a class="post" href="post.php">
+                <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
                     <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
                 </a>
             </div>
@@ -153,21 +141,20 @@
             <div class="see_all">
                 <a class="twitter_see_all" href="/seeallposts.php?platformName=Twitter" id="twitter_see_all">See all</a>
             </div>
-
         </div>
         
         <!-- De aici iau datele din reddit_posts -->
         <h2 class="reddit">Reddit</h2>
         <div class="reddit">
             <?php
-                $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score FROM `reddit_posts` ORDER BY score DESC LIMIT 6');
+                $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score, id FROM reddit_posts ORDER BY score DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
             ?>
         
             <div class="reddit_post">
-                <a class="post" href="post.php">
+                <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
                     <h3> <?php echo $row['title'] ?> </h3>
                     <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
                 </a>
@@ -183,7 +170,7 @@
         <h2 class="youtube">YouTube</h2>
         <div class="youtube">
             <?php
-                $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), likes FROM `youtube_videos` ORDER BY likes LIMIT 6');
+                $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), likes FROM youtube_videos ORDER BY likes LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
@@ -196,18 +183,16 @@
                 </a>
             </div>
             <?php endwhile; ?>
-        </div>
 
-        <div class="see_all">
-            <a class="youtube_see_all" href="/seeallposts.php?platformName=Youtube" id="youtube_see_all">See all</a>
+            <div class="see_all">
+                <a class="youtube_see_all" href="/seeallposts.php?platformName=Youtube" id="youtube_see_all">See all</a>
+            </div>
         </div>
 
         </section>
     </main>
 
-    <hr>
-
-    <footer>
+    <footer class="footer">
         Footer infos <br>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
         sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem

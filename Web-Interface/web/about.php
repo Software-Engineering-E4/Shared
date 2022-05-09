@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/general.css" rel="stylesheet">
@@ -16,9 +16,9 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/index.php">Site name</a>
+                    <a class="site_name" href="/homepage.html">Site name</a>
                 </div>
-                <form action="/index.php" method="get">
+                <form action="/search.php" method="post">
                     <div class="search_bar">
                         <input type="search" id="search" name="search" placeholder=" Search...">
                     </div>
@@ -26,7 +26,7 @@
             </div>
             <ul class="right_container">
                 <li class="latest">
-                    <a class="menu_option" href="latest.php"> Latest </a>
+                    <a class="menu_option" href="index.php"> Latest </a>
                 </li>
                 <li class="categories">
                     <a class="menu_option" href="index.php#Categories">Categories</a>
@@ -59,8 +59,11 @@
 
     </main>
 
-    <footer>
-
+    <footer class="footer">
+        Footer infos <br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
+        sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
+        minus est.
     </footer>
 </body>
 
