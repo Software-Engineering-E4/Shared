@@ -1,6 +1,6 @@
 {
-  "name": "Colorectal Cancer",
-  "description": "Colorectal Cancer repo for github",
-  "repository": "",
-  "addons": []
+    "name": "Colorectal Cancer" ,
+    "description": "View demographic data about colorectal cancer " ,
+    "repository": "" ,
+    "addons": [] 
 }

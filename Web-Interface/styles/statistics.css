@@ -1,0 +1,186 @@
+:root{
+    --darkblue: #00468B;
+    --lightblue: #008BD0;
+    --lightred: #FF715B;
+    --white: #FFFFFF;
+    --lightgray: #DFDFDF;
+    --twitter: #00acee;
+    --twitter-outline: rgb(122, 203, 235);
+    --reddit: #FF5700;
+    --reddit-outline: #fe9e6d;
+    --youtube: #c4302b;
+    --youtube-outline: #c46c69;
+    --opo_white: #292C35;
+    --opo_post: #595b64;
+    --opo_shadow: #3b3d46;
+    --pink: #E75480;
+}
+
+div.statistics-twitter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+      
+}
+div.statistics-reddit {
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+    
+}
+div.statistics-youtube {
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+    
+}
+
+h2.reddit{
+    color: var(--reddit);
+    justify-content: center;
+}
+h2.youtube{
+    color: var(--youtube);
+    justify-content: center;
+}
+h2.twitter{
+    color: var(--twitter);
+    justify-content: center;
+}
+div.twitter{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.chart{
+    margin-bottom: 10vh ;
+    width: 600px;
+    height: 300px;
+    display: block;
+  }
+  
+.twitter .values{
+    color: var(--twitter);
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 100%;
+    display: inline-block;   
+  }
+.reddit .values{
+    color: var(--reddit);
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 100%;
+    display: inline-block;   
+  } 
+.youtube .values{
+    color: var(--youtube);
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 100%;
+    display: inline-block;   
+  }
+  .values li{
+    list-style: none;
+    height: 150px;
+    position: relative;
+    bottom: 145px;
+  }
+  
+  .values span{
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+  }
+  
+  .twitter .bars {
+    color: var(--twitter);
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--twitter);
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+  }
+  .reddit .bars {
+    color: var(--reddit);
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--reddit);
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px; 
+  }
+  .youtube .bars {
+    color: var(--youtube);
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--youtube);
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px; 
+  }
+ 
+  
+  .bars li{
+    display: table-cell;
+    width: 150px;
+    height: 300px;
+    position: relative;
+    left: 20px;
+  }
+  
+  .bars span{
+    width: 100%;
+    position: absolute;
+    bottom: -30px;
+    text-align: center;
+    left: 0px;
+  }
+  
+  .bars .bar{
+    display: block;
+    background: #fff;
+    width: 70px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 40px;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
+    transition: 0.5s;
+    transition-property: background, box-shadow;
+  }
+  
+  .bars .bar:hover{
+    background: var(--darkblue);
+    box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+    cursor: pointer;
+  }
+  
+  .bars .bar:before{
+    color: #fff;
+    content: attr(data-percentage) '%';
+    position: relative;
+    bottom: 20px;
+  }
+        
+        
