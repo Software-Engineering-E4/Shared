@@ -38,11 +38,14 @@ h2.youtube{
     color: var(--youtube);
 }
 h3.title{
-    margin: 2.5vh;
+    margin: 0vh;
+    padding: 2.5vh;
     color: black;
 }
 p.description{
-    margin: 2.5vh;
+    margin: 0vh;
+    padding: 2.5vh;
+    padding-top: 0vh;
 }
 a.post{
     text-decoration: none;
@@ -62,12 +65,14 @@ div.twitter_post{
     max-width: 31.6%;
     border: 0.1rem solid var(--twitter);
     background-color: var(--white);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-grow: 1;
 }
 div.twitter_post:hover{
+    box-shadow: 0rem 0rem 0.25rem 0.4rem var(--lightgray);
     outline: 0.2rem outset var(--twitter-outline);
-    transition: 100ms;
+    transform: scale(1.025);
+    transition: 200ms;
 }
 div.reddit{
     display: flex;
@@ -81,12 +86,14 @@ div.reddit_post{
     max-width: 31.6%;
     border: 0.1rem solid var(--reddit);
     background-color: var(--white);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-grow: 1;
 }
 div.reddit_post:hover{
+    box-shadow: 0rem 0rem 0.25rem 0.4rem var(--lightgray);
     outline: 0.2rem outset var(--reddit-outline);
-    transition: 100ms;
+    transform: scale(1.025);
+    transition: 200ms;
 }
 div.youtube{
     display: flex;
@@ -100,12 +107,14 @@ div.youtube_post{
     max-width: 31.6%;
     border: 0.1rem solid var(--youtube);
     background-color: var(--white);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--lightgray);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-grow: 1;
 }
 div.youtube_post:hover{
+    box-shadow: 0rem 0rem 0.25rem 0.4rem var(--lightgray);
     outline: 0.2rem outset var(--youtube-outline);
-    transition: 100ms;
+    transform: scale(1.025);
+    transition: 200ms;
 }
 
 
@@ -120,22 +129,26 @@ div.youtube_post:hover{
 /* change theme */
 h2.dark-theme-dark-grey{
     background-color: var(--opo_white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 div.dark-theme-dark-grey{
     background-color: var(--opo_white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 div.dark-theme-grey{
     background-color: var(--opo_post);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--opo_shadow);
-    transition: all 250ms;
+    box-shadow: 0rem 0rem 0.25rem 0.2rem var(--opo_shadow);
+    transition: all 400ms;
+}
+div.dark-theme-grey:hover{
+    box-shadow: 0rem 0rem 0.25rem 0.4rem var(--opo_shadow);
+    transform: scale(1.025);
 }
 h3.dark-theme-light-grey{
     color: var(--lightgray);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 p.dark-theme-light-grey{
     color: var(--lightgray);
-    transition: all 250ms;
+    transition: all 400ms;
 }

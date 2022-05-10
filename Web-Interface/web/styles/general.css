@@ -17,6 +17,7 @@ body{
 
 /* top bar */
 header.site_header{
+    margin: 0vh;
     border-bottom: 0.1vh solid black;
 }
 nav.navig_line{
@@ -96,10 +97,6 @@ ul.right_container{
     justify-content: space-around;
     align-items: center;
 }
-ul.right_container:hover{
-    background-color: var(--darkblue);
-    transition: 200ms;
-}
 li.latest{
     font-size: 1.5rem;
     text-align: center;
@@ -161,17 +158,33 @@ a.menu_option{
 a.menu_option:hover{
     color: var(--white);
 }
-/* theme button - to be styled soon */
-div.change_theme input[type=checkbox]{
-    transform: scale(150%);
-    /* opacity: 0; */
+/* theme button*/
+div.change_theme{
+    padding: 0.1rem;
+    border-radius: 1.5rem;
+    background-color: var(--lightblue);
+    transform: scale(1.35);
+    cursor: pointer;
+
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
 }
-/*
-label.label_for_checkbox{
+div.change_theme:hover{
+    background-color: var(--lightgray);
+    transition: 400ms;
 }
-input.checkbox:checked + label.label_for_checkbox{
-} 
-*/
+img.sun{
+    border-radius: 1.5rem;
+    max-width: 40%;
+    cursor: pointer;
+}
+img.moon{
+    border-radius: 1.5rem;
+    max-width: 40%;
+    cursor: pointer;
+}
 /* faculty logo */
 a.faculty{
     background-color: var(--white);
@@ -274,21 +287,21 @@ footer.footer{
 /* change theme */
 body.dark-theme{
     background-color: var(--opo_white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 nav.dark-theme{
     border-bottom-color: var(--pink);
     background-color: var(--opo_white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 div.dark-theme input[type=search]{
     background-color: var(--opo_post);
     color: var(--white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 ul.dark-theme{
     background-color: var(--opo_white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 ul.dark-theme:hover{
     background-color: var(--opo_white);
@@ -296,9 +309,17 @@ ul.dark-theme:hover{
 li.dark-theme:hover{
     background-color: var(--opo_shadow);
 }
+div.dark-theme-btn{
+    background-color: var(--pink);
+    transition: all 400ms;
+}
+div.dark-theme-btn:hover{
+    background-color: var(--opo_post); 
+    transition: all 400ms;
+}
 a.dark-theme{
     color: var(--pink);
-    transition: all 250ms;
+    transition: all 400ms;
 }
 a.dark-theme:hover{
     color: var(--white);
@@ -306,5 +327,5 @@ a.dark-theme:hover{
 footer.dark-theme{
     border-top-color: var(--pink);
     background-color: var(--opo_white);
-    transition: all 250ms;
+    transition: all 400ms;
 }
