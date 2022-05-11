@@ -1,0 +1,75 @@
+{
+    "authentication": {
+        "username": "SoftwareE4",
+        "password": "Cnr1XNy%gtc#6F4HS$9e",
+        "client_id": "fTCKpqKyRapTPX73ePjJNg",
+        "secret_key": "yJgOOuHl-3Yigm9dOextVza3Ybb7RQ"
+    },
+    "tables": {
+        "reddit_posts": {
+            "id": {
+                "type": "string",
+                "translate": false
+            },
+            "subreddit": {
+                "type": "string",
+                "translate": false
+            },
+            "title": {
+                "type": "string",
+                "translate": true
+            },
+            "selftext": {
+                "type": "string",
+                "translate": true
+            },
+            "score": {
+                "type": "number",
+                "translate": false
+            },
+            "award_score": {
+                "type": "number",
+                "translate": false
+            },
+            "views": {
+                "type": "number",
+                "translate": false
+            },
+            "created_utc": {
+                "type": "date",
+                "translate": false
+            },
+            "link": {
+                "type": "string",
+                "translate": false
+            }
+        },
+        "reddit_comments": {
+            "id": {
+                "type": "string",
+                "translate": false
+            },
+            "id_post": {
+                "type": "string",
+                "translate": false
+            },
+            "selftext": {
+                "type": "string",
+                "translate": true,
+                "actualName": "body"
+            },
+            "score": {
+                "type": "string",
+                "translate": false
+            },
+            "award_score": {
+                "type": "string",
+                "translate": false
+            },
+            "created_utc": {
+                "type": "string",
+                "translate": false
+            }
+        }
+    }
+}
