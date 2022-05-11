@@ -3,3 +3,8 @@
 .pytest_cache/
 *.iml
 *.log
+__pycache__/
+
+# Deployment
+webhook.php
+auto_deploy.sh
