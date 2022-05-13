@@ -14,8 +14,8 @@ class RedditRequester(Requester):
     headers: dict[str, str] = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db)
-        self.config_file = "Web-Crawler/python/config/reddit.json"
+        super().__init__(self.db, "https://oauth.reddit.com/r", self.real_time, self.send_mode)
+        self.config_file = "backend/python/config/reddit.json"
 
         with open(self.config_file) as file:
             self.json_data = json.load(file)

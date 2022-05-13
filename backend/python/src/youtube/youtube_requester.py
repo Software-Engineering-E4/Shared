@@ -1,18 +1,19 @@
 from dataclasses import dataclass, field
 import json
-import logging
 from requester import Requester
 import googleapiclient.discovery
+import requests
 
 
 @dataclass
 class YoutubeRequester(Requester):
     api_key: str = field(init=False)
+    access_token: str = field(init=False)
     resource: googleapiclient.discovery.Resource = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db)
-        self.config_file = "Web-Crawler/python/config/youtube.json"
+        super().__init__(self.db, "https://www.googleapis.com/youtube/v3", self.real_time, self.send_mode)
+        self.config_file = "backend/python/config/youtube.json"
 
         with open(self.config_file) as file:
             self.json_data = json.load(file)
@@ -25,3 +26,19 @@ class YoutubeRequester(Requester):
             "youtube", "v3", developerKey=api_key
         )
         self.logger.info("Finished authentication")
+
+    def request_has_error(self, result: requests.Response) -> bool:
+        try:
+            result.json()["error"]
+            try:
+                self.logger.error(
+                    f"Skipping request, reason: {result.json()['error']['errors'][0]['message']}"
+                )
+            except KeyError:
+                try:
+                    self.logger.error(f"Skipping request, reason: {result.json()['error']['message']}")
+                except KeyError:
+                    self.logger.error(f"Skipped request, reason: unknown {result.json()}")
+            return True
+        except KeyError:
+            return False

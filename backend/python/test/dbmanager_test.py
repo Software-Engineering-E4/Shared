@@ -6,7 +6,7 @@ import mysql.connector
 
 class DBManagerTest(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
-        self.db = DBManager("Web-Crawler/python/config/database.json", False)
+        self.db = DBManager("backend/python/config/database.json", False)
         super().__init__(methodName)
 
     def internet_connection(self) -> None:

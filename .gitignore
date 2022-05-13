@@ -4,6 +4,7 @@
 *.iml
 *.log
 __pycache__/
+*.class
 
 # Deployment
 webhook.php

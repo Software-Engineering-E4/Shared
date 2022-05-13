@@ -1,1 +1,1 @@
-PYTHONPATH="Web-Crawler/python/" python3 Web-Crawler/python/src/main.py
+PYTHONPATH="backend/python/;backend/python/src;backend/python/test" python3 backend/python/src/main.py

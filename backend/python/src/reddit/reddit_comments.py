@@ -19,7 +19,7 @@ class RedditComments(RedditRequester):
             id, subreddit = values
             try:
                 res = requests.get(
-                    f"https://oauth.reddit.com/r/{subreddit}/comments/{id}",
+                    f"{self.link}/{subreddit}/comments/{id}",
                     headers=self.headers,
                     params={"limit": "100"},
                 )

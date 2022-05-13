@@ -4,6 +4,7 @@ from enum import Enum
 from typing import Any
 from utils.DBManager import DBManager
 import logging
+import requests
 
 
 class SendMode(Enum):
@@ -15,6 +16,7 @@ class SendMode(Enum):
 @dataclass
 class Requester(ABC):
     db: DBManager
+    link: str = ""
     real_time: bool = True
     send_mode: SendMode = SendMode.AUTO
     table_name: str = field(init=False)
@@ -41,8 +43,7 @@ class Requester(ABC):
         self.db.set_table_name(table_name)
         self.columns = self.json_data["tables"][self.db.table_name]
 
-    def send_to_db(
-        self, data: list[dict[str, str | int]], format) -> None:
+    def send_to_db(self, data: list[dict[str, str | int]], format) -> None:
         for item in data:
             formatted = self.db.format_data(item, format)
             formatted = self.db.clean_translation(formatted)
@@ -65,4 +66,12 @@ class Requester(ABC):
 
     @abstractmethod
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
+        pass
+
+    @staticmethod
+    def build(params: dict[str, str]) -> str:
+        return "&".join(f"{param}={params[param]}" for param in params.keys())
+
+    @abstractmethod
+    def request_has_error(self, result: requests.Response) -> bool:
         pass

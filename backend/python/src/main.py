@@ -6,7 +6,7 @@ from youtube.youtube_comments import YoutubeComments
 
 
 def main() -> None:
-    with DBManager("Web-Crawler/python/config/database.json") as db:
+    with DBManager("backend/python/config/database.json", translate=True) as db:
         youtube_videos = YoutubeVideos(db)
         queries = ["colorectal cancer", "cancer", "colorectal", "cancer colorectal"]
         for query in queries:

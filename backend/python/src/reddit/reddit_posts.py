@@ -15,7 +15,7 @@ class RedditPosts(RedditRequester):
 
     def request(self, subreddit: str) -> list[dict[str, str | int]]:
         res = requests.get(
-            f"https://oauth.reddit.com/r/{subreddit}/hot",
+            f"{self.link}/{subreddit}/hot",
             headers=self.headers,
             params={"limit": "100"},
         )
@@ -47,3 +47,6 @@ class RedditPosts(RedditRequester):
                 return f"https://www.reddit.com/{item['data']['id']}"
             case _:
                 return ""
+
+    def request_has_error(self, result: requests.Response) -> bool:
+        return super().request_has_error(result)

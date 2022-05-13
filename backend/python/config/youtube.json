@@ -18,10 +18,6 @@
                 "type": "string",
                 "translate": true
             },
-            "subtitles": {
-                "type": "string",
-                "translate": true
-            },
             "views": {
                 "type": "number",
                 "translate": false
@@ -38,6 +34,11 @@
             "link": {
                 "type": "string",
                 "translate": false
+            },
+            "author": {
+                "type": "string",
+                "translate": false,
+                "actualName": "channelTitle"
             }
         },
         "youtube_comments": {
@@ -47,19 +48,27 @@
             },
             "id_video": {
                 "type": "string",
-                "translate": false
+                "translate": false,
+                "actualName": "videoId"
             },
             "likes": {
                 "type": "number",
-                "translate": false
+                "translate": false,
+                "actualName": "likeCount"
             },
             "text": {
                 "type": "string",
-                "translate": true
+                "translate": true,
+                "actualName": "textDisplay"
             },
             "created_utc": {
                 "type": "date",
                 "translate": false
+            },
+            "author": {
+                "type": "string",
+                "translate": false,
+                "actualName": "authorDisplayName"
             }
         }
     }
