@@ -1,5 +1,5 @@
 package main;
-import dao.*;
+import apps.*;
 import database.Database;
 import stanford.NLP;
 
@@ -10,10 +10,13 @@ public class Analyzer {
         NLP.init();
         Database.createConnection();
 
-        //RedditPostsDAO.analyzePosts();
-        RedditDAO.analyzeComments();
-        //YouTubePostsDAO.analyzePosts();
-        //TwitterPostsDAO.analyzePosts();
+        Reddit.analyzePosts();
+        Reddit.analyzeComments();
+
+        YouTube.analyzePosts();
+        YouTube.analyzeComm();
+
+        Twitter.analyzePosts();
 
         Database.closeConnection();
     }
