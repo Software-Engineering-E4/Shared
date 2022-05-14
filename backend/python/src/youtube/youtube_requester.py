@@ -13,11 +13,11 @@ class YoutubeRequester(Requester):
 
     def __post_init__(self) -> None:
         super().__init__(self.db, "https://www.googleapis.com/youtube/v3", self.real_time, self.send_mode)
-        self.config_file = "backend/python/config/youtube.json"
+        self.config_file = "backend/config/youtube.json"
 
         with open(self.config_file) as file:
             self.json_data = json.load(file)
-            self.api_key = self.json_data["api_key"]
+            self.api_key = self.json_data["authentication"]["api_key"]
 
         self.authenticate(self.api_key)
 

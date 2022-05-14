@@ -1,0 +1,32 @@
+{
+    "authentication": {
+        "api_key": "my_youtube_api_key"
+    },
+    "tables": {
+        "table_name_1": {
+            "table_column_1": {
+                "type": "string",
+                "translate": false
+            },
+            "table_column_2": {
+                "type": "number",
+                "translate": false
+            },
+            "table_column_3": {
+                "type": "string",
+                "translate": true,
+                "actualName": "table_column_3_actual"
+            }
+        },
+        "table_name_2": {
+            "table_column_1": {
+                "type": "date",
+                "translate": false
+            },
+            "table_column_2": {
+                "type": "date",
+                "translate": false
+            }
+        }
+    }
+}

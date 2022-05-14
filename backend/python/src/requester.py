@@ -12,6 +12,12 @@ class SendMode(Enum):
     INSERT = 1
     UPDATE = 2
 
+    def __eq__(self, o: object) -> bool:
+        try:
+            return self.value == SendMode(o).value and self.name == SendMode(o).name
+        except:
+            return False
+
 
 @dataclass
 class Requester(ABC):
@@ -26,7 +32,7 @@ class Requester(ABC):
     logger: logging.Logger = field(default=logging.getLogger(__name__), init=False)
 
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format="[%(asctime)s] %(levelname)s %(name)s line %(lineno)s: %(message)s",
         filename="latest.log",
     )
@@ -62,7 +68,7 @@ class Requester(ABC):
                 case _:
                     continue
 
-            self.logger.info(f"{self.send_mode.__str__()} on row with id={item['id']}")
+            self.logger.debug(f"{self.send_mode.__str__()} on row with id={item['id']}")
 
     @abstractmethod
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:

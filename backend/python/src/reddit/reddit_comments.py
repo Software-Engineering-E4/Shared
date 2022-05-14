@@ -48,7 +48,7 @@ class RedditComments(RedditRequester):
                         if self.real_time:
                             self.send_to_db([data], self.columns)
             if not self.real_time:
-                self.logger.info(f"Comments with post_id={id} done")
+                self.logger.debug(f"Comments with post_id={id} done")
 
         return out
 

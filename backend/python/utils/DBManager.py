@@ -18,10 +18,12 @@ class DBManager:
     password: str = field(init=False)
     port: str = field(init=False)
     table_name: str = field(init=False)
-    connector: mysql.connector.connection_cext.CMySQLConnection = field(init=False)
+    connector: mysql.connector.connection_cext.CMySQLConnection = field(
+        init=False, default=mysql.connector.connection_cext.CMySQLConnection()
+    )
     logger: logging.Logger = field(default=logging.getLogger(__name__), init=False)
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format="[%(asctime)s] %(levelname)s %(name)s line %(lineno)s: %(message)s",
         filename="latest.log",
     )
@@ -52,7 +54,7 @@ class DBManager:
             port=port,
         )
         self.cursor = sql_connection.cursor()
-        self.logger.info(f"Connected to the database, auto_connect={self.auto_connect}, translate={self.translate}")
+        self.logger.info(f"Connected to the database, {self.__repr__()}")
         return sql_connection
 
     def __enter__(self) -> DBManager:
@@ -61,6 +63,11 @@ class DBManager:
     def __exit__(self, *args, **kwargs) -> None:
         self.connector.commit()
         self.connector.close()
+
+    def __repr__(self) -> str:
+        return f"""{__name__}(config_file='{self.config_file}', auto_connect={self.auto_connect}, \
+translate={self.translate}, host='{self.host}', database='{self.database}', user='{self.user}', \
+password='{self.password}', port='{self.port}')"""
 
     def set_table_name(self, table_name: str) -> None:
         self.table_name = table_name
@@ -73,7 +80,7 @@ class DBManager:
         )
         try:
             self.cursor.execute(statement)
-        except mysql.connector.errors.IntegrityError as err:
+        except mysql.connector.errors.Error as err:
             self.logger.exception(err)
         self.connector.commit()
 
@@ -82,7 +89,7 @@ class DBManager:
         statement = f"update {self.table_name} set {result} where id='{columns['id']}'"
         try:
             self.cursor.execute(statement)
-        except mysql.connector.errors.IntegrityError as err:
+        except mysql.connector.errors.Error as err:
             self.logger.exception(err)
         self.connector.commit()
 
@@ -124,7 +131,7 @@ class DBManager:
                             translated = str(
                                 ts.google(
                                     clean_str,
-                                    sleep_seconds=0.125,
+                                    sleep_seconds=0.06,
                                     if_ignore_limit_of_length=True,
                                 )
                             )
@@ -174,8 +181,6 @@ class DBManager:
                     out += f"{row}={data[row]}, "
                 else:
                     out += f"{row}='{data[row]}', "
-            else:
-                out += f"{row}=NULL, "
 
         return out[:-2]
 

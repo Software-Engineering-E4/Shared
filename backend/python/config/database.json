@@ -1,7 +1,0 @@
-{
-    "host": "ip-database.ccrihfbatmnt.eu-central-1.rds.amazonaws.com",
-    "database": "ipdatabase",
-    "password": "6kT4Yi1S7AtqErWTxZyD",
-    "user": "admin",
-    "port": "3306"
-}

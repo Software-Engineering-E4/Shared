@@ -7,7 +7,7 @@ from utils.DBManager import DBManager
 
 class RedditPostsTest(unittest.TestCase):
     def __init__(self, super_method: str = "") -> None:
-        self.db = DBManager("backend/python/config/database.json")
+        self.db = DBManager("backend/config/database.json")
         super(RedditPostsTest, self).__init__(super_method)
 
     def setUp(self) -> None:

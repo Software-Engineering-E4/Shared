@@ -23,6 +23,7 @@ class YoutubeComments(YoutubeRequester):
                     "videoId": id,
                     "maxResults": "100",
                     "textFormat": "plainText",
+                    "order": "relevance",
                 }
             )
             res = requests.get(f"{self.link}/commentThreads?{request_params}")
@@ -53,7 +54,7 @@ class YoutubeComments(YoutubeRequester):
                 else:
                     out.append(data)
             if not self.real_time:
-                self.logger.info(f"Comments with video_id={id} done")
+                self.logger.debug(f"Comments with video_id={id} done")
 
         return out
 

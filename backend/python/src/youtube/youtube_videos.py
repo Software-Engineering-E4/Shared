@@ -28,6 +28,7 @@ class YoutubeVideos(YoutubeRequester):
                         "type": "video",
                     }
                 )
+                self.logger.debug(f"Requesting query='{query}', year={year}, month={month}")
                 result = requests.get(f"{self.link}/search?{request_params}")
                 if self.request_has_error(result):
                     continue

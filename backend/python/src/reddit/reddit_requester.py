@@ -15,7 +15,7 @@ class RedditRequester(Requester):
 
     def __post_init__(self) -> None:
         super().__init__(self.db, "https://oauth.reddit.com/r", self.real_time, self.send_mode)
-        self.config_file = "backend/python/config/reddit.json"
+        self.config_file = "backend/config/reddit.json"
 
         with open(self.config_file) as file:
             self.json_data = json.load(file)
