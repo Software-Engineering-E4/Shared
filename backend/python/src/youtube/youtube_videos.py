@@ -14,7 +14,7 @@ class YoutubeVideos(YoutubeRequester):
 
     def request(self, query: str) -> list[dict[str, str | int]]:
         out: list[dict[str, str | int]] = []
-        for year in range(2015, 2018):
+        for year in range(2010, 2022):
             for month in range(1, 13):
                 is_next_year = (month + 1) == 13
                 request_params = self.build(

@@ -78,6 +78,7 @@ password='{self.password}', port='{self.port}')"""
         statement = (
             f"insert into {self.table_name} ({pretty_columns}) values ({pretty_items})"
         )
+        self.logger.debug(f"Insert: {statement}")
         try:
             self.cursor.execute(statement)
         except mysql.connector.errors.Error as err:
@@ -87,6 +88,7 @@ password='{self.password}', port='{self.port}')"""
     def update(self, columns: dict[str, str | int]) -> None:
         result = self.unpack_for_update(columns)
         statement = f"update {self.table_name} set {result} where id='{columns['id']}'"
+        self.logger.debug(f"Update: {statement}")
         try:
             self.cursor.execute(statement)
         except mysql.connector.errors.Error as err:

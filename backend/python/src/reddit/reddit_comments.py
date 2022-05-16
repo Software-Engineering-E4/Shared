@@ -60,3 +60,6 @@ class RedditComments(RedditRequester):
                 return str(datetime.fromtimestamp(item["data"][column]))[:10]
             case _:
                 return ""
+
+    def request_has_error(self, result: requests.Response) -> bool:
+        return super().request_has_error(result)
