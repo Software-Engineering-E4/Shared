@@ -13,6 +13,7 @@
     <link href="styles/post.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
+    <script src="scripts/keepingdarktheme.js" defer></script>
     <title>Reddit post</title>
 </head>
 
@@ -43,12 +44,9 @@
                     <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
-            <div class="change_theme">
-                <input type="checkbox" class="checkbox" id="checkbox">
-                <label class="label_for_checkbox" for="checkbox">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                </label>
+            <div class="change_theme" id="change_theme">
+                <img src="images/sun.svg" class="sun">
+                <img src="images/moon.svg" class="moon">
             </div>
             <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
                     alt="University logo" class="faculty_logo">

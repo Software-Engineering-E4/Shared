@@ -42,15 +42,18 @@ div.statistics-youtube {
 
 h2.reddit{
     color: var(--reddit);
-    justify-content: center;
+    margin-top: 7.5vh;
+    margin-bottom: 2.5vh;
 }
 h2.youtube{
     color: var(--youtube);
-    justify-content: center;
+    margin-top: 7.5vh;
+    margin-bottom: 4.5vh;
 }
 h2.twitter{
     color: var(--twitter);
-    justify-content: center;
+    margin-top: 7.5vh;
+    margin-bottom: 2.5vh;
 }
 div.twitter{
     justify-content: center;
@@ -58,10 +61,10 @@ div.twitter{
     align-items: center;
 }
 .chart{
-    margin-bottom: 10vh ;
+    margin-bottom: 5vh ;
     width: 600px;
     height: 300px;
-    display: block;
+    display: flex;
   }
   
 .twitter .values{
@@ -170,8 +173,18 @@ div.twitter{
     transition-property: background, box-shadow;
   }
   
-  .bars .bar:hover{
-    background: var(--darkblue);
+  .twitter .bars .bar:hover{
+    background: #92daf7;
+    box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+    cursor: pointer;
+  }
+  .reddit .bars .bar:hover{
+    background: var(--reddit-outline);
+    box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+    cursor: pointer;
+  }
+  .youtube .bars .bar:hover{
+    background: var(--lightred);
     box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
     cursor: pointer;
   }
@@ -182,5 +195,14 @@ div.twitter{
     position: relative;
     bottom: 20px;
   }
-        
+
+  @media (max-width:500px)  {
+    .chart{
+      width: 400px;
+    height: 400px;
+    }
+    .bars .bar{
+      margin-left:1vh;
+    }     
+  } 
         

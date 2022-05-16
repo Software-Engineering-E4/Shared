@@ -116,6 +116,19 @@ div.youtube_post:hover{
     transform: scale(1.025);
     transition: 200ms;
 }
+div.for_image{
+    padding: 2.5vh;
+    padding-bottom: 5vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+img.youtube_image{
+    max-width: 100%;
+    border-radius: 1.5rem;
+}
+
 
 
 /* responsive */
