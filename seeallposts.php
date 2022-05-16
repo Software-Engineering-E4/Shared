@@ -73,7 +73,7 @@
         if ($platformName == 'Reddit'): ?>
             <div class="reddit" id="reddit_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(selftext, 1, 250), score FROM `reddit_posts` ORDER BY score DESC');
+                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(selftext, 1, 250), score FROM `reddit_posts`  WHERE selftext IS NOT NULL ORDER BY score DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
@@ -96,7 +96,7 @@
         if ($platformName == 'Youtube'): ?>
             <div class="youtube" id="youtube_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(description, 1, 250), likes FROM `youtube_videos` ORDER BY likes DESC');
+                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(description, 1, 250), score FROM `youtube_videos` ORDER BY score DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
@@ -120,7 +120,7 @@
         if ($platformName == 'Twitter'): ?>
         <div class="twitter" id="twitter_see_all">
             <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets FROM `twitter_posts` ORDER BY retweets DESC');
+                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets FROM `twitter_posts` GROUP BY text ORDER BY retweets DESC');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
