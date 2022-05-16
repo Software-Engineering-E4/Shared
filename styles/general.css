@@ -162,7 +162,7 @@ a.menu_option:hover{
 div.change_theme{
     padding: 0.1rem;
     border-radius: 1.5rem;
-    background-color: var(--lightblue);
+    background-color: var(--darkblue);
     transform: scale(1.35);
     cursor: pointer;
 
@@ -172,12 +172,12 @@ div.change_theme{
     justify-content: space-around;
 }
 div.change_theme:hover{
-    background-color: var(--lightgray);
+    background-color: var(--lightblue);
     transition: 400ms;
 }
 img.sun{
     border-radius: 1.5rem;
-    max-width: 40%;
+    max-width: 50%;
     cursor: pointer;
 }
 img.moon{
@@ -219,49 +219,82 @@ footer.footer{
 
 
 /* responsive design */
-.menu-btn{
-    position:absolute;
-    top:30px;
-    right: 30px;
-    width: 40px;
+/* header */
+div.phone-buttons{
+    display:none;
+}
+img.menu-btn{
+    position: relative;
     cursor: pointer;
     display: none;
 }
-.search-btn{
-    position:absolute;
-    top:30px;
-    right: 80px;
-    width: 35px;
+img.search-btn{
+    position: relative;
     cursor: pointer;
     display: none;
+}
+/* menu below the header */
+div.phone.options{
+    padding: 2.5vh;
+    background-color: var(--darkblue);
+    display: none;
+}
+ul.phone.container{
+    list-style: none;
+    margin: 0vh;
+    padding: 0vh;
+    font-size: 1.5rem;
+}
+li.phone_list_element{
+    margin: 0vh;
+    padding: 2.5vh;
+    background-color: var(--darkblue);
+    text-align: center;
+}
+li.phone_list_element:hover{
+    background-color: var(--lightblue);
+    border-radius: 1.5rem;
+    transition: 400ms
+}
+a.phone.menu_option{
+    color: var(--lightgray);
+    text-decoration: none;
+}
+a.phone.menu_option:hover{
+    color: var(--white);
 }
 
+
 @media (max-width: 900px){
-    nav {
-        padding: 0rem;
-    }
-    a.faculty{
-        display: none;
-    }
-    .menu-btn{
-        display: block;
-    }
-    .search-btn{
-        display: block;
-    }
-    .right_container{
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        background-color: var(--darkblue);
-        margin-top: -1000px;
-        transition:all 0.5s ease;
-    }
-    .mobile-menu{
-        margin-top: 0px;
-        border-bottom-right-radius: 30%;
     
+    /* menu */
+    nav.navig_line{
+        padding: 2.5vh;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
     }
+    div.phone-buttons{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        column-gap: 2.5vh;
+    }
+    img.menu-btn{
+        height: 3rem;
+        width: 3rem;
+        display: block;
+    }
+    img.search-btn{
+        height: 3rem;
+        width: 3rem;
+        display: block;
+    }
+    div.phone.options.mobile-menu{
+        display: block;
+    }
+
+    /* search bar */
      .search_bar{
         flex-direction: row;
         width: 100%;
@@ -275,11 +308,16 @@ footer.footer{
         border-bottom-right-radius: 30%;
 
     }
-    .container li {
-        margin:30px auto;
+
+    /* hide elements on phone display */
+    ul.right_container{
+        display: none;
     }
     div.change_theme{
         display:none;
+    }
+    a.faculty{
+        display: none;
     }
 }
 
@@ -310,7 +348,7 @@ li.dark-theme:hover{
     background-color: var(--opo_shadow);
 }
 div.dark-theme-btn{
-    background-color: var(--pink);
+    background-color: var(--opo_white);
     transition: all 400ms;
 }
 div.dark-theme-btn:hover{

@@ -33,7 +33,7 @@
             </div>
             <ul class="right_container">
                 <li class="latest">
-                    <a class="menu_option" href="latest.php"> Latest </a>
+                    <a class="menu_option" href="index.php"> Home </a>
                 </li>
                 <li class="categories">
                     <a class="menu_option" href="index.php#Categories">Categories</a>
@@ -54,10 +54,27 @@
             </a>
 
             <!-- responsive website -->
-            <img src="images/btn1.png" alt="" class="menu-btn">
-            <img src="images/search.png" alt="" class="search-btn">
-
+            <div class="phone-buttons">
+                <img src="images/search.png" class="search-btn">
+                <img src="images/menu.png" class="menu-btn">
+            </div>
         </nav>
+        <div class="phone options">
+            <ul class="phone container">
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="index.php">Home</a>
+                </li>
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="index.php#Categories">Categories</a>
+                </li>
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="statistics.php">Statistics</a>
+                </li>
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="about.php">About us</a>
+                </li>
+            </ul>
+        </div>
     </header>
   
     <!-- Functie pentru calcularea procentajului -->
