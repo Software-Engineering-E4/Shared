@@ -8,6 +8,7 @@
     <link href="styles/general.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
+    <script src="scripts/keepingdarktheme.js" defer></script>
     <title>About</title>
 </head>
 
@@ -16,7 +17,7 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/homepage.html">Site name</a>
+                    <a class="site_name" href="/index.php">Site name</a>
                 </div>
                 <form action="/search.php" method="post">
                     <div class="search_bar">
@@ -38,12 +39,9 @@
                     <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
-            <div class="change_theme">
-                <input type="checkbox" class="checkbox" id="checkbox">
-                <label class="label_for_checkbox" for="checkbox">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                </label>
+            <div class="change_theme" id="change_theme">
+                <img src="images/sun.svg" class="sun">
+                <img src="images/moon.svg" class="moon">
             </div>
             <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
                     alt="University logo" class="faculty_logo">

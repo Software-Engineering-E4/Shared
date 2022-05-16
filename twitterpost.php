@@ -13,9 +13,9 @@
     <link href="styles/post.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
+    <script src="scripts/keepingdarktheme.js" defer></script>
     <title>Twitter post</title>
 </head>
-
 <body>
     <header class="site_header">
         <nav class="navig_line">
@@ -23,7 +23,7 @@
                 <div class="site_name">
                     <a class="site_name" href="/index.php">Site name</a>
                 </div>
-                <form action="/index.php" method="get">
+                <form action="/search.php" method="post">
                     <div class="search_bar">
                         <input type="search" id="search" name="search" placeholder=" Search...">
                     </div>
@@ -31,10 +31,10 @@
             </div>
             <ul class="right_container">
                 <li class="latest">
-                    <a class="menu_option" href="latest.php"> Latest </a>
+                    <a class="menu_option" href="index.php"> Latest </a>
                 </li>
                 <li class="categories">
-                    <a class="menu_option" href="/index.php#Categories">Categories</a>
+                    <a class="menu_option" href="index.php#Categories">Categories</a>
                 </li>
                 <li class="statistics">
                     <a class="menu_option" href="statistics.php">Statistics</a>
@@ -43,12 +43,9 @@
                     <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
-            <div class="change_theme">
-                <input type="checkbox" class="checkbox" id="checkbox">
-                <label class="label_for_checkbox" for="checkbox">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                </label>
+            <div class="change_theme" id="change_theme">
+                <img src="images/sun.svg" class="sun">
+                <img src="images/moon.svg" class="moon">
             </div>
             <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
                     alt="University logo" class="faculty_logo">
@@ -60,41 +57,56 @@
 
         </nav>
     </header>
-</body>
 
-<main>
-    <h2 class="platform_title">Twitter post</h2>
-    <div class="content">
-        <section class="title_and_description">
-            <h3 class="title">
-                Title of post
-            </h3>
-            <p class="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio similique explicabo doloremque iure
-                eveniet
-                incidunt adipisci, doloribus sit vel eligendi at architecto quod necessitatibus voluptatem magni sint
-                non
-                aut voluptate.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tempore assumenda praesentium. Officiis
-                nemo ut possimus debitis numquam corporis delectus dolores quam illum, necessitatibus repellendus,
-                fugiat, ipsum eum ad error?
-            </p>
-        </section>
-        <section class="stats_and_review">
-            <div class="date">
-                <h3 class="stats_title">Date:</h3>
-                <p class="description">posted date</p>
-            </div>
-            <div class="feelings">
-                <h3 class="stats_title">Overall feeling:</h3>
-                <p class="description">Lorem ipsum dolor sit amet</p>
-            </div>
-            <div class=" review">
-                <h3 class="stats_title">Leave a review here:</h3>
-                <p class="description">To be done...</p>
-            </div>
-        </section>
-    </div>
-</main>
+    <?php $idPost = $_GET['id']; ?>
+
+    <main>
+        <h2 class="platform_name twitter">Twitter post</h2>
+        <div class="content">
+            <section class="title_and_description twitter">
+                <?php
+                    $stmt = $mysql->prepare('SELECT * FROM twitter_posts ORDER BY retweets');
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    while ($row = $result->fetch_assoc()):
+                        if($row['id']!=$idPost):
+                            continue;
+                        else:
+                ?>
+                <h3 class="title">
+                    Title of post
+                </h3>
+                <p class="description">
+                    <?php echo $row['text'] ?>
+                </p>
+            </section>
+            <section class="stats_and_review twitter">
+                <div class="date">
+                    <h3 class="stats_title">Date:</h3>
+                    <p class="description"><?php echo $row['UTC_date']?></p>
+                </div>
+                <div class="feelings">
+                    <h3 class="stats_title">Overall feeling:</h3>
+                    <p class="description"><?php echo $row['sentiment']?></p>
+                </div>
+                <div class=" review">
+                    <h3 class="stats_title">Leave a review here:</h3>
+                    <p class="description">To be done...</p>
+                </div>
+            </section>
+            <?php break; ?>
+            <?php endif; ?>
+            <?php endwhile; ?>
+        </div>
+    </main>
+
+    <footer class="footer">
+        Footer infos <br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
+        sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
+        minus est.
+    </footer>
+
+</body>
 
 </html>

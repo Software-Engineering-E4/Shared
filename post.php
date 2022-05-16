@@ -1,7 +1,6 @@
 <?php
     require "dbconnection.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/general.css" rel="stylesheet">
-    <link href="styles/homepage.css" rel="stylesheet">
+    <link href="styles/post.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
-    <script src="scripts/homepage.js" defer></script>
-    <title>Site name</title>
+    <title>Post</title>
 </head>
 
 <body>
@@ -29,24 +27,13 @@
                         <input type="search" id="search" name="search" placeholder=" Search...">
                     </div>
                 </form>
-
-                <!-- Aici este functia pentru search (trebuie vazut de ce nu functioneaza) -->
-                <?php
-				    if (isset($_GET['search'])) {
-                        $search = $_GET['search'];
-                        $stmt = $pdo->query("SELECT * FROM `reddit_posts` WHERE title LIKE '%$search%' OR selftext LIKE '%$search%'");
-                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    }
-				?>
-
             </div>
-
             <ul class="right_container">
                 <li class="latest">
                     <a class="menu_option" href="latest.php"> Latest </a>
                 </li>
                 <li class="categories">
-                    <a class="menu_option" href="#Categories">Categories</a>
+                    <a class="menu_option" href="index.php#Categories">Categories</a>
                 </li>
                 <li class="statistics">
                     <a class="menu_option" href="statistics.php">Statistics</a>
@@ -55,7 +42,6 @@
                     <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
-
             <div class="change_theme">
                 <input type="checkbox" class="checkbox" id="checkbox">
                 <label class="label_for_checkbox" for="checkbox">
@@ -63,9 +49,8 @@
                     <i class="fas fa-sun"></i>
                 </label>
             </div>
-
-            <a href="https://www.info.uaic.ro" class="faculty"> <img src="images/logo-fii.png" alt="University logo"
-                    class="faculty_logo">
+            <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
+                    alt="University logo" class="faculty_logo">
             </a>
 
             <!-- responsive website -->
@@ -74,22 +59,6 @@
 
         </nav>
     </header>
-
-    <main>
-        <h2 class="titles" id="titles">Latest posts</h2>
-        <section class="latest_posts">
-        
-    </main>
-
-    <hr>
-
-    <footer>
-        Footer infos <br>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
-        sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
-        minus est.
-    </footer>
-
 </body>
 
 </html>

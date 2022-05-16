@@ -1,27 +1,10 @@
-/* change theme status */
-const button = document.getElementById("change_theme");
-
-button.addEventListener('click',() => {
-
-    // 1st time
-    if(localStorage.getItem("vDark") === null) {
-        localStorage.setItem("vDark", 'true');
-        changeColors();
+var themeStatus = localStorage.getItem("vDark");
+    if(themeStatus === 'true') {
+        if(document.body.classList.contains('dark-theme') === false)
+            changeColors();
     }
-    else {
-        checkAndChangeStatus();
-        changeColors();
-    }
-});
 
-function checkAndChangeStatus() {
-    if(localStorage.getItem("vDark") === 'true')
-            localStorage.setItem("vDark", 'false');
-        else
-            localStorage.setItem("vDark", 'true');
-}
-
-function  changeColors() {
+function changeColors() {
 
     document.body.classList.toggle('dark-theme');
     var index;
