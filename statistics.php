@@ -13,9 +13,8 @@
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/keepingdarktheme.js" defer></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
-    <title>Site name</title>
+    <title>Statistics</title>
 </head>
 
 <body>
@@ -27,12 +26,12 @@
                 </div>
                 <form action="/index.php" method="get">
                     <div class="search_bar">
-                        <input type="search" id="search" name="search" placeholder=" Search...">
+                        <input type="search" id="search" name="keyword" placeholder=" Search...">
                     </div>
                 </form>
             </div>
             <ul class="right_container">
-                <li class="latest">
+                <li class="home">
                     <a class="menu_option" href="index.php"> Home </a>
                 </li>
                 <li class="categories">

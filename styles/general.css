@@ -97,14 +97,14 @@ ul.right_container{
     justify-content: space-around;
     align-items: center;
 }
-li.latest{
+li.home{
     font-size: 1.5rem;
     text-align: center;
 
     flex-grow: 1;
     flex-basis: 0;
 }
-li.latest:hover{
+li.home:hover{
     background-color: var(--lightblue);
     color: white;
     border-radius: 1.5rem;
@@ -281,13 +281,13 @@ a.phone.menu_option:hover{
         column-gap: 2.5vh;
     }
     img.menu-btn{
-        height: 3rem;
-        width: 3rem;
+        height: 2rem;
+        width: 2rem;
         display: block;
     }
     img.search-btn{
-        height: 3rem;
-        width: 3rem;
+        height: 2rem;
+        width: 2rem;
         display: block;
     }
     div.phone.options.mobile-menu{

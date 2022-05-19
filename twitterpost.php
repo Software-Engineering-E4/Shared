@@ -25,12 +25,12 @@
                 </div>
                 <form action="/search.php" method="post">
                     <div class="search_bar">
-                        <input type="search" id="search" name="search" placeholder=" Search...">
+                        <input type="search" id="search" name="keyword" placeholder=" Search...">
                     </div>
                 </form>
             </div>
             <ul class="right_container">
-                <li class="latest">
+                <li class="home">
                     <a class="menu_option" href="index.php"> Home </a>
                 </li>
                 <li class="categories">

@@ -28,12 +28,12 @@
                 </div>
                 <form action="/search.php" method="post">
                     <div class="search_bar">
-                        <input type="search" id="search" name="search" placeholder=" Search...">
+                        <input type="search" id="search" name="keyword" placeholder=" Search...">
                     </div>
                 </form>
             </div>
             <ul class="right_container">
-                <li class="latest">
+                <li class="home">
                     <a class="menu_option" href="index.php"> Home </a>
                 </li>
                 <li class="categories">
@@ -89,7 +89,8 @@
         if ($platformName == 'Twitter'): ?>
         <div class="twitter" id="twitter_see_all">
             <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id FROM twitter_posts GROUP BY text ORDER BY retweets DESC');
+                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id
+                 FROM twitter_posts GROUP BY text ORDER BY retweets DESC');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
@@ -111,7 +112,8 @@
         if ($platformName == 'Reddit'): ?>
             <div class="reddit" id="reddit_see_all">
                 <?php
-                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(selftext, 1, 250), score, id FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC');
+                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(selftext, 1, 250), score, id 
+                    FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
@@ -134,19 +136,21 @@
 
         if ($platformName == 'Youtube'): ?>
             <div class="youtube" id="youtube_see_all">
-                <?php
-                    $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), score FROM youtube_videos ORDER BY score DESC');
+            <?php
+                    $stmt = $mysql->prepare('SELECT title, link, thumbnail, score 
+                    FROM youtube_videos WHERE title IS NOT NULL ORDER BY score DESC');
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()):
                 ?>
-
-                <div class="youtube_post">
-                    <a class="post" href="">
-                        <h3> <?php echo $row['title'] ?> </h3>
-                        <p class="description"> <?php echo $row['SUBSTRING(description, 1, 250)'] ?> </p>
-                    </a>
-                </div>
+                    <div class="youtube_post">
+                        <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
+                            <h3> <?php echo $row['title'] ?> </h3>
+                            <div class="for_image">
+                                <img class="youtube_image" src="<?php echo $row['thumbnail'] ?>">
+                            </div>
+                        </a>
+                    </div>
                 <?php endwhile; ?>
             </div>
         <?php endif; ?>

@@ -77,7 +77,7 @@ section.title_and_description{
     border-bottom: 0.1vh solid black;
     border-bottom-left-radius: 1.5rem;
     border-left:  0.1vh solid black;
-    border-right: 0.05vh rem solid black;
+    border-right: 0.05vh solid black;
     background-color: var(--white);
 }
 section.stats_and_review{
@@ -141,4 +141,33 @@ h3.dark-theme-light-grey{
 p.dark-theme-light-grey{
     color: var(--lightgray);
     transition: all 400ms;
+}
+
+
+/* responsive */
+@media (max-width: 800px){
+    div.content{ 
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        row-gap: 2.5vh;
+    }
+    section.title_and_description{
+        width: 75%;
+        border-right: 0.1vh solid black;
+        border-radius: 0rem;
+    }
+    section.title_and_description:hover{
+        border-radius: 1.5rem;
+    }
+    section.stats_and_review{
+        width: 75%;
+        border-left: 0.1vh solid black;
+        border-radius: 0rem;
+    }
+    section.stats_and_review:hover{
+        border-radius: 1.5rem;
+    }
+
 }
