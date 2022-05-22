@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Word Cloud API in Java</artifactId>
+    <artifactId>WordCloudAPIinJava</artifactId>
     <packaging>jar</packaging>
     <version>0.1.0</version>
 
