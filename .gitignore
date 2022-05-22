@@ -5,7 +5,12 @@
 *.log
 __pycache__/
 *.class
+*.jar
+dependency-reduced-pom.xml
+*.properties
+*.lst
 
 # Deployment
 webhook.php
 auto_deploy.sh
+auto_deploy_log.txt
