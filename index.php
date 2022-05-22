@@ -25,16 +25,16 @@
                 <div class="site_name">
                     <a class="site_name" href="/index.php">Site name</a>
                 </div>
-                <form action="/search.php" method="POST">
+                <form action="/search.php" method="post">
                     <div class="search_bar">
-                        <input type="search" id="search" name="search" placeholder=" Search...">
+                        <input type="search" id="search" name="keyword" placeholder=" Search...">
                     </div>
                 </form>
             </div>
 
             <ul class="right_container">
-                <li class="latest">
-                    <a class="menu_option" href="index.php"> Latest </a>
+                <li class="home">
+                    <a class="menu_option" href="index.php"> Home </a>
                 </li>
                 <li class="categories">
                     <a class="menu_option" href="#Categories">Categories</a>
@@ -57,10 +57,27 @@
             </a>
 
             <!-- responsive website -->
-            <img src="images/btn1.png" alt="" class="menu-btn">
-            <img src="images/search.png" alt="" class="search-btn">
-
+            <div class="phone-buttons">
+                <img src="images/search.png" class="search-btn">
+                <img src="images/menu.png" class="menu-btn">
+            </div>
         </nav>
+        <div class="phone options">
+            <ul class="phone container">
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="index.php">Home</a>
+                </li>
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="#Categories">Categories</a>
+                </li>
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="statistics.php">Statistics</a>
+                </li>
+                <li class="phone_list_element">
+                    <a class="phone menu_option" href="about.php">About us</a>
+                </li>
+            </ul>
+        </div>
     </header>
     
     <main>
@@ -69,7 +86,8 @@
         
         <!-- De aici iau datele din reddit_posts -->
         <?php
-            $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score, id FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC LIMIT 2');
+            $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score, id 
+            FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
@@ -85,7 +103,8 @@
         
         <!-- De aici iau datele din twitter_posts -->
         <?php
-            $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id FROM twitter_posts GROUP BY text ORDER BY retweets DESC LIMIT 2');
+            $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id
+             FROM twitter_posts GROUP BY text ORDER BY retweets DESC LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
@@ -100,20 +119,21 @@
         
         <!-- De aici iau datele din youtube_videos -->
         <?php
-            $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), score FROM youtube_videos ORDER BY score LIMIT 2');
+            $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), link, thumbnail, score 
+            FROM youtube_videos WHERE description IS NOT NULL ORDER BY score LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
         ?>
-
-        <div class="most_reviewed_post">
-            <a class="post" href="post.php">
-                <h3> <?php echo $row['title'] ?> </h3>
-                <p class="description"> <?php echo $row['SUBSTRING(description, 1, 250)'] ?> </p>
-            </a>
-        </div>
+            <div class="most_reviewed_post">
+                <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
+                    <h3> <?php echo $row['title'] ?> </h3>
+                    <div class="for_image">
+                        <img class="youtube_image" src="<?php echo $row['thumbnail'] ?>">
+                    </div>
+                </a>
+            </div>
         <?php endwhile; ?>
-
         </section>
         
         <h2 class="titles" id="Categories">Categories</h2>
@@ -123,7 +143,8 @@
         <h2 class="twitter">Twitter</h2>
         <div class="twitter">
             <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id FROM twitter_posts GROUP BY text ORDER BY retweets DESC LIMIT 6');
+                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id
+                 FROM twitter_posts GROUP BY text ORDER BY retweets DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
@@ -145,7 +166,8 @@
         <h2 class="reddit">Reddit</h2>
         <div class="reddit">
             <?php
-                $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score, id FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC LIMIT 6');
+                $stmt = $mysql->prepare('SELECT title, SUBSTRING(selftext, 1, 250), score, id 
+                FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
@@ -167,21 +189,22 @@
         <!-- De aici iau datele din youtube_videos -->
         <h2 class="youtube">YouTube</h2>
         <div class="youtube">
-            <?php
-                $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), score FROM youtube_videos ORDER BY score LIMIT 6');
+        <?php
+                $stmt = $mysql->prepare('SELECT title, link, thumbnail, score
+                 FROM youtube_videos WHERE title IS NOT NULL ORDER BY score DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
             ?>
-
-            <div class="youtube_post">
-                <a class="post" href="post.php">
-                    <h3> <?php echo $row['title'] ?> </h3>
-                    <p class="description"> <?php echo $row['SUBSTRING(description, 1, 250)'] ?> </p>
-                </a>
-            </div>
+                <div class="youtube_post">
+                    <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
+                        <h3> <?php echo $row['title'] ?> </h3>
+                        <div class="for_image">
+                            <img class="youtube_image" src="<?php echo $row['thumbnail'] ?>">
+                        </div>
+                    </a>
+                </div>
             <?php endwhile; ?>
-        </div>
 
            
 

@@ -10,7 +10,7 @@ function changeColors() {
     var index;
     var list;
     /* header content & footer */
-    list = document.querySelectorAll(".navig_line, .search_bar, .site_name, .right_container, .latest, .categories, .statistics, .about, .menu_option, .footer");
+    list = document.querySelectorAll(".navig_line, .search_bar, .site_name, .right_container, .home, .categories, .statistics, .about, .menu_option, .footer");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme');
     /* div for theme button */
