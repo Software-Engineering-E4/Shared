@@ -217,6 +217,21 @@ a.youtube_see_all{
 
 /* responsive */
 @media (max-width:900px){
+    div.most_reviewed_post{
+        max-width: 48.3%;
+    }
+    div.twitter_post{
+        max-width: 48.3%;
+    }
+    div.reddit_post{
+        max-width: 48.3%;
+    }
+    div.youtube_post{
+        max-width: 48.3%;
+    }
+}
+
+@media (max-width:750px){
     div.most_reviewed_post{       
         max-width: 80%;
     }
@@ -233,6 +248,23 @@ a.youtube_see_all{
         width: 100%;
     }
 }
+
+@media (max-width: 550px){
+    h2.titles{
+        text-align: center;
+    }
+    h2.twitter{
+        text-align: center;
+    }
+    h2.reddit{
+        text-align: center;
+    }
+    h2.youtube{
+        text-align: center;
+    }
+}
+
+
 
 
 /* change theme */

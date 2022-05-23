@@ -209,12 +209,25 @@ main{
 
 /* footer */
 footer.footer{
+    margin: 0rem;
     border-top-width: 0.38rem;
     border-top-style: solid;
     border-top-color: var(--lightblue);
     background-color: var(--darkblue);
     color: var(--lightgray);
-    margin: 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+div.footer_option{
+    margin: 1vh;
+    width: 90%;
+    text-align: center;
+}
+div.first_option{
+    margin-top: 2vh;
 }
 
 
@@ -265,8 +278,8 @@ a.phone.menu_option:hover{
 }
 
 
-@media (max-width: 900px){
-    
+/* responsive design */
+@media (max-width: 1100px){
     /* menu */
     nav.navig_line{
         padding: 2.5vh;
@@ -319,6 +332,22 @@ a.phone.menu_option:hover{
     a.faculty{
         display: none;
     }
+}
+
+
+/* scroll bar */
+::-webkit-scrollbar{
+    width: 1rem;
+}
+::-webkit-scrollbar-track{
+    background-color: var(--white);
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--opo_post);
+    border-radius: 1.5rem;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: var(--opo_shadow);
 }
 
 

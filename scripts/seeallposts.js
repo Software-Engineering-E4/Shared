@@ -31,6 +31,11 @@ function loadTwitterPosts() {
     list = document.querySelectorAll(".platform_post");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('twitter_post');
+
+    /* add right href attributes */
+    var a = document.querySelectorAll(".post");
+    for(index = 0; index < a.length; index++)
+        a[index].setAttribute("href", "twitterpost.html");
 }
 
 function loadRedditPosts() {
@@ -46,6 +51,10 @@ function loadRedditPosts() {
     list = document.querySelectorAll(".platform_post");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('reddit_post');
+
+    var a = document.querySelectorAll(".post");
+    for(index = 0; index < a.length; index++)
+        a[index].setAttribute("href", "redditpost.html");
 }
 
 function loadYoutubePosts() {
@@ -62,10 +71,10 @@ function loadYoutubePosts() {
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('youtube_post');
     var a = document.querySelectorAll(".post");
-   /* for(index = 0; index < a.length; index++) {
+    for(index = 0; index < a.length; index++) {
         a[index].setAttribute("href", "https://www.youtube.com");
         a[index].setAttribute("target", "_blank");
-    } */
+    }
     
     addHTMLElements();
 
@@ -87,7 +96,7 @@ function addHTMLElements() {
         divElement.classList.toggle('for_image');
         const imgElement = document.createElement('img');
         imgElement.classList.toggle('youtube_image');
-        // imgElement.src = "images/youtube.jpg";
+        imgElement.src = "images/youtube.jpg";
 
         /* append img to div */
         divElement.appendChild(imgElement);

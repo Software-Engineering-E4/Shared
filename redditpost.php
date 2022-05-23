@@ -9,12 +9,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
     <link href="styles/general.css" rel="stylesheet">
     <link href="styles/post.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/keepingdarktheme.js" defer></script>
-    <title>Reddit post</title>
+    <script src="scripts/chartcomm.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+    <title>InfoMed | Reddit post</title>
 </head>
 
 <body>
@@ -22,7 +25,7 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/index.php">Site name</a>
+                    <a class="site_name" href="/index.php">InfoMed</a>
                 </div>
                 <form action="/search.php" method="post">
                     <div class="search_bar">
@@ -35,7 +38,7 @@
                     <a class="menu_option" href="index.php"> Home </a>
                 </li>
                 <li class="categories">
-                    <a class="menu_option" href="#Categories">Categories</a>
+                    <a class="menu_option" href="index.php#Categories">Categories</a>
                 </li>
                 <li class="statistics">
                     <a class="menu_option" href="statistics.php">Statistics</a>
@@ -103,26 +106,52 @@
             <div class="date">
                 <h3 class="stats_title">Date:</h3>
                 <p class="description"><?php echo $row['created_utc'] ?></p>
-            </div> <!-- to be changed here; adding 2 exxtra sentiments -->
+            </div> 
             <div class="feelings">
                 <div class="feeling">
                     <h3 class="stats_title">Positive:</h3>
-                    <p class="description"><?php echo $row['positive'] ?></p>
+                    <div class="progress-positive">
+                        <div class="progress__fill__positive"></div>
+                        <span class="progress__text__positive"></span>
+                    </div>
+                    <script type="text/javascript">
+                        positive = '<?php echo $row['positive']; ?>';
+                        positive_round = Math.round(positive);
+                        document.querySelector(".progress__fill__positive").style.width = `${positive_round}%`;
+                        document.querySelector(".progress__text__positive").textContent = `${positive_round}%`;
+                    </script>
                 </div>
                 <div class="feeling">
                     <h3 class="stats_title">Neutral:</h3>
-                    <p class="description"><?php echo $row['neutral'] ?></p>
+                    <div class="progress-neutral">
+                        <div class="progress__fill__neutral"></div>
+                        <span class="progress__text__neutral"></span>
+                    </div>
+                    <script type="text/javascript">
+                        neutral = '<?php echo $row['neutral']; ?>';
+                        neutral_round = Math.round(neutral);
+                        document.querySelector(".progress__fill__neutral").style.width = `${neutral_round}%`;
+                        document.querySelector(".progress__text__neutral").textContent = `${neutral_round}%`;
+                    </script>
                 </div>
                 <div class="feeling">
-                    <h3 class="stats_title">Negative:</h3>
-                    <p class="description"><?php echo $row['negative'] ?></p>
+                    <h3 class="stats_negative">Negative:</h3>
+                    <div class="progress-negative">
+                        <div class="progress__fill__negative"></div>
+                        <span class="progress__text__negative"></span>
+                    </div>
+                    <script type="text/javascript">
+                        negative = '<?php echo $row['negative']; ?>';
+                        negative_round = Math.round(negative);
+                        document.querySelector(".progress__fill__negative").style.width = `${negative_round}%`;
+                        document.querySelector(".progress__text__negative").textContent = `${negative_round}%`;
+                    </script>
                 </div>
             </div>
-            <div class=" review">
-                <h3 class="stats_title">Leave a review here:</h3>
-                <p class="description">To be done...</p>
-            </div>
         </section>
+        <section class="comments">
+                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+            </section>
         <?php break; ?>
         <?php endif; ?>
         <?php endwhile; ?>
@@ -130,10 +159,9 @@
 </main>
 
 <footer class="footer">
-    Footer infos <br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
-    sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
-    minus est.
-</footer>
-
+        <div class="footer_option first_option"><a class="menu_option" href="index.php#Categories">Categories</a></div>
+        <div class="footer_option"><a class="menu_option" href="statistics.php">Statistics</a></div>
+        <div class="footer_option"><a class="menu_option" href="about.php">About us</a></div>
+        <div class="footer_option">© Copyright 2022 InfoMed</div>
+    </footer>
 </html>

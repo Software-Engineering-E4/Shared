@@ -16,57 +16,47 @@
     --pink: #E75480;
 }
 
+
+h2.twitter{
+  color: var(--twitter);
+  margin-top: 5vh;
+  margin-bottom: 4.5vh;
+}
+h2.reddit{
+    color: var(--reddit);
+    margin-top: 15vh;
+    margin-bottom: 4.5vh;
+}
+h2.youtube{
+    color: var(--youtube);
+    margin-top: 15vh;
+    margin-bottom: 4.5vh;
+}
 div.statistics-twitter {
+    margin: 0vh;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-around;
       
 }
 div.statistics-reddit {
-  
+  margin: 0vh;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-around;
-    
 }
 div.statistics-youtube {
-  
+  margin: 0vh;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-around;
-    
 }
 
-h2.reddit{
-    color: var(--reddit);
-    margin-top: 7.5vh;
-    margin-bottom: 2.5vh;
-}
-h2.youtube{
-    color: var(--youtube);
-    margin-top: 7.5vh;
-    margin-bottom: 4.5vh;
-}
-h2.twitter{
-    color: var(--twitter);
-    margin-top: 7.5vh;
-    margin-bottom: 2.5vh;
-}
-div.twitter{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-.chart{
-    margin-bottom: 5vh ;
-    width: 600px;
-    height: 300px;
-    display: flex;
-  }
-  
+
+/* for percentage */
 .twitter .values{
     color: var(--twitter);
     margin: 0;
@@ -74,7 +64,7 @@ div.twitter{
     width: 50px;
     height: 100%;
     display: inline-block;   
-  }
+}
 .reddit .values{
     color: var(--reddit);
     margin: 0;
@@ -82,7 +72,7 @@ div.twitter{
     width: 50px;
     height: 100%;
     display: inline-block;   
-  } 
+} 
 .youtube .values{
     color: var(--youtube);
     margin: 0;
@@ -90,23 +80,30 @@ div.twitter{
     width: 50px;
     height: 100%;
     display: inline-block;   
-  }
+}
   .values li{
     list-style: none;
     height: 150px;
     position: relative;
     bottom: 145px;
-  }
-  
+}
   .values span{
     font-size: 12px;
     font-weight: 600;
     position: absolute;
     bottom: 0;
     right: 10px;
-  }
+}
+
   
-  .twitter .bars {
+/* for bars */
+.chart{
+  width: 600px;
+  height: 300px;
+  display: flex;
+}
+
+.twitter .bars {
     color: var(--twitter);
     font-size: 12px;
     font-weight: 600;
@@ -117,8 +114,8 @@ div.twitter{
     width: 500px;
     height: 300px;
     border-radius: 5px;
-  }
-  .reddit .bars {
+}
+.reddit .bars {
     color: var(--reddit);
     font-size: 12px;
     font-weight: 600;
@@ -129,8 +126,8 @@ div.twitter{
     width: 500px;
     height: 300px;
     border-radius: 5px; 
-  }
-  .youtube .bars {
+}
+.youtube .bars {
     color: var(--youtube);
     font-size: 12px;
     font-weight: 600;
@@ -141,26 +138,26 @@ div.twitter{
     width: 500px;
     height: 300px;
     border-radius: 5px; 
-  }
+}
  
   
-  .bars li{
+.bars li{
     display: table-cell;
     width: 150px;
     height: 300px;
     position: relative;
     left: 20px;
-  }
+}
   
-  .bars span{
+.bars span{
     width: 100%;
     position: absolute;
     bottom: -30px;
     text-align: center;
     left: 0px;
-  }
+}
   
-  .bars .bar{
+.bars .bar{
     display: block;
     background: #fff;
     width: 70px;
@@ -171,38 +168,102 @@ div.twitter{
     box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
     transition: 0.5s;
     transition-property: background, box-shadow;
-  }
+}
   
-  .twitter .bars .bar:hover{
+.twitter .bars .bar:hover{
     background: #92daf7;
     box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
     cursor: pointer;
-  }
-  .reddit .bars .bar:hover{
+}
+.reddit .bars .bar:hover{
     background: var(--reddit-outline);
     box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
     cursor: pointer;
-  }
-  .youtube .bars .bar:hover{
+}
+.youtube .bars .bar:hover{
     background: var(--lightred);
     box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
     cursor: pointer;
-  }
+}
   
-  .bars .bar:before{
+.bars .bar:before{
     color: #fff;
     content: attr(data-percentage) '%';
     position: relative;
     bottom: 20px;
-  }
+}
 
-  @media (max-width:500px)  {
+
+  /* after the statistics */
+h2.outro{
+    color: var(--darkblue);
+    margin-top: 20vh;
+    margin-bottom: 4.5vh;
+  }
+div.photo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+img.general{
+    width: 40%;
+    height: 40%;
+  }
+  
+
+  @media (max-width:625px)  {
+    h2.twitter{
+      text-align: center;
+    }
+    div.twitter{
+      width: 85%;
+    }
+    h2.reddit{
+      text-align: center;
+    }
+    div.reddit{
+      width: 85%;
+    }
+    h2.youtube{
+      text-align: center;
+    }
+    div.youtube{
+      width: 85%;
+    }
     .chart{
-      width: 400px;
-    height: 400px;
+      width: 100%;
+      height: 100%;
     }
     .bars .bar{
-      margin-left:1vh;
-    }     
+      margin-left: 20px;;
+      width: 50%;
+    }  
+    h2.outro{
+      text-align: center;
+    }
+    img.general{
+      width: 70%;
+      height: 70%;
+    }
+  }
+  @media (max-width: 475px) {
+    div.twitter{
+      width: 95%;
+    }
+    div.reddit{
+      width: 95%;
+    }
+    div.youtube{
+      width: 95%;
+    }
+    .chart{
+      width: 100%;
+      height: 300px;
+    }
+    .bars .bar{
+      margin-left: 10px;;
+      width: 25%;
+    }   
   } 
         

@@ -5,11 +5,12 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
     <link href="styles/general.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/keepingdarktheme.js" defer></script>
-    <title>About</title>
+    <title>InfoMed | About Us</title>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/index.php">Site name</a>
+                    <a class="site_name" href="/index.php">InfoMed</a>
                 </div>
                 <form action="/search.php" method="post">
                     <div class="search_bar">
@@ -73,12 +74,11 @@
     <main>
 
     </main>
-
     <footer class="footer">
-        Footer infos <br>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
-        sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
-        minus est.
+        <div class="footer_option first_option"><a class="menu_option" href="index.php#Categories">Categories</a></div>
+        <div class="footer_option"><a class="menu_option" href="statistics.php">Statistics</a></div>
+        <div class="footer_option"><a class="menu_option" href="about.php">About us</a></div>
+        <div class="footer_option">© Copyright 2022 InfoMed</div>
     </footer>
 </body>
 

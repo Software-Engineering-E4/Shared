@@ -9,13 +9,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
     <link href="styles/general.css" rel="stylesheet">
     <link href="styles/homepage.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/keepingdarktheme.js" defer></script>
     <script src="scripts/homepage.js" defer></script>
-    <title>Site name</title>
+    <title>InfoMed</title>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
         <nav class="navig_line">
             <div class="left_container">
                 <div class="site_name">
-                    <a class="site_name" href="/index.php">Site name</a>
+                    <a class="site_name" href="/index.php">InfoMed</a>
                 </div>
                 <form action="/search.php" method="POST">
                     <div class="search_bar">
@@ -86,6 +87,7 @@
         <h2 class="titles" id="titles">Search responses</h2>
         <section class="Categories">
         
+        <h2 class="twitter">Twitter</h2>
         <div class="twitter">
             <!-- De aici iau datele din twitter_posts pentru search-->
             <?php
@@ -106,6 +108,7 @@
           ?>
         </div>
 
+        <h2 class="reddit">Reddit</h2>
         <div class="reddit">
             <!-- De aici iau datele din reddit_posts pentru search-->
             <?php
@@ -118,7 +121,7 @@
 
             <div class="reddit_post">
                 <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
-                    <h3> <?php echo $row['title'] ?> </h3>
+                    <h3 class="title"> <?php echo $row['title'] ?> </h3>
                     <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
                 </a>
             </div>
@@ -126,6 +129,7 @@
             endif; ?>
         </div>
 
+        <h2 class="youtube">YouTube</h2>
         <div class="youtube">
             <!-- De aici iau datele din youtube_videos pentru search-->
             <?php
@@ -137,7 +141,7 @@
             ?>
                  <div class="youtube_post">
                     <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
-                        <h3> <?php echo $row['title'] ?> </h3>
+                        <h3 class="title"> <?php echo $row['title'] ?> </h3>
                         <div class="for_image">
                             <img class="youtube_image" src="<?php echo $row['thumbnail'] ?>">
                         </div>
@@ -148,14 +152,11 @@
         </div>
         </section>
     </main>
-
-    <hr>
-
     <footer class="footer">
-        Footer infos <br>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolores quam eaque inventore amet? Minima nisi
-        sunt id illum provident architecto illo, laboriosam voluptatem incidunt necessitatibus recusandae exercitationem
-        minus est.
+        <div class="footer_option first_option"><a class="menu_option" href="index.php#Categories">Categories</a></div>
+        <div class="footer_option"><a class="menu_option" href="statistics.php">Statistics</a></div>
+        <div class="footer_option"><a class="menu_option" href="about.php">About us</a></div>
+        <div class="footer_option">© Copyright 2022 InfoMed</div>
     </footer>
 
 </body>

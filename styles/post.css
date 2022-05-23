@@ -118,31 +118,47 @@ section.stats_and_review.reddit:hover{
     transform: scale(1.025);
     transition: 400ms;
 }
-
-
-/* change theme */
-main.dark-theme-dark-grey{
-    background-color: var(--opo_white);
-    transition: all 400ms;
-}
-h2.dark-theme-dark-grey{
-    background-color: var(--opo_white);
-    transition: all 400ms;
-}
-section.dark-theme-grey{
-    background-color: var(--opo_post);
-    color: var(--white);
-    transition: all 400ms;
-}
-h3.dark-theme-light-grey{
-    color: var(--lightgray);
-    transition: all 400ms;
-}
-p.dark-theme-light-grey{
-    color: var(--lightgray);
-    transition: all 400ms;
-}
-
+.progress-positive {
+    position: relative;
+    width: 210px;
+    height: 30px;
+    background: var(--reddit-outline);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+.progress-negative {
+    position: relative;
+    width: 210px;
+    height: 30px;
+    background: var(--reddit-outline);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .progress-neutral {
+    position: relative;
+    width: 210px;
+    height: 30px;
+    background: var(--reddit-outline);
+    border-radius: 5px;
+    overflow: hidden;
+  } 
+.progress__fill__positive, .progress__fill__neutral, .progress__fill__negative {
+    width: 0%;
+    height: 100%;
+    background: var(--reddit);
+    transition: all 0.2s;
+  }
+  
+.progress__text__positive, .progress__text__neutral, .progress__text__negative {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    font: bold 14px "Quicksand", sans-serif;
+    color: #ffffff;
+  }
+  
+  
 
 /* responsive */
 @media (max-width: 800px){
@@ -170,4 +186,27 @@ p.dark-theme-light-grey{
         border-radius: 1.5rem;
     }
 
+}
+
+/* change theme */
+main.dark-theme-dark-grey{
+    background-color: var(--opo_white);
+    transition: all 400ms;
+}
+h2.dark-theme-dark-grey{
+    background-color: var(--opo_white);
+    transition: all 400ms;
+}
+section.dark-theme-grey{
+    background-color: var(--opo_post);
+    color: var(--white);
+    transition: all 400ms;
+}
+h3.dark-theme-light-grey{
+    color: var(--lightgray);
+    transition: all 400ms;
+}
+p.dark-theme-light-grey{
+    color: var(--lightgray);
+    transition: all 400ms;
 }
