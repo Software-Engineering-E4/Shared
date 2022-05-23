@@ -64,8 +64,6 @@ public class Main extends Application {
 
 
 
-
-
         Group rootLineRedditPosts = new Group(LineChartRedditPosts.lineChartRedditPosts());
         Scene sceneLineRedditPosts = new Scene(rootLineRedditPosts, 1100, 800);
         stage.setScene(sceneLineRedditPosts);
