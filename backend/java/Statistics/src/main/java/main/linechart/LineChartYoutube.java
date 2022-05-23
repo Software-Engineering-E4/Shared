@@ -61,7 +61,7 @@ public class LineChartYoutube  {
         series1.getData().add(new XYChart.Data("May-Aug 2022", negative[7]));
 
 
-        var series2 = new Series();
+        Series series2 = new Series();
         series2.setName("Neutral");
 
         series2.getData().add(new XYChart.Data("Jan-Apr 2020", neutral[0]));

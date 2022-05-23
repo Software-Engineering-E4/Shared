@@ -1,4 +1,4 @@
-module main.statistics {
+module main {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;

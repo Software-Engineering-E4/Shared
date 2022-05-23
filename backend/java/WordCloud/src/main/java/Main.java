@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException {
 
         Database.createConnection();
-        var reddit = new RedditPostsDAO();
+        RedditPostsDAO reddit = new RedditPostsDAO();
         String text;
         text = reddit.getSelftext();
         Database.getConnection().commit();
