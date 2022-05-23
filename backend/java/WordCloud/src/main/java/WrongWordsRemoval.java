@@ -66,7 +66,6 @@ public class WrongWordsRemoval {
         String separator = " ";
         String entireFile = Files.lines(Paths.get("stopWords.txt")).collect(Collectors.joining());
         return entireFile.split(separator);
-
     }
 
     public HashSet<String> compareToDictionary(HashSet<String> words) throws FileNotFoundException {

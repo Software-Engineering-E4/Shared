@@ -12,8 +12,7 @@ public class Main {
 
         Database.createConnection();
         RedditPostsDAO reddit = new RedditPostsDAO();
-        String text;
-        text = reddit.getSelftext();
+        String text = reddit.getSelftext();
         Database.getConnection().commit();
         Database.closeConnection();
 
