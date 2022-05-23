@@ -1,10 +1,13 @@
 <?php
     require "dbconnection.php";
+    $queries = array();
+    parse_str($_SERVER['QUERY_STRING'], $queries);
+    $platformName =  $queries['platformName'];
+    $content_selector_platform = "#content_see_all";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +21,41 @@
     <script src="scripts/seeallposts.js" defer></script>
     <script src="scripts/homepage.js" defer></script>
     <title>InfoMed | All posts</title>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            currentLimit = 12;
+            $("#bseemoreitems").click(function() {                
+                $.ajax({    //create an ajax request to display.php
+                    type: "GET",
+                    url: "dbfetch.php",
+                    <?php
+                        if ($platformName == 'Twitter') {
+                            global $content_selector_platform;
+                            $content_selector_platform = "#twitter_see_all";
+                            echo 'data: {seemoretwitter: currentLimit},';
+                        } else if ($platformName == 'Reddit') {
+                            global $content_selector_platform;
+                            $content_selector_platform = "#reddit_see_all";
+                            echo 'data: {seemorereddit: currentLimit},';
+                        } else if ($platformName == 'Youtube') {
+                            global $content_selector_platform;
+                            $content_selector_platform = "#youtube_see_all";
+                            echo 'data: {seemoreyoutube: currentLimit},';
+                        }
+                    ?>
+                    dataType: "html",   //expect html to be returned                
+                    success: function(response){
+                        <?php
+                            echo '$("'.$content_selector_platform.'").append(response);'
+                        ?>          
+                        currentLimit = currentLimit + 12;
+                        //alert(response);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -83,78 +121,27 @@
         <h2 class="platform_name" id="platform_name"></h2>
         
         <?php
-        $queries = array();
-        parse_str($_SERVER['QUERY_STRING'], $queries);
-        $platformName =  $queries['platformName'];
+            require "dbfetch.php";
+            if ($platformName == 'Twitter') {
+                echo '<div class="twitter" id="twitter_see_all">';
+                display_twitter_items(0);
+                echo '</div>';
+            } else if ($platformName == 'Reddit') {
+                echo '<div class="reddit" id="reddit_see_all">';
+                display_reddit_items(0);
+                echo '</div>';
+            } else if ($platformName == 'Youtube') {
+                echo '<div class="youtube" id="youtube_see_all">';
+                display_youtube_items(0);
+                echo '</div>';
+            }
+        ?>
 
-        if ($platformName == 'Twitter'): ?>
-        <div class="twitter" id="twitter_see_all">
-            <?php
-                $stmt = $mysql->prepare('SELECT SUBSTRING(text, 1, 250), retweets, id
-                 FROM twitter_posts GROUP BY text ORDER BY retweets DESC');
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_assoc()):
-            ?>
-                <div class="twitter_post">
-                    <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
-                        <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
-                    </a>
-            </div>
-            <?php endwhile; ?>
+        </br>
+        <!-- See more button -->
+        <div class="see_all">
+            <input class="bseemoreitems" id="bseemoreitems" type="button" value="See more content..." />
         </div>
-        <?php endif; ?>
-
-        <?php
-        $queries = array();
-        parse_str($_SERVER['QUERY_STRING'], $queries);
-        $platformName =  $queries['platformName'];
-
-        if ($platformName == 'Reddit'): ?>
-            <div class="reddit" id="reddit_see_all">
-                <?php
-                    $stmt = $mysql->prepare('SELECT title,SUBSTRING(selftext, 1, 250), score, id 
-                    FROM reddit_posts WHERE selftext IS NOT NULL ORDER BY score DESC');
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    while ($row = $result->fetch_assoc()):
-                ?>
-
-                <div class="reddit_post">
-                    <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
-                        <h3 class="title"> <?php echo $row['title'] ?> </h3>
-                        <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
-                    </a>
-                </div>
-                <?php endwhile; ?>     
-            </div>
-        <?php endif; ?>
-
-        <?php
-        $queries = array();
-        parse_str($_SERVER['QUERY_STRING'], $queries);
-        $platformName =  $queries['platformName'];
-
-        if ($platformName == 'Youtube'): ?>
-            <div class="youtube" id="youtube_see_all">
-            <?php
-                    $stmt = $mysql->prepare('SELECT title, link, thumbnail, score 
-                    FROM youtube_videos WHERE title IS NOT NULL ORDER BY score DESC');
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    while ($row = $result->fetch_assoc()):
-                ?>
-                    <div class="youtube_post">
-                        <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
-                            <h3 class="title"> <?php echo $row['title'] ?> </h3>
-                            <div class="for_image">
-                                <img class="youtube_image" src="<?php echo $row['thumbnail'] ?>">
-                            </div>
-                        </a>
-                    </div>
-                <?php endwhile; ?>
-            </div>
-        <?php endif; ?>
 
     </main>
     <footer class="footer">

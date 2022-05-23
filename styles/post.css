@@ -77,7 +77,7 @@ section.title_and_description{
     border-bottom: 0.1vh solid black;
     border-bottom-left-radius: 1.5rem;
     border-left:  0.1vh solid black;
-    border-right: 0.05vh solid black;
+    border-right: 0.1vh solid black;
     background-color: var(--white);
 }
 section.stats_and_review{
@@ -89,7 +89,7 @@ section.stats_and_review{
     border-bottom: 0.1vh solid black;
     border-bottom-right-radius: 1.5rem;
     border-right:  0.1vh solid black;
-    border-left: 0.05vh solid black;
+    border-left: 0.1vh solid black;
     background-color: var(--white);
 }
 /* just for twitter post */
@@ -113,6 +113,29 @@ section.title_and_description.reddit:hover{
     transition: 400ms;
 }
 section.stats_and_review.reddit:hover{
+    border-radius: 1.5rem;
+    box-shadow: 0rem 0rem 0.25rem 0.2rem var(--reddit-outline);
+    transform: scale(1.025);
+    transition: 400ms;
+}
+div.content_below{
+    margin-top: 2.5vh;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+}
+section.comments{
+    padding: 2.5vh;
+    padding-top: 5vh;
+    width: 60%;
+    border-radius: 1.5rem;
+    border: 0.1vh solid black;
+    background-color: var(--white);
+    flex-direction: column;
+    align-items: center;
+}
+section.comments:hover{
     border-radius: 1.5rem;
     box-shadow: 0rem 0rem 0.25rem 0.2rem var(--reddit-outline);
     transform: scale(1.025);
@@ -142,7 +165,7 @@ section.stats_and_review.reddit:hover{
     border-radius: 5px;
     overflow: hidden;
   } 
-.progress__fill__positive, .progress__fill__neutral, .progress__fill__negative {
+  .progress__fill__positive, .progress__fill__neutral, .progress__fill__negative {
     width: 0%;
     height: 100%;
     background: var(--reddit);
@@ -185,7 +208,15 @@ section.stats_and_review.reddit:hover{
     section.stats_and_review:hover{
         border-radius: 1.5rem;
     }
-
+    section.comments{
+        width: 75%;
+        border-radius: 0rem; 
+    }
+    section.chart{
+        width: 75%;
+        border-right: 0.1vh solid black;
+        border-radius: 0rem;
+    }
 }
 
 /* change theme */

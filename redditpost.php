@@ -149,7 +149,9 @@
                 </div>
             </div>
         </section>
-        <section class="comments">
+        </div>
+        <div class="content_below">
+            <section class="comments">
                 <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
             </section>
         <?php break; ?>

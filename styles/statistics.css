@@ -196,7 +196,7 @@ div.statistics-youtube {
 
   /* after the statistics */
 h2.outro{
-    color: var(--darkblue);
+    color: var(--lightgray);
     margin-top: 20vh;
     margin-bottom: 4.5vh;
   }

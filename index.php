@@ -193,7 +193,7 @@
         <div class="youtube">
         <?php
                 $stmt = $mysql->prepare('SELECT title, link, thumbnail, score
-                 FROM youtube_videos WHERE title IS NOT NULL ORDER BY score DESC LIMIT 6');
+                 FROM youtube_videos GROUP BY title HAVING title IS NOT NULL  ORDER BY score DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
