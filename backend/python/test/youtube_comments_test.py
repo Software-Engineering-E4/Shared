@@ -7,3 +7,9 @@ class YoutubeCommentsTest(unittest.TestCase):
     def __init__(self, super_method: str = "") -> None:
         self.db = DBManager("backend/config/database.json")
         super(YoutubeCommentsTest, self).__init__(super_method)
+
+    def setUp(self) -> None:
+        self.youtube = YoutubeComments(self.db)
+
+    def tearDown(self) -> None:
+        pass

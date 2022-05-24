@@ -38,16 +38,13 @@ class RedditPostsTest(unittest.TestCase):
         }
         mock_subreddits = [
             "cancerbiology",
-            "cancerfamilysupport",
-            "cancercaregivers",
-            "colorectalcancer",
         ]
 
         errors = []
         for subreddit in mock_subreddits:
-            for f in self.reddit.request(subreddit):
+            for response in self.reddit.request(subreddit):
                 try:
-                    jsonschema.validate(f, schema)
+                    jsonschema.validate(response, schema)
                 except jsonschema.exceptions.ValidationError as err:  # type: ignore
                     errors.append(err)
 

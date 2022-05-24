@@ -23,6 +23,8 @@ def main() -> None:
             "cancerfamilysupport",
             "cancercaregivers",
             "colorectalcancer",
+            "Fuckcancer",
+            "CancerAdvances",
         ]
         for subreddit in subreddits:
             output = reddit_posts.request(subreddit)
