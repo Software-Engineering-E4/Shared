@@ -46,4 +46,7 @@ function changeColors() {
     list = document.querySelectorAll(".title, .description");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-light-grey');
+    /* statistics content */
+    list = document.querySelector(".outro");
+    list.classList.toggle('dark-theme-dark-grey-overlap-2');
 }

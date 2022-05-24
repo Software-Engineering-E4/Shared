@@ -26,7 +26,7 @@
         $(document).ready(function() {
             currentLimit = 12;
             $("#bseemoreitems").click(function() {                
-                $.ajax({    //create an ajax request to display.php
+                $.ajax({    
                     type: "GET",
                     url: "dbfetch.php",
                     <?php

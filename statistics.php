@@ -228,6 +228,35 @@
                 </div>
             </div>
         </div>
+        <!--image slider start-->
+        <div class="place_for_slider">
+            <div class="slider">
+                <div class="slides">
+                    <input type="radio" name="button" id="radio1Reddit">
+                    <input type="radio" name="button" id="radio2Reddit">
+                    <input type="radio" name="button" id="radio3Reddit">
+                    <!--slide images start-->
+                    <div class="slide first">
+                        <img src="images/PieChartRedditPosts.png">
+                    </div>
+                    <div class="slide">
+                        <img src="images/BarChartRedditPosts.png">
+                    </div>
+                    <div class="slide">
+                        <img src="images/LineChartRedditPosts.png">
+                    </div>
+                    <!--slide images end-->
+                </div>
+                <!--navigation-->
+                <div class="navigation">
+                    <label for="radio1Reddit" class="button reddit"></label>
+                    <label for="radio2Reddit" class="button reddit"></label>
+                    <label for="radio3Reddit" class="button reddit"></label>
+                </div>
+            </div>
+            <!--image slider end-->
+        </div>
+
 
         <h2 class="youtube">Youtube</h2>
         <div class="statistics-youtube">
@@ -250,6 +279,29 @@
                             <div class="bar" data-percentage=<?php echo $percentageNeutralYoutube ?>><span>Neutral</span></div>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+        <div class="place_for_slider">
+            <div class="slider">
+                <div class="slides">
+                    <input type="radio" name="button" id="radio1Youtube">
+                    <input type="radio" name="button" id="radio2Youtube">
+                    <input type="radio" name="button" id="radio3Youtube">
+                    <div class="slide first">
+                        <img src="images/PieChartYoutubeVideos.png">
+                    </div>
+                    <div class="slide">
+                        <img src="images/BarChartYoutubeVideos.png">
+                    </div>
+                    <div class="slide">
+                        <img src="images/LineChartYoutube.png">
+                    </div>
+                </div>
+                <div class="navigation">
+                    <label for="radio1Youtube" class="button youtube"></label>
+                    <label for="radio2Youtube" class="button youtube"></label>
+                    <label for="radio3Youtube" class="button youtube"></label>
                 </div>
             </div>
         </div>

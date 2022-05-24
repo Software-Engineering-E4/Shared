@@ -136,12 +136,24 @@ img.youtube_image{
 
 /* responsive */
 @media (max-width:900px){
-    div.platform_post{       
+    div.twitter_post{       
+        max-width: 48.3%;
+    }
+    div.reddit_post{       
+        max-width: 48.3%;
+    }
+    div.youtube_post{       
         max-width: 48.3%;
     }
 }
 @media (max-width: 750px){
-    div.platform_post{
+    div.twitter_post{
+        max-width: 80%;
+    }
+    div.reddit_post{
+        max-width: 80%;
+    }
+    div.youtube_post{
         max-width: 80%;
     }
 }
