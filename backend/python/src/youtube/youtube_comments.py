@@ -13,8 +13,7 @@ class YoutubeComments(YoutubeRequester):
         self.logger = logging.getLogger(__name__)
         self.set_table_name("youtube_comments")
 
-    def request(self, query: Any = None) -> list[dict[str, str | int]]:
-        out: list[dict[str, str | int]] = []
+    def request(self, query: Any = None) -> None:
         for id in self.db.query_one("youtube_videos", "id"):
             request_params = self.build(
                 {
@@ -30,33 +29,29 @@ class YoutubeComments(YoutubeRequester):
             if self.request_has_error(res):
                 continue
 
-            for result in res.json()["items"]:
-                inner_data = result["snippet"]["topLevelComment"]
-                data: dict[str, str | int] = {}
+            self.treat_response(res)
 
-                for column in self.columns:
-                    data[column] = self.treat_special_case(column, inner_data)
-                    if data[column] != "":
-                        continue
+    def treat_response(self, res: requests.Response) -> None:
+        for result in res.json()["items"]:
+            inner_data = result["snippet"]["topLevelComment"]
+            db_row: dict[str, str | int] = {}
 
+            for column in self.columns:
+                db_row[column] = self.treat_special_case(column, inner_data)
+                if db_row[column] != "":
+                    continue
+
+                try:
+                    db_row[column] = inner_data["snippet"][column]
+                except KeyError:
                     try:
-                        data[column] = inner_data["snippet"][column]
+                        db_row[column] = inner_data["snippet"][
+                            self.columns[column]["actualName"]
+                        ]
                     except KeyError:
-                        try:
-                            data[column] = inner_data["snippet"][
-                                self.columns[column]["actualName"]
-                            ]
-                        except KeyError:
-                            data[column] = "NULL"
+                        db_row[column] = "NULL"
 
-                if self.real_time:
-                    self.send_to_db([data], self.columns)
-                else:
-                    out.append(data)
-            if not self.real_time:
-                self.logger.debug(f"Comments with video_id={id} done")
-
-        return out
+            self.send_to_db(db_row, self.columns)
 
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
         match column:

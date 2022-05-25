@@ -46,10 +46,8 @@ class DBManagerTest(unittest.TestCase):
             self.db.database, self.db.user, self.db.password, self.db.host, self.db.port
         )
         self.db.set_table_name("reddit_comments")
-        self.db.insert({"id": "mock1234", "selftext": "mocktext", "title": "mocktitle"})
-        self.db.update(
-            {"id": "mock1234", "selftext": "mocktext", "title": "mock updated title"}
-        )
+        self.db.insert({"id": "mock1234", "selftext": "mocktext"})
+        self.db.update({"id": "mock1234", "selftext": "mocktext"})
         self.db.execute("delete from reddit_comments where id=mock1234")
 
     def test_youtube_videos_mock_values(self) -> None:
@@ -57,10 +55,8 @@ class DBManagerTest(unittest.TestCase):
             self.db.database, self.db.user, self.db.password, self.db.host, self.db.port
         )
         self.db.set_table_name("youtube_videos")
-        self.db.insert({"id": "mock1234", "selftext": "mocktext", "title": "mocktitle"})
-        self.db.update(
-            {"id": "mock1234", "selftext": "mocktext", "title": "mock updated title"}
-        )
+        self.db.insert({"id": "mock1234", "title": "mocktitle"})
+        self.db.update({"id": "mock1234", "title": "mock updated title"})
         self.db.execute("delete from youtube_videos where id=mock1234")
 
     def test_youtube_comments_mock_values(self) -> None:
@@ -68,10 +64,8 @@ class DBManagerTest(unittest.TestCase):
             self.db.database, self.db.user, self.db.password, self.db.host, self.db.port
         )
         self.db.set_table_name("youtube_comments")
-        self.db.insert({"id": "mock1234", "selftext": "mocktext", "title": "mocktitle"})
-        self.db.update(
-            {"id": "mock1234", "selftext": "mocktext", "title": "mock updated title"}
-        )
+        self.db.insert({"id": "mock1234", "text": "mocktitle"})
+        self.db.update({"id": "mock1234", "text": "mock updated title"})
         self.db.execute("delete from youtube_comments where id=mock1234")
 
     def test_twitter_posts_mock_values(self) -> None:
@@ -79,8 +73,6 @@ class DBManagerTest(unittest.TestCase):
             self.db.database, self.db.user, self.db.password, self.db.host, self.db.port
         )
         self.db.set_table_name("twitter_posts")
-        self.db.insert({"id": "mock1234", "selftext": "mocktext", "title": "mocktitle"})
-        self.db.update(
-            {"id": "mock1234", "selftext": "mocktext", "title": "mock updated title"}
-        )
+        self.db.insert({"id": "mock1234", "text": "mocktext"})
+        self.db.update({"id": "mock1234", "text": "mocktext"})
         self.db.execute("delete from twitter_posts where id=mock1234")

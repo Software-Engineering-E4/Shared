@@ -13,8 +13,7 @@ class RedditComments(RedditRequester):
         self.logger = logging.getLogger(__name__)
         self.set_table_name("reddit_comments")
 
-    def request(self, query: Any = None) -> list[dict[str, str | int]]:
-        out: list[dict[str, str | int]] = []
+    def request(self, query: Any = None) -> None:
         for values in self.db.query("reddit_posts", ["id", "subreddit"]):
             id, subreddit = values
             try:
@@ -27,30 +26,30 @@ class RedditComments(RedditRequester):
                 self.logger.exception(ex)
                 continue
 
-            for child in res.json():
-                for inner_child in child["data"]["children"]:
-                    data: dict[str, str | int] = {}
-                    for column in self.columns:
-                        data[column] = self.treat_special_case(column, inner_child, id)
-                        if data[column] != "":
-                            continue
-                        try:
-                            data[column] = inner_child["data"][column]
-                        except KeyError:
-                            try:
-                                data[column] = inner_child["data"][
-                                    self.columns[column]["actualName"]
-                                ]
-                            except KeyError:
-                                data[column] = "NULL"
-                    if data["id"] != data["id_post"]:
-                        out.append(data)
-                        if self.real_time:
-                            self.send_to_db([data], self.columns)
-            if not self.real_time:
-                self.logger.debug(f"Comments with post_id={id} done")
+            self.treat_response(id, res)
 
-        return out
+    def treat_response(self, id: str, res: requests.Response):
+        for child in res.json():
+            for inner_child in child["data"]["children"]:
+                db_row: dict[str, str | int] = {}
+
+                for column in self.columns:
+                    db_row[column] = self.treat_special_case(column, inner_child, id)
+                    if db_row[column] != "":
+                        continue
+
+                    try:
+                        db_row[column] = inner_child["data"][column]
+                    except KeyError:
+                        try:
+                            db_row[column] = inner_child["data"][
+                                self.columns[column]["actualName"]
+                            ]
+                        except KeyError:
+                            db_row[column] = "NULL"
+
+                if db_row["id"] != db_row["id_post"]:
+                    self.send_to_db(db_row, self.columns)
 
     def treat_special_case(self, column: str, item: dict[str, Any], id=None) -> str:
         match column:
@@ -58,6 +57,11 @@ class RedditComments(RedditRequester):
                 return id
             case "created_utc":
                 return str(datetime.fromtimestamp(item["data"][column]))[:10]
+            case "award_score":
+                sum = 0
+                for award in item["data"]["all_awardings"]:
+                    sum += award["coin_price"] * award["count"]
+                return sum
             case _:
                 return ""
 

@@ -22,11 +22,6 @@ class DBManager:
         init=False, default=mysql.connector.connection_cext.CMySQLConnection()
     )
     logger: logging.Logger = field(default=logging.getLogger(__name__), init=False)
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="[%(asctime)s] %(levelname)s %(name)s line %(lineno)s: %(message)s",
-        filename="latest.log",
-    )
 
     def __post_init__(self) -> None:
         with open(self.config_file) as file:
@@ -129,6 +124,8 @@ password='{self.password}', port='{self.port}')"""
                     clean_str = "NULL"
                 if clean_str != "NULL":
                     if format[key]["translate"] and clean_str != "" and self.translate:
+                        if len(clean_str) >= 5000:
+                            continue
                         try:
                             translated = str(
                                 ts.google(

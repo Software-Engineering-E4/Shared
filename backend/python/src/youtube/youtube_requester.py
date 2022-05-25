@@ -12,7 +12,7 @@ class YoutubeRequester(Requester):
     resource: googleapiclient.discovery.Resource = field(init=False)
 
     def __post_init__(self) -> None:
-        super().__init__(self.db, "https://www.googleapis.com/youtube/v3", self.real_time, self.send_mode)
+        super().__init__(self.db, "https://www.googleapis.com/youtube/v3", self.send_mode)
         self.config_file = "backend/config/youtube.json"
 
         with open(self.config_file) as file:

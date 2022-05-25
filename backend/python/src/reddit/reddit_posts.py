@@ -13,31 +13,28 @@ class RedditPosts(RedditRequester):
         self.logger = logging.getLogger(__name__)
         self.set_table_name("reddit_posts")
 
-    def request(self, subreddit: str) -> list[dict[str, str | int]]:
+    def request(self, subreddit: str) -> None:
         res = requests.get(
             f"{self.link}/{subreddit}/hot",
             headers=self.headers,
             params={"limit": "100"},
         )
 
-        out: list[dict[str, str | int]] = []
+        self.treat_response(res)
+
+    def treat_response(self, res: requests.Response):
         for post in res.json()["data"]["children"]:
-            data: dict[str, str | int] = {}
+            db_row: dict[str, str | int] = {}
 
             for column in self.columns:
-                data[column] = self.treat_special_case(column, post)
-                if data[column] != "":
+                db_row[column] = self.treat_special_case(column, post)
+                if db_row[column] != "":
                     continue
                 try:
-                    data[column] = post["data"][column]
+                    db_row[column] = post["data"][column]
                 except KeyError:
-                    data[column] = "NULL"
-            if self.real_time:
-                self.send_to_db([data], self.columns)
-            else:
-                out.append(data)
-
-        return out
+                    db_row[column] = "NULL"
+                self.send_to_db(db_row, self.columns)
 
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
         match column:
@@ -45,6 +42,11 @@ class RedditPosts(RedditRequester):
                 return str(datetime.fromtimestamp(item["data"][column]))[:10]
             case "link":
                 return f"https://www.reddit.com/{item['data']['id']}"
+            case "award_score":
+                sum = 0
+                for award in item["data"]["all_awardings"]:
+                    sum += award["coin_price"] * award["count"]
+                return sum
             case _:
                 return ""
 

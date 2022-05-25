@@ -12,8 +12,7 @@ class YoutubeVideos(YoutubeRequester):
         self.logger = logging.getLogger(__name__)
         self.set_table_name("youtube_videos")
 
-    def request(self, query: str) -> list[dict[str, str | int]]:
-        out: list[dict[str, str | int]] = []
+    def request(self, query: str) -> None:
         for year in range(2010, 2022):
             for month in range(1, 13):
                 is_next_year = (month + 1) == 13
@@ -28,34 +27,34 @@ class YoutubeVideos(YoutubeRequester):
                         "type": "video",
                     }
                 )
-                self.logger.debug(f"Requesting query='{query}', year={year}, month={month}")
+                self.logger.debug(
+                    f"Requesting query='{query}', year={year}, month={month}"
+                )
                 result = requests.get(f"{self.link}/search?{request_params}")
                 if self.request_has_error(result):
                     continue
 
-                for item in result.json()["items"]:
-                    data: dict[str, str | int] = {}
+                self.treat_response(result)
 
-                    for column in self.columns:
-                        data[column] = self.treat_special_case(column, item)
-                        if data[column]:
-                            continue
-                        try:
-                            data[column] = item["snippet"][column]
-                        except KeyError:
-                            try:
-                                data[column] = item["snippet"][
-                                    self.columns[column]["actualName"]
-                                ]
-                            except KeyError:
-                                data[column] = "NULL"
+    def treat_response(self, result: requests.Response) -> None:
+        for item in result.json()["items"]:
+            db_row: dict[str, str | int] = {}
 
-                    if self.real_time:
-                        self.send_to_db([data], self.columns)
-                    else:
-                        out.append(data)
+            for column in self.columns:
+                db_row[column] = self.treat_special_case(column, item)
+                if db_row[column]:
+                    continue
+                try:
+                    db_row[column] = item["snippet"][column]
+                except KeyError:
+                    try:
+                        db_row[column] = item["snippet"][
+                            self.columns[column]["actualName"]
+                        ]
+                    except KeyError:
+                        db_row[column] = "NULL"
 
-        return out
+            self.send_to_db(db_row, self.columns)
 
     def treat_special_case(self, column: str, item: dict[str, Any]) -> str:
         match column:
