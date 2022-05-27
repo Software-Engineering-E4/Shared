@@ -15,7 +15,6 @@
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/keepingdarktheme.js" defer></script>
-    <script src="scripts/chartcomm.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
     <title>InfoMed | Reddit post</title>
 </head>
@@ -75,10 +74,25 @@
                 <li class="phone_list_element">
                     <a class="phone menu_option" href="about.php">About us</a>
                 </li>
+                <li class="phone_list_element change_theme">
+                    <div class="phone change_theme" id="phone_change_theme">
+                        <img src="images/sun.svg" class="phone_sun">
+                        <img src="images/moon.svg" class="phone_moon">
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
 </body>
+
+<?php
+    function calPercentage($numAmount, $numTotal) {
+        $count1 = $numAmount / $numTotal;
+        $count2 = $count1 * 100;
+        $count = number_format($count2, 0);
+        return $count;
+    }
+?>
 
 <?php $idPost = $_GET['id']; ?>
 
@@ -150,14 +164,68 @@
             </div>
         </section>
         </div>
+        <?php break; ?>
+        <?php endif; ?>
+        <?php endwhile; ?>
+        <?php
+        $q = 'SELECT * FROM reddit_comments WHERE id_post=' ."'" . $idPost . "'" . ' ';
+        $result = mysqli_query($mysql, $q);
+        $rows = mysqli_num_rows($result);
+        if($rows > 0) :
+            $counterNeutralReddit=0;
+            $neutralReddit='neutral';
+            $counterPositiveReddit=0;
+            $positiveReddit='positive';
+            $counterNegativeReddit=0;
+            $negativeReddit='negative';
+            $counterAllSentimentsReddit=0;
+            while ($row = mysqli_fetch_assoc($result)){
+                $counterAllSentimentsReddit++;
+                if($row['sentiment']==$neutralReddit){
+                    $counterNeutralReddit++;
+                }
+                if($row['sentiment']==$positiveReddit){
+                    $counterPositiveReddit++;
+                }
+                if($row['sentiment']==$negativeReddit){
+                    $counterNegativeReddit++;
+                }
+            }
+            $percentagePositiveReddit = calPercentage($counterNeutralReddit, $counterAllSentimentsReddit);
+            $percentageNeutralReddit = calPercentage($counterPositiveReddit, $counterAllSentimentsReddit);
+            $percentageNegativeReddit = calPercentage($counterNegativeReddit, $counterAllSentimentsReddit);
+          ?>
         <div class="content_below">
             <section class="comments">
                 <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
             </section>
-        <?php break; ?>
-        <?php endif; ?>
-        <?php endwhile; ?>
+            <script>
+                positive = '<?php echo $percentagePositiveReddit ?>';
+                neutral = '<?php echo $percentageNeutralReddit ?>';
+                negative = '<?php echo $percentageNegativeReddit ?>';
+                var xValues = ["Positive", "Neutral", "Negative"];
+                var yValues = [positive, neutral, negative];
+                var barColors = ["green", "blue","red"];
+
+                new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                    display: true,
+                    text: "Feelings in the comments"
+                    }
+                }
+                });
+            </script>
     </div>
+    <?php endif; ?>
 </main>
 
 <footer class="footer">

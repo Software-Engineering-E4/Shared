@@ -1,14 +1,6 @@
 <?php
     require "dbconnection.php";
 
-    /*function debug_to_console($data) {
-        $output = $data;
-        if (is_array($output))
-            $output = implode(',', $output);
-    
-        echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-    }*/
-
     function fetch_twitter_items($currentLimit, $limit) {
         global $mysql;
         $query = 'SELECT SUBSTRING(text, 1, 250), retweets, id FROM twitter_posts GROUP BY text ORDER BY likes DESC LIMIT '. $currentLimit .',' .$limit.' ';
@@ -22,7 +14,7 @@
         while ($row = $result->fetch_assoc()) {
             echo '<div class="twitter_post">';
             echo '    <a class="post" id="'.$row['id'].'" href="twitterpost.php?id='.$row['id'].'">';
-            echo '        <p class="description">'.$row['SUBSTRING(text, 1, 250)'].'</p>';
+            echo '        <p class="description">'.$row['SUBSTRING(text, 1, 250)'] . '...' . '</p>';
             echo '    </a>';
             echo '</div>';
         }
@@ -43,7 +35,7 @@
             echo '<div class="reddit_post">';
             echo '    <a class="post" id="<'.$row['id'].'" href="redditpost.php?id='.$row['id'].'">';
             echo '        <h3>'.$row['title'].' </h3>';
-            echo '        <p class="description">'.$row['SUBSTRING(selftext, 1, 250)'].'</p>';
+            echo '        <p class="description">'.$row['SUBSTRING(selftext, 1, 250)'] . '...' . '</p>';
             echo '    </a>';
             echo '</div>';
         }
@@ -51,7 +43,7 @@
 
     function fetch_youtube_items($currentLimit, $limit) {
         global $mysql;
-        $query = 'SELECT title, link, thumbnail, score FROM youtube_videos GROUP BY title HAVING title IS NOT NULL ORDER BY score DESC LIMIT '. $currentLimit .',' .$limit.' ';
+        $query = 'SELECT title, link, thumbnail, score FROM youtube_videos WHERE description IS NOT NULL ORDER BY score DESC LIMIT '. $currentLimit .',' .$limit.' ';
         $stmt = $mysql->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();

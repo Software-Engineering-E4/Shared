@@ -44,13 +44,13 @@
                             echo 'data: {seemoreyoutube: currentLimit},';
                         }
                     ?>
-                    dataType: "html",   //expect html to be returned                
+                    dataType: "html",                   
                     success: function(response){
                         <?php
                             echo '$("'.$content_selector_platform.'").append(response);'
                         ?>          
                         currentLimit = currentLimit + 12;
-                        //alert(response);
+                        
                     }
                 });
             });
@@ -113,6 +113,12 @@
                 <li class="phone_list_element">
                     <a class="phone menu_option" href="about.php">About us</a>
                 </li>
+                <li class="phone_list_element change_theme">
+                    <div class="phone change_theme" id="phone_change_theme">
+                        <img src="images/sun.svg" class="phone_sun">
+                        <img src="images/moon.svg" class="phone_moon">
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -140,7 +146,7 @@
         </br>
         <!-- See more button -->
         <div class="see_all">
-            <input class="bseemoreitems" id="bseemoreitems" type="button" value="See more content..." />
+            <p class="bseemoreitems" id="bseemoreitems"> See more </p>
         </div>
 
     </main>

@@ -29,10 +29,8 @@ h3.title{
     padding:2.5vh;
     color: black;
 }
-p.description{
-    margin: 0vh;
-    padding: 2.5vh;
-    padding-top: 0vh;
+p.description{ 
+    padding: 2.5vh; 
 }
 h2.twitter{
     margin-top: 2.5vh;
@@ -213,6 +211,8 @@ a.youtube_see_all{
     color: var(--youtube);
     font-size: 1.25rem;
 }
+
+
 
 
 /* responsive */

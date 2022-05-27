@@ -77,6 +77,12 @@
                 <li class="phone_list_element">
                     <a class="phone menu_option" href="about.php">About us</a>
                 </li>
+                <li class="phone_list_element change_theme">
+                    <div class="phone change_theme" id="phone_change_theme">
+                        <img src="images/sun.svg" class="phone_sun">
+                        <img src="images/moon.svg" class="phone_moon">
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -96,7 +102,7 @@
 
         <div class="most_reviewed_post">
             <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
-                <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
+                <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] . '...'  ?> </p>
             </a>
         </div>
         <?php endwhile; ?>
@@ -113,7 +119,7 @@
         <div class="most_reviewed_post">
             <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
                 <h3 class="title"> <?php echo $row['title'] ?> </h3>
-                <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
+                <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] . '...' ?> </p>
             </a>
         </div>
         <?php endwhile; ?>
@@ -121,8 +127,8 @@
 
         <!-- De aici iau datele din youtube_videos -->
         <?php
-            $stmt = $mysql->prepare('SELECT title, SUBSTRING(description, 1, 250), link, thumbnail, score 
-            FROM youtube_videos WHERE description IS NOT NULL ORDER BY score LIMIT 2');
+            $stmt = $mysql->prepare('SELECT title, link, thumbnail, score 
+            FROM youtube_videos WHERE description IS NOT NULL ORDER BY score DESC LIMIT 2');
             $stmt->execute();
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()):
@@ -138,6 +144,11 @@
         <?php endwhile; ?>
         </section>
         
+      <!--  <h2 class="outro">Common words used</h2>
+        <div class="photo">
+            <img class="general" src="images/WordCloud.png">
+        </div> -->
+
         <h2 class="titles" id="Categories">Categories</h2>
         <section class="Categories">
 
@@ -154,7 +165,7 @@
 
             <div class="twitter_post">
                 <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
-                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
+                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] . '...' ?> </p>
                 </a>
             </div>
             <?php endwhile; ?>
@@ -178,7 +189,7 @@
             <div class="reddit_post">
                 <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
                     <h3 class="title"> <?php echo $row['title'] ?> </h3>
-                    <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
+                    <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] . '...' ?> </p>
                 </a>
             </div>
             <?php endwhile; ?>
@@ -193,7 +204,7 @@
         <div class="youtube">
         <?php
                 $stmt = $mysql->prepare('SELECT title, link, thumbnail, score
-                 FROM youtube_videos GROUP BY title HAVING title IS NOT NULL  ORDER BY score DESC LIMIT 6');
+                 FROM youtube_videos WHERE description IS NOT NULL ORDER BY score DESC LIMIT 6');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()):
