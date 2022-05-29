@@ -102,6 +102,7 @@
 
         <div class="most_reviewed_post">
             <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
+            <h3 class="title"></h3>
                 <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] . '...'  ?> </p>
             </a>
         </div>

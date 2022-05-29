@@ -98,17 +98,13 @@
                         else:
                 ?>
                 <h3 class="title">
-                    Title of post
+                   
                 </h3>
                 <p class="description">
                     <?php echo $row['text'] ?>
                 </p>
             </section>
             <section class="stats_and_review twitter">
-                <div class="date">
-                    <h3 class="stats_title">Date:</h3>
-                    <p class="description"><?php echo $row['UTC_date']?></p>
-                </div>
                 <div class="feelings">
                     <h3 class="stats_title">Overall feeling:</h3>
                     <p class="description"><?php echo $row['sentiment']?></p>

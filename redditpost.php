@@ -168,7 +168,7 @@
         <?php endif; ?>
         <?php endwhile; ?>
         <?php
-        $q = 'SELECT * FROM reddit_comments WHERE id_post=' ."'" . $idPost . "'" . ' ';
+        $q = 'SELECT * FROM reddit_comments WHERE id_post=' ."'" . $idPost . "'" . ' AND sentiment IS NOT NULL';
         $result = mysqli_query($mysql, $q);
         $rows = mysqli_num_rows($result);
         if($rows > 0) :
@@ -195,9 +195,9 @@
             $percentageNeutralReddit = calPercentage($counterPositiveReddit, $counterAllSentimentsReddit);
             $percentageNegativeReddit = calPercentage($counterNegativeReddit, $counterAllSentimentsReddit);
           ?>
-        <div class="content_below">
+        <div class="chart">
             <section class="comments">
-                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                <canvas id="myChart"></canvas>
             </section>
             <script>
                 positive = '<?php echo $percentagePositiveReddit ?>';
@@ -217,6 +217,9 @@
                     }]
                 },
                 options: {
+                    legend: {
+                   display: false
+                    },
                     title: {
                     display: true,
                     text: "Feelings in the comments"

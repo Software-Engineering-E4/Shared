@@ -193,23 +193,27 @@ div.see_all:hover{
     border-radius: 1.5rem;
     transition: 750ms;
 }
+
 a.twitter_see_all{
     text-decoration: none;
     text-align: center;
     color: var(--twitter);
     font-size: 1.25rem;
+    cursor: pointer;
 }
 a.reddit_see_all{
     text-decoration: none;
     text-align: center;
     color: var(--reddit);
     font-size: 1.25rem;
+    cursor: pointer;
 }
 a.youtube_see_all{
     text-decoration: none;
     text-align: center;
     color: var(--youtube);
     font-size: 1.25rem;
+    cursor: pointer;
 }
 
 

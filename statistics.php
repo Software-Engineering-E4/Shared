@@ -95,7 +95,7 @@
 
     <!-- De aici iau sentimentele din twitter_posts -->
     <?php
-        $stmt = $mysql->prepare('SELECT sentiment FROM twitter_posts');
+        $stmt = $mysql->prepare('SELECT sentiment FROM twitter_posts WHERE sentiment IS NOT NULL');
         $stmt->execute();
         $result = $stmt->get_result();
         $counterNeutralTwitter=0;
@@ -125,7 +125,7 @@
 
     <!-- De aici iau sentimentele din reddit_posts -->
     <?php
-        $stmt = $mysql->prepare('SELECT sentiment FROM reddit_posts');
+        $stmt = $mysql->prepare('SELECT sentiment FROM reddit_posts WHERE sentiment IS NOT NULL');
         $stmt->execute();
         $result = $stmt->get_result(); 
         $counterNeutralReddit=0;
@@ -155,7 +155,7 @@
 
     <!-- De aici iau sentimentele din youtube_videos -->
     <?php
-        $stmt = $mysql->prepare('SELECT sentiment FROM youtube_videos');
+        $stmt = $mysql->prepare('SELECT sentiment FROM youtube_videos WHERE sentiment IS NOT NULL');
         $stmt->execute();
         $result = $stmt->get_result(); 
         $counterNeutralYoutube=0;

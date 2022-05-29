@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,24 +85,51 @@
             </ul>
         </div>
     </header>
+    <?php $keyword = mysqli_real_escape_string($mysql, $_POST['keyword']); ?>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var twitterPostsCount = 6;
+            var redditPostsCount = 6;
+            var youtubePostsCount = 6;
+            var keyword = "<?php echo $keyword; ?>";
+            $("#seeMoreTwitter").click(function() {
+                twitterPostsCount = twitterPostsCount + 6;
+                $("#twitter").load("load-twitter-posts.php", {
+                    twitterNewPostsCount: twitterPostsCount,
+                    sendKeyword: keyword
+                });
+            });
+            $("#seeMoreReddit").click(function() {
+                redditPostsCount = redditPostsCount + 6;
+                $("#reddit").load("load-reddit-posts.php", {
+                    redditNewPostsCount: redditPostsCount,
+                    sendKeyword: keyword
+                });
+            });
+            $("#seeMoreYoutube").click(function() {
+                youtubePostsCount = youtubePostsCount + 6;
+                $("#youtube").load("load-youtube-posts.php", {
+                    youtubeNewPostsCount: youtubePostsCount,
+                    sendKeyword: keyword
+                });
+            });
+        });
+    </script>
     <main>
-        
-        <?php $keyword = mysqli_real_escape_string($mysql, $_POST['keyword']); ?>
-
         <h2 class="titles" id="titles">Search responses</h2>
         <section class="Categories">
         
         <?php
               $q = "SELECT id,SUBSTRING(text, 1, 250) 
               FROM twitter_posts where text LIKE '%$keyword%' GROUP BY text
-              ORDER BY retweets DESC LIMIT 12";
+              ORDER BY retweets DESC LIMIT 6";
               $result = mysqli_query($mysql, $q);
               $rows = mysqli_num_rows($result);
     
               if($rows > 0) : ?>
              <h2 class="twitter">Twitter</h2>
-                 <div class="twitter">
+                 <div class="twitter" id="twitter">
              <?php  while ($row = mysqli_fetch_assoc($result)): 
             ?>
             <div class="twitter_post">
@@ -110,22 +137,24 @@
                     <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
                 </a>
             </div>
-            <?php
-         endwhile;
-        endif;
-          ?>
+            <?php endwhile; 
+            if($rows == 6 ) :
+            ?>
+            <div class="see_all">
+            <a class="twitter_see_all" id="seeMoreTwitter" > See more </a>
         </div>
-
+            <?php endif; endif; ?>
+        </div>
         <?php
                 $q = "SELECT id,title,SUBSTRING(selftext, 1, 250)
                  FROM reddit_posts where selftext LIKE '%$keyword%' OR title  LIKE '%$keyword%' and selftext IS NOT NULL
-                 ORDER BY score DESC LIMIT 12";
+                 ORDER BY score DESC LIMIT 6";
                 $result = mysqli_query($mysql, $q);
                 $rows = mysqli_num_rows($result);
             
                 if($rows > 0) : ?>
                 <h2 class="reddit">Reddit</h2>
-                  <div class="reddit">
+                  <div class="reddit" id="reddit">
                <?php  while ($row = mysqli_fetch_assoc($result)): 
             ?>
 
@@ -136,18 +165,23 @@
                 </a>
             </div>
             <?php endwhile;
-            endif; ?>
+            if($rows == 6 ) :
+            ?>
+            <div class="see_all">
+            <a class="reddit_see_all" id="seeMoreReddit">See more</a>
+        </div>
+           <?php endif; endif; ?>
         </div>
         <?php
                 $q = "SELECT title,link,thumbnail 
                 FROM youtube_videos where description LIKE '%$keyword%' OR title  LIKE '%$keyword%' 
-                ORDER BY score DESC LIMIT 12";
+                ORDER BY score DESC LIMIT 6";
                 $result = mysqli_query($mysql, $q);
                 $rows = mysqli_num_rows($result);
             
                 if($rows > 0) : ?>
                  <h2 class="youtube">YouTube</h2>
-                   <div class="youtube">
+                   <div class="youtube" id="youtube">
                <?php  while ($row = mysqli_fetch_assoc($result)): 
             ?>
                  <div class="youtube_post">
@@ -159,7 +193,12 @@
                     </a>
                 </div>
             <?php endwhile; 
-            endif;?>
+            if($rows == 6 ) :
+            ?>
+            <div class="see_all">
+            <a class="youtube_see_all" id="seeMoreYoutube"> See more </a>
+        </div>
+        <?php endif; endif; ?>
         </div>
         </section>
     </main>
