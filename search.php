@@ -130,21 +130,19 @@
               if($rows > 0) : ?>
              <h2 class="twitter">Twitter</h2>
                  <div class="twitter" id="twitter">
-             <?php  while ($row = mysqli_fetch_assoc($result)): 
-            ?>
+             <?php  while ($row = mysqli_fetch_assoc($result)): ?>
             <div class="twitter_post">
                 <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
-                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
+                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] . '...' ?> </p>
                 </a>
             </div>
-            <?php endwhile; 
-            if($rows == 6 ) :
-            ?>
-            <div class="see_all">
-            <a class="twitter_see_all" id="seeMoreTwitter" > See more </a>
+            <?php endwhile; endif;  ?>
         </div>
-            <?php endif; endif; ?>
-        </div>
+        <?php if($rows > 0 && $rows == 6) : ?>
+                <div class="see_all">
+                    <a class="twitter_see_all" id="seeMoreTwitter" > See more </a>
+                </div>
+            <?php endif; ?>
         <?php
                 $q = "SELECT id,title,SUBSTRING(selftext, 1, 250)
                  FROM reddit_posts where selftext LIKE '%$keyword%' OR title  LIKE '%$keyword%' and selftext IS NOT NULL
@@ -155,23 +153,20 @@
                 if($rows > 0) : ?>
                 <h2 class="reddit">Reddit</h2>
                   <div class="reddit" id="reddit">
-               <?php  while ($row = mysqli_fetch_assoc($result)): 
-            ?>
-
-            <div class="reddit_post">
-                <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
-                    <h3 class="title"> <?php echo $row['title'] ?> </h3>
-                    <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
-                </a>
-            </div>
-            <?php endwhile;
-            if($rows == 6 ) :
-            ?>
-            <div class="see_all">
-            <a class="reddit_see_all" id="seeMoreReddit">See more</a>
+               <?php  while ($row = mysqli_fetch_assoc($result)): ?>
+                  <div class="reddit_post">
+                     <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
+                       <h3 class="title"> <?php echo $row['title'] ?> </h3>
+                        <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] . '...' ?> </p>
+                    </a>
+                 </div>
+            <?php endwhile; endif;?>
         </div>
-           <?php endif; endif; ?>
-        </div>
+        <?php if($rows > 0 && $rows == 6) : ?>
+                <div class="see_all">
+                    <a class="reddit_see_all" id="seeMoreReddit">See more</a>
+                </div>
+            <?php endif; ?>
         <?php
                 $q = "SELECT title,link,thumbnail 
                 FROM youtube_videos where description LIKE '%$keyword%' OR title  LIKE '%$keyword%' 
@@ -182,8 +177,7 @@
                 if($rows > 0) : ?>
                  <h2 class="youtube">YouTube</h2>
                    <div class="youtube" id="youtube">
-               <?php  while ($row = mysqli_fetch_assoc($result)): 
-            ?>
+               <?php  while ($row = mysqli_fetch_assoc($result)): ?>
                  <div class="youtube_post">
                     <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
                         <h3 class="title"> <?php echo $row['title'] ?> </h3>
@@ -192,14 +186,13 @@
                         </div>
                     </a>
                 </div>
-            <?php endwhile; 
-            if($rows == 6 ) :
-            ?>
-            <div class="see_all">
-            <a class="youtube_see_all" id="seeMoreYoutube"> See more </a>
+            <?php endwhile; endif; ?>
         </div>
-        <?php endif; endif; ?>
-        </div>
+        <?php if($rows > 0 && $rows == 6) : ?>
+                <div class="see_all">
+                    <a class="youtube_see_all" id="seeMoreYoutube"> See more </a>
+                </div> 
+            <?php endif; ?>
         </section>
     </main>
     <footer class="footer">
