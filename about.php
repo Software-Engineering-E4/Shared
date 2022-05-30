@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
     <link href="styles/general.css" rel="stylesheet">
+    <link href="styles/about.css" rel="stylesheet">
     <script src="scripts/responsive.js" defer></script>
     <script src="scripts/darktheme.js" defer></script>
     <script src="scripts/keepingdarktheme.js" defer></script>
@@ -44,8 +45,7 @@
                 <img src="images/sun.svg" class="sun">
                 <img src="images/moon.svg" class="moon">
             </div>
-            <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png"
-                    alt="University logo" class="faculty_logo">
+            <a href="https://www.info.uaic.ro" class="faculty" target="_blank"> <img src="images/logo-fii.png" alt="University logo" class="faculty_logo">
             </a>
 
             <!-- responsive website -->
@@ -77,8 +77,9 @@
             </ul>
         </div>
     </header>
-    <main>
-
+    <main class="about">
+        <p class="about_content first">This website was created within the "Software Engineering" course from the "Faculty of Informatics" Iasi, made by group 2E4.</p>
+        <p class="about_content second">The project "InfoMed" contains information about colorectal cancer from social media platform such as Twitter, Reddit and Youtube, that was analyzed for sentiment identification and used for different statistics.</p>
     </main>
     <footer class="footer">
         <div class="footer_option first_option"><a class="menu_option" href="index.php#Categories">Categories</a></div>

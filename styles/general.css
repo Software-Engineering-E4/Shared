@@ -171,6 +171,9 @@ div.change_theme{
     flex-direction: row;
     justify-content: space-around;
 }
+div.change_theme.display_none{
+    display:none;
+}
 div.change_theme:hover{
     background-color: var(--lightblue);
     transition: 400ms;
@@ -264,6 +267,12 @@ li.phone_list_element{
     padding: 2.5vh;
     background-color: var(--darkblue);
     text-align: center;
+}
+li.phone_list_element.display_none{
+    display: none;
+}
+div.phone.change_theme.display_none{
+    display:none;
 }
 li.phone_list_element:hover{
     background-color: var(--lightblue);

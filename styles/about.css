@@ -1,0 +1,37 @@
+main.about{
+    height: 55vh;
+    font-size: 1.1rem;
+}
+
+p.about_content{
+    margin: 0vh;
+    color: var(--lightblue);
+}
+
+p.about_content.first{
+    padding: 2.5vh;
+    padding-bottom: 0vh;
+}
+
+p.about_content.second{
+    padding: 2.5vh;
+}
+
+p.about_content.first.dark-theme{
+    color: var(--lightgray);
+}
+p.about_content.second.dark-theme{
+    color: var(--lightgray);
+}
+
+@media (max-width: 350px) {
+    main.about{
+        height: fit-content;
+    }
+}
+
+@media (max-height: 500px) {
+    main.about{
+        height: fit-content;
+    }
+}

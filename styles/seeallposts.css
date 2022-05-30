@@ -132,20 +132,23 @@ img.youtube_image{
     border-radius: 1.5rem;
 }
 
-div.see_all{
+div.see_more{
     padding: 0vh;
     padding-top: 2.5vh;
     padding-bottom: 2.5vh;
     width: 100%;
+    margin-top: 2.5vh;
+
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-div.see_all:hover{
+div.see_more:hover{
+    background: var(--lightgray);
     border-radius: 1.5rem;
-    background-color: var(--lightgray);
     transition: 750ms;
 }
+
 p.bseemoreitems{
     margin: 0vh;
     color: var(--darkblue);
@@ -174,6 +177,9 @@ p.bseemoreitems{
     }
     div.youtube_post{
         max-width: 80%;
+    }
+    div.see_more{
+        width: 100%;
     }
 }
 @media (max-width: 550px){
@@ -214,4 +220,14 @@ h3.dark-theme-light-grey{
 p.dark-theme-light-grey{
     color: var(--lightgray);
     transition: all 400ms;
+}
+div.dark-theme-grey-overlap{
+    background-color: var(--opo_white);
+    transition: all 400ms;
+}
+div.dark-theme-grey-overlap:hover{
+    background-color: var(--opo_post);
+}
+p.bseemoreitems.dark-theme-grey{
+    color: var(--pink);
 }

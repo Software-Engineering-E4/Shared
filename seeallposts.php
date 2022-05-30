@@ -46,11 +46,15 @@
                     ?>
                     dataType: "html",                   
                     success: function(response){
+                        var is_dark = localStorage.getItem("vDark") != null && localStorage.getItem("vDark") === 'true';
+                        if (is_dark == true)
+                            changeColors();
                         <?php
                             echo '$("'.$content_selector_platform.'").append(response);'
-                        ?>          
+                        ?>      
                         currentLimit = currentLimit + 12;
-                        
+                        if (is_dark == true)
+                            changeColors();
                     }
                 });
             });
@@ -145,7 +149,7 @@
 
         </br>
         <!-- See more button -->
-        <div class="see_all">
+        <div class="see_more">
             <p class="bseemoreitems" id="bseemoreitems"> See more </p>
         </div>
 

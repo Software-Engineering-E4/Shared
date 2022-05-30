@@ -57,11 +57,18 @@ function  changeColors() {
     list = document.querySelectorAll(".see_all");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-grey-overlap');
+    // search content
+    list = document.querySelectorAll(".see_more");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-grey-overlap');   
     /* seeallposts content */
     list = document.querySelectorAll(".platform_name, .platform");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-dark-grey');
     list = document.querySelectorAll(".platform_post .twitter_post, .platform_post .reddit_post, .platform_post .youtube_post");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-grey');
+    list = document.querySelectorAll(".bseemoreitems");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-grey');
     /* twitter post & reddit post */
@@ -84,4 +91,9 @@ function  changeColors() {
     /* statistics content */
     list = document.querySelector(".intro");
     list.classList.toggle('dark-theme');
+    
+    /* about us content */
+    list = document.querySelectorAll(".about_content");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme');
     }

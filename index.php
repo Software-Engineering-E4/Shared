@@ -88,7 +88,7 @@
     </header>
     
     <main>
-        <h2 class="titles" id="titles">Popular works</h2>
+        <h2 class="titles" id="titles">Popular posts</h2>
         <section class="most_reviewed">
         
         <!-- De aici iau datele din twitter_posts -->
@@ -144,11 +144,7 @@
             </div>
         <?php endwhile; ?>
         </section>
-        
-      <!--  <h2 class="outro">Common words used</h2>
-        <div class="photo">
-            <img class="general" src="images/WordCloud.png">
-        </div> -->
+    
 
         <h2 class="titles" id="Categories">Categories</h2>
         <section class="Categories">

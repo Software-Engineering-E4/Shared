@@ -194,6 +194,23 @@ div.see_all:hover{
     transition: 750ms;
 }
 
+div.see_more{
+    padding: 0vh;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    width: 100%;
+    margin-top: 2.5vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+div.see_more:hover{
+    background: var(--lightgray);
+    border-radius: 1.5rem;
+    transition: 750ms;
+}
+
 a.twitter_see_all{
     text-decoration: none;
     text-align: center;
@@ -249,6 +266,9 @@ a.youtube_see_all{
         max-width: 80%;
     }
     div.see_all{
+        width: 100%;
+    }
+    div.see_more{
         width: 100%;
     }
 }
