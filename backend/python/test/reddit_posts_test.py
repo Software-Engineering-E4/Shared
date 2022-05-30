@@ -42,7 +42,7 @@ class RedditPostsTest(unittest.TestCase):
 
         errors = []
         for subreddit in mock_subreddits:
-            for response in self.reddit.request(subreddit):
+            for response in self.reddit.request(subreddit): # type: ignore
                 try:
                     jsonschema.validate(response, schema)
                 except jsonschema.exceptions.ValidationError as err:  # type: ignore
