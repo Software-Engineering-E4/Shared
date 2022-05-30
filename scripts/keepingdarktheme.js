@@ -1,11 +1,10 @@
 var themeStatus = localStorage.getItem("vDark");
-    if(themeStatus === 'true') {
+    if(themeStatus === 'true' && themeStatus != null) {
         if(document.body.classList.contains('dark-theme') === false)
             changeColors();
     }
 
 function changeColors() {
-
     document.body.classList.toggle('dark-theme');
     var index;
     var list;
@@ -28,6 +27,10 @@ function changeColors() {
     list = document.querySelectorAll(".see_all");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-grey-overlap');
+    // search content
+    list = document.querySelectorAll(".see_more");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-grey-overlap'); 
     /* seeallposts content */
     list = document.querySelectorAll(".platform_name, .platform");
     for(index = 0; index < list.length; index++)
@@ -35,6 +38,9 @@ function changeColors() {
     list = document.querySelectorAll(".platform_post .twitter_post, .platform_post .reddit_post, .platform_post .youtube_post");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-grey');
+        list = document.querySelectorAll(".bseemoreitems");
+        for(index = 0; index < list.length; index++)
+            list[index].classList.toggle('dark-theme-grey');
     /* twitter post & reddit post */
     list = document.querySelectorAll(".main, .platform_name .twitter");
     for(index = 0; index < list.length; index++)
@@ -46,7 +52,19 @@ function changeColors() {
     list = document.querySelectorAll(".title, .description");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-light-grey');
-    /* statistics content */
-    list = document.querySelector(".outro");
-    list.classList.toggle('dark-theme-dark-grey-overlap-2');
+
+    /* for phone */
+    list = document.querySelectorAll(".phone.options, .phone.container, .phone_list_element, .phone_list_element.change_theme, .phone.change_theme");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-phone');
+
+     /* statistics content */
+     list = document.querySelectorAll(".intro");
+     for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme');
+
+     /* about us content */
+     list = document.querySelectorAll(".about_content");
+     for(index = 0; index < list.length; index++)
+         list[index].classList.toggle('dark-theme');
 }

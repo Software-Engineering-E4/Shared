@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@
                     <a class="menu_option" href="about.php">About us</a>
                 </li>
             </ul>
-            <div class="change_theme" id="change_theme">
+            <div class="change_theme display_none" id="change_theme">
                 <img src="images/sun.svg" class="sun">
                 <img src="images/moon.svg" class="moon">
             </div>
@@ -76,84 +76,138 @@
                 <li class="phone_list_element">
                     <a class="phone menu_option" href="about.php">About us</a>
                 </li>
+                <li class="phone_list_element change_theme display_none">
+                    <div class="phone change_theme display_none" id="phone_change_theme">
+                        <img src="images/sun.svg" class="phone_sun">
+                        <img src="images/moon.svg" class="phone_moon">
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
+    <?php $keyword = mysqli_real_escape_string($mysql, $_POST['keyword']); ?>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var twitterPostsCount = 6;
+            var redditPostsCount = 6;
+            var youtubePostsCount = 6;
+            var keyword = "<?php echo $keyword; ?>";
+            if (localStorage.getItem("vDark") === 'true' && localStorage.getItem("vDark") != null) {
+                $("#seeMoreTwitter").click(function() {
+                    twitterPostsCount = twitterPostsCount + 6;
+                    $("#twitter").load("load-twitter-posts-dark.php", {
+                        twitterNewPostsCount: twitterPostsCount,
+                        sendKeyword: keyword
+                    });
+                });
+            } else {
+                $("#seeMoreTwitter").click(function() {
+                    twitterPostsCount = twitterPostsCount + 6;
+                    $("#twitter").load("load-twitter-posts.php", {
+                        twitterNewPostsCount: twitterPostsCount,
+                        sendKeyword: keyword
+                    });
+                });
+            }
+            if (localStorage.getItem("vDark") === 'true' && localStorage.getItem("vDark") != null) {
+                $("#seeMoreReddit").click(function() {
+                    redditPostsCount = redditPostsCount + 6;
+                    $("#reddit").load("load-reddit-posts-dark.php", {
+                        redditNewPostsCount: redditPostsCount,
+                        sendKeyword: keyword
+                    });
+                });
+            } else {    
+                $("#seeMoreReddit").click(function() {
+                    redditPostsCount = redditPostsCount + 6;
+                    $("#reddit").load("load-reddit-posts.php", {
+                        redditNewPostsCount: redditPostsCount,
+                        sendKeyword: keyword
+                    });
+                });
+            }
+            if (localStorage.getItem("vDark") === 'true' && localStorage.getItem("vDark") != null) {
+                $("#seeMoreYoutube").click(function() {
+                    youtubePostsCount = youtubePostsCount + 6;
+                    $("#youtube").load("load-youtube-posts-dark.php", {
+                        youtubeNewPostsCount: youtubePostsCount,
+                        sendKeyword: keyword
+                    });
+                });
+            } else {
+                $("#seeMoreYoutube").click(function() {
+                    youtubePostsCount = youtubePostsCount + 6;
+                    $("#youtube").load("load-youtube-posts.php", {
+                        youtubeNewPostsCount: youtubePostsCount,
+                        sendKeyword: keyword
+                    });
+                });
+            }
+        });
+    </script>
     <main>
-        
-        <?php $keyword = mysqli_real_escape_string($mysql, $_POST['keyword']); ?>
-
         <h2 class="titles" id="titles">Search responses</h2>
         <section class="Categories">
         
-        <h2 class="twitter">Twitter</h2>
-        <div class="twitter">
-            <!-- De aici iau datele din twitter_posts pentru search-->
-            <?php
+        <?php
               $q = "SELECT id,SUBSTRING(text, 1, 250) 
               FROM twitter_posts where text LIKE '%$keyword%' GROUP BY text
-              ORDER BY retweets DESC LIMIT 12";
+              ORDER BY retweets DESC LIMIT 6";
               $result = mysqli_query($mysql, $q);
               $rows = mysqli_num_rows($result);
-              if($rows==0) {
-                echo "We are sorry, there are no responses...";
-            }
-              if($rows > 0) :
-               while ($row = mysqli_fetch_assoc($result)): 
-            ?>
+    
+              if($rows > 0) : ?>
+             <h2 class="twitter">Twitter</h2>
+                 <div class="twitter" id="twitter">
+             <?php  while ($row = mysqli_fetch_assoc($result)): ?>
             <div class="twitter_post">
                 <a class="post" id="<?php $row['id'] ?>" href="twitterpost.php?id=<?php echo $row['id'] ?>">
-                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] ?> </p>
+                    <p class="description"> <?php echo $row['SUBSTRING(text, 1, 250)'] . '...' ?> </p>
                 </a>
             </div>
-            <?php
-         endwhile;
-        endif;
-          ?>
+            <?php endwhile; endif;  ?>
         </div>
-
-        <h2 class="reddit">Reddit</h2>
-        <div class="reddit">
-            <!-- De aici iau datele din reddit_posts pentru search-->
-            <?php
+        <?php if($rows > 0 && $rows == 6) : ?>
+                <div class="see_more">
+                    <a class="twitter_see_all" id="seeMoreTwitter" > See more </a>
+                </div>
+            <?php endif; ?>
+        <?php
                 $q = "SELECT id,title,SUBSTRING(selftext, 1, 250)
                  FROM reddit_posts where selftext LIKE '%$keyword%' OR title  LIKE '%$keyword%' and selftext IS NOT NULL
-                 ORDER BY score DESC LIMIT 12";
+                 ORDER BY score DESC LIMIT 6";
                 $result = mysqli_query($mysql, $q);
                 $rows = mysqli_num_rows($result);
-                if($rows==0) {
-                    echo "We are sorry, there are no responses...";
-                }
-                if($rows > 0) :
-                 while ($row = mysqli_fetch_assoc($result)): 
-            ?>
-
-            <div class="reddit_post">
-                <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
-                    <h3 class="title"> <?php echo $row['title'] ?> </h3>
-                    <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] ?> </p>
-                </a>
-            </div>
-            <?php endwhile;
-            endif; ?>
+            
+                if($rows > 0) : ?>
+                <h2 class="reddit">Reddit</h2>
+                  <div class="reddit" id="reddit">
+               <?php  while ($row = mysqli_fetch_assoc($result)): ?>
+                  <div class="reddit_post">
+                     <a class="post" id="<?php $row['id'] ?>" href="redditpost.php?id=<?php echo $row['id'] ?>">
+                       <h3 class="title"> <?php echo $row['title'] ?> </h3>
+                        <p class="description"> <?php echo $row['SUBSTRING(selftext, 1, 250)'] . '...' ?> </p>
+                    </a>
+                 </div>
+            <?php endwhile; endif;?>
         </div>
-
-        <h2 class="youtube">YouTube</h2>
-        <div class="youtube">
-            <!-- De aici iau datele din youtube_videos pentru search-->
-            <?php
+        <?php if($rows > 0 && $rows == 6) : ?>
+                <div class="see_more">
+                    <a class="reddit_see_all" id="seeMoreReddit">See more</a>
+                </div>
+            <?php endif; ?>
+        <?php
                 $q = "SELECT title,link,thumbnail 
                 FROM youtube_videos where description LIKE '%$keyword%' OR title  LIKE '%$keyword%' 
-                ORDER BY score DESC LIMIT 12";
+                ORDER BY score DESC LIMIT 6";
                 $result = mysqli_query($mysql, $q);
                 $rows = mysqli_num_rows($result);
-                if($rows==0) {
-                    echo "We are sorry, there are no responses...";
-                }
-                if($rows > 0) :
-                 while ($row = mysqli_fetch_assoc($result)): 
-            ?>
+            
+                if($rows > 0) : ?>
+                 <h2 class="youtube">YouTube</h2>
+                   <div class="youtube" id="youtube">
+               <?php  while ($row = mysqli_fetch_assoc($result)): ?>
                  <div class="youtube_post">
                     <a class="post" href="<?php echo $row['link'] ?>" target="_blank">
                         <h3 class="title"> <?php echo $row['title'] ?> </h3>
@@ -162,9 +216,13 @@
                         </div>
                     </a>
                 </div>
-            <?php endwhile; 
-            endif;?>
+            <?php endwhile; endif; ?>
         </div>
+        <?php if($rows > 0 && $rows == 6) : ?>
+                <div class="see_more">
+                    <a class="youtube_see_all" id="seeMoreYoutube"> See more </a>
+                </div> 
+            <?php endif; ?>
         </section>
     </main>
     <footer class="footer">

@@ -72,6 +72,12 @@
                 <li class="phone_list_element">
                     <a class="phone menu_option" href="about.php">About us</a>
                 </li>
+                <li class="phone_list_element change_theme">
+                    <div class="phone change_theme" id="phone_change_theme">
+                        <img src="images/sun.svg" class="phone_sun">
+                        <img src="images/moon.svg" class="phone_moon">
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -92,17 +98,13 @@
                         else:
                 ?>
                 <h3 class="title">
-                    Title of post
+                   
                 </h3>
                 <p class="description">
                     <?php echo $row['text'] ?>
                 </p>
             </section>
             <section class="stats_and_review twitter">
-                <div class="date">
-                    <h3 class="stats_title">Date:</h3>
-                    <p class="description"><?php echo $row['UTC_date']?></p>
-                </div>
                 <div class="feelings">
                     <h3 class="stats_title">Overall feeling:</h3>
                     <p class="description"><?php echo $row['sentiment']?></p>

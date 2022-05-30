@@ -25,7 +25,7 @@
                 <div class="site_name">
                     <a class="site_name" href="/index.php">InfoMed</a>
                 </div>
-                <form action="/index.php" method="get">
+                <form action="search.php" method="get">
                     <div class="search_bar">
                         <input type="search" id="search" name="keyword" placeholder=" Search...">
                     </div>
@@ -73,6 +73,12 @@
                 <li class="phone_list_element">
                     <a class="phone menu_option" href="about.php">About us</a>
                 </li>
+                <li class="phone_list_element change_theme">
+                    <div class="phone change_theme" id="phone_change_theme">
+                        <img src="images/sun.svg" class="phone_sun">
+                        <img src="images/moon.svg" class="phone_moon">
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -89,7 +95,7 @@
 
     <!-- De aici iau sentimentele din twitter_posts -->
     <?php
-        $stmt = $mysql->prepare('SELECT sentiment FROM twitter_posts');
+        $stmt = $mysql->prepare('SELECT sentiment FROM twitter_posts WHERE sentiment IS NOT NULL');
         $stmt->execute();
         $result = $stmt->get_result();
         $counterNeutralTwitter=0;
@@ -119,7 +125,7 @@
 
     <!-- De aici iau sentimentele din reddit_posts -->
     <?php
-        $stmt = $mysql->prepare('SELECT sentiment FROM reddit_posts');
+        $stmt = $mysql->prepare('SELECT sentiment FROM reddit_posts WHERE sentiment IS NOT NULL');
         $stmt->execute();
         $result = $stmt->get_result(); 
         $counterNeutralReddit=0;
@@ -149,7 +155,7 @@
 
     <!-- De aici iau sentimentele din youtube_videos -->
     <?php
-        $stmt = $mysql->prepare('SELECT sentiment FROM youtube_videos');
+        $stmt = $mysql->prepare('SELECT sentiment FROM youtube_videos WHERE sentiment IS NOT NULL');
         $stmt->execute();
         $result = $stmt->get_result(); 
         $counterNeutralYoutube=0;
@@ -177,7 +183,13 @@
         $percentageNegativeYoutube = calPercentage($counterNegativeYoutube, $counterAllSentimentsYoutube);
     ?>
 
-    <main>
+    <main class="statistics">
+
+    <h2 class="intro">Common words used</h2>
+        <div class="photo">
+            <img class="general" src="images/WordCloud.png">
+        </div>
+
         <h2 class="twitter">Twitter</h2>
         <div class="statistics-twitter">
             <div class="twitter">
@@ -201,6 +213,9 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="place_for_single_image">
+            <img src="images/PieChartTwitterPosts.png" class="single_image">
         </div>
 
         <h2 class="reddit">Reddit</h2>
@@ -306,11 +321,6 @@
             </div>
         </div>
 
-            </div>
-            <h2 class="outro">Common words used</h2>
-        <div class="photo">
-            <img class="general" src="images/WordCloud.png">
-        </div>
             <!--script desenare bare-->
             <script type="text/javascript">
                 $(function () {

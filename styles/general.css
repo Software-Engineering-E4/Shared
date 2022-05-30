@@ -171,6 +171,9 @@ div.change_theme{
     flex-direction: row;
     justify-content: space-around;
 }
+div.change_theme.display_none{
+    display:none;
+}
 div.change_theme:hover{
     background-color: var(--lightblue);
     transition: 400ms;
@@ -231,6 +234,7 @@ div.first_option{
 }
 
 
+
 /* responsive design */
 /* header */
 div.phone-buttons{
@@ -264,6 +268,12 @@ li.phone_list_element{
     background-color: var(--darkblue);
     text-align: center;
 }
+li.phone_list_element.display_none{
+    display: none;
+}
+div.phone.change_theme.display_none{
+    display:none;
+}
 li.phone_list_element:hover{
     background-color: var(--lightblue);
     border-radius: 1.5rem;
@@ -276,6 +286,7 @@ a.phone.menu_option{
 a.phone.menu_option:hover{
     color: var(--white);
 }
+
 
 
 /* responsive design */
@@ -322,6 +333,31 @@ a.phone.menu_option:hover{
 
     }
 
+    /* dark theme */
+    li.phone_list_element.change_theme{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+    }
+    li.phone_list_element.change_theme:hover{
+        background-color: var(--darkblue);
+    }
+    div.phone.change_theme{
+        flex-basis: 7.5%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    img.phone_sun{
+        width: 30%;
+    }
+    img.phone_moon{
+        width: 20%; 
+    }
+
     /* hide elements on phone display */
     ul.right_container{
         display: none;
@@ -332,26 +368,108 @@ a.phone.menu_option:hover{
     a.faculty{
         display: none;
     }
+
+    /* change theme just for phone here */
+    div.phone.options.dark-theme-phone{
+        background-color: var(--opo_white);
+    }
+    ul.phone.container.dark-theme-phone{
+        background-color: var(--opo_white);
+    }
+    li.phone_list_element.dark-theme-phone{
+        background-color: var(--opo_white);
+    }
+    li.phone_list_element.dark-theme-phone:hover{
+        background-color: var(--opo_shadow);
+    }
+    li.phone_list_element.change_theme.dark-theme-phone{
+        background-color: var(--opo_white);
+    }
+    li.phone_list_element.change_theme.dark-theme-phone:hover{
+        background-color: var(--opo_white);
+    }
+    div.phone.change_theme.dark-theme-phone{
+        background-color: var(--opo_white);
+    }
+    div.phone.change_theme.dark-theme-phone:hover{
+        background-color: var(--opo_shadow);
+    }
 }
+
+@media (max-width:900px){
+    /* dark theme */
+    li.phone_list_element.change_theme{
+       display: flex;
+       flex-wrap: nowrap;
+       flex-direction: row;
+       justify-content: center;
+   }
+   li.phone_list_element.change_theme:hover{
+       background-color: var(--darkblue);
+   }
+   div.phone.change_theme{
+       flex-basis: 10%;
+       display: flex;
+       flex-wrap: nowrap;
+       flex-direction: row;
+       justify-content: center;
+       align-items: center;
+   }
+   img.phone_sun{
+       width: 30%;
+   }
+   img.phone_moon{
+       width: 20%; 
+   }
+}
+
+@media (max-width: 500px){
+     /* dark theme */
+     li.phone_list_element.change_theme{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+    }
+    li.phone_list_element.change_theme:hover{
+        background-color: var(--darkblue);
+    }
+    div.phone.change_theme{
+        flex-basis: 25%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    img.phone_sun{
+        width: 30%;
+    }
+    img.phone_moon{
+        width: 20%; 
+    }
+}
+
 
 
 /* scroll bar */
 ::-webkit-scrollbar{
-    width: 1rem;
+    width: 0.75rem;
 }
 ::-webkit-scrollbar-track{
-    background-color: var(--white);
+    background-color: var(--opo_white);
 }
 ::-webkit-scrollbar-thumb{
     background-color: var(--opo_post);
     border-radius: 1.5rem;
 }
 ::-webkit-scrollbar-thumb:hover{
-    background-color: var(--opo_shadow);
+    background-color: var(--lightgray);
 }
 
 
-/* change theme */
+
+/* NORMAL screen change theme */
 body.dark-theme{
     background-color: var(--opo_white);
     transition: all 400ms;
@@ -360,6 +478,9 @@ nav.dark-theme{
     border-bottom-color: var(--pink);
     background-color: var(--opo_white);
     transition: all 400ms;
+}
+div.search_bar.dark-theme.search_menu{
+    background-color: var(--opo_white);
 }
 div.dark-theme input[type=search]{
     background-color: var(--opo_post);

@@ -118,7 +118,7 @@ section.stats_and_review.reddit:hover{
     transform: scale(1.025);
     transition: 400ms;
 }
-div.content_below{
+div.chart{
     margin-top: 2.5vh;
     display: flex;
     flex-wrap: nowrap;
@@ -126,14 +126,14 @@ div.content_below{
     justify-content: center;
 }
 section.comments{
-    padding: 2.5vh;
-    padding-top: 5vh;
+    padding: 1rem;
     width: 60%;
     border-radius: 1.5rem;
     border: 0.1vh solid black;
     background-color: var(--white);
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
 }
 section.comments:hover{
     border-radius: 1.5rem;
@@ -181,6 +181,11 @@ section.comments:hover{
     color: #ffffff;
   }
   
+  #myChart{
+    width: 100%;
+    height: max-content !important;
+    padding: 0, 0, 0, 0 !important;
+  }
   
 
 /* responsive */
@@ -209,13 +214,27 @@ section.comments:hover{
         border-radius: 1.5rem;
     }
     section.comments{
-        width: 75%;
-        border-radius: 0rem; 
-    }
-    section.chart{
-        width: 75%;
+        width: 82%; 
+        /* width: 100%; */
         border-right: 0.1vh solid black;
-        border-radius: 0rem;
+        border-radius: 0rem;   
+        /* min-height: 400px; */
+        height: min-content;
+        padding: 0;
+    }
+    #myChart{
+        /* display: block; */
+        display: flex !important;
+        margin: auto !important;
+        float: none !important;
+        width: 100% !important;
+        /* margin-top: 0px;
+        margin-right:0px;
+        margin-left:0px; */
+        margin: 0,0,0,0 !important;
+        /* height: auto; */
+        /* height: max-content; */
+        height: max-content !important;
     }
 }
 

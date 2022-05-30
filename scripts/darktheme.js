@@ -1,8 +1,21 @@
 /* change theme status */
 const button = document.getElementById("change_theme");
-
+const buttonPhone = document.getElementById("phone_change_theme");
+/* normal screen */
 button.addEventListener('click',() => {
 
+    // 1st time
+    if(localStorage.getItem("vDark") === null) {
+        localStorage.setItem("vDark", 'true');
+        changeColors();
+    }
+    else {
+        checkAndChangeStatus();
+        changeColors();
+    }
+});
+/* phone screen */
+buttonPhone.addEventListener('click',() => {
     // 1st time
     if(localStorage.getItem("vDark") === null) {
         localStorage.setItem("vDark", 'true');
@@ -22,7 +35,6 @@ function checkAndChangeStatus() {
 }
 
 function  changeColors() {
-
     document.body.classList.toggle('dark-theme');
     var index;
     var list;
@@ -45,11 +57,18 @@ function  changeColors() {
     list = document.querySelectorAll(".see_all");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-grey-overlap');
+    // search content
+    list = document.querySelectorAll(".see_more");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-grey-overlap');   
     /* seeallposts content */
     list = document.querySelectorAll(".platform_name, .platform");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-dark-grey');
     list = document.querySelectorAll(".platform_post .twitter_post, .platform_post .reddit_post, .platform_post .youtube_post");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-grey');
+    list = document.querySelectorAll(".bseemoreitems");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-grey');
     /* twitter post & reddit post */
@@ -63,7 +82,18 @@ function  changeColors() {
     list = document.querySelectorAll(".title, .description");
     for(index = 0; index < list.length; index++)
         list[index].classList.toggle('dark-theme-light-grey');
+
+    /* for phone */
+    list = document.querySelectorAll(".phone.options, .phone.container, .phone_list_element, .phone_list_element.change_theme, .phone.change_theme");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme-phone');
+
     /* statistics content */
-    list = document.querySelectorAll(".outro");
-    list.classList.toggle('dark-theme-dark-grey-verlap-2');
-}
+    list = document.querySelector(".intro");
+    list.classList.toggle('dark-theme');
+    
+    /* about us content */
+    list = document.querySelectorAll(".about_content");
+    for(index = 0; index < list.length; index++)
+        list[index].classList.toggle('dark-theme');
+    }
